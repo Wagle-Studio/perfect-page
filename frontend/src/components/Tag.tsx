@@ -1,25 +1,7 @@
-import { HTMLAttributes, ReactNode } from "react";
-import { BlockTags } from "@/services/blockService";
+import { MarkupConf } from "@/types/Markup";
 
-type Tag = {
-  tag: BlockTags;
-  content?: string;
-  children?: ReactNode | ReactNode[];
-} & HTMLAttributes<
-  | HTMLHeadingElement
-  | HTMLParagraphElement
-  | HTMLLIElement
-  | HTMLUListElement
-  | HTMLOListElement
->;
+export function Tag(props: MarkupConf) {
+  const TagElement = props.tag;
 
-export default function Tag({ tag, content, children, ...props }: Tag) {
-  const Tag = tag as BlockTags;
-
-  return (
-    <>
-      {content && !children && <Tag {...props}>{content}</Tag>}
-      {!content && children && <Tag {...props}>{children}</Tag>}
-    </>
-  );
+  return <TagElement key={props.key}>{props.content}</TagElement>;
 }
