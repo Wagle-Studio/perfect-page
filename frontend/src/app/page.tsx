@@ -1,6 +1,7 @@
 import { Client } from "@notionhq/client";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { blockParser } from "@/services/blockParser";
+import { Article } from "@/components/Article";
 
 export default async function Home() {
   const notionClient = new Client({
@@ -14,6 +15,10 @@ export default async function Home() {
   const blocks = data.results as BlockObjectResponse[];
 
   return (
-    <div>{blocks && blockParser(blocks).map((markup) => markup.render())}</div>
+    <div>
+      <Article>
+        {blocks && blockParser(blocks).map((markup) => markup.render())}
+      </Article>
+    </div>
   );
 }
