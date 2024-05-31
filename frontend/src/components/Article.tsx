@@ -1,11 +1,17 @@
-"use client"
+"use client";
 
-import { ReactNode } from "react";
+import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
+import { blockParser } from "@/services/blockParser";
 
 type ArticleProps = {
-  children: ReactNode;
+  blocks: BlockObjectResponse[];
 };
 
 export function Article(props: ArticleProps) {
-  return <>{props.children}</>;
+  return (
+    <article>
+      {props.blocks &&
+        blockParser(props.blocks).map((markup) => markup.render())}
+    </article>
+  );
 }

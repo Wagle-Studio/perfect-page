@@ -2,6 +2,7 @@ import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { BlockTypes } from "@/types/Block";
 import { Markup } from "@/types/Markup";
 import { AbstractTag } from "@/factory/tag/AbstractTag";
+import { AbstractCode } from "@/factory/code/AbstractCode";
 
 export function blockParser(blocks: BlockObjectResponse[]): Markup[] {
   let markups: Markup[] = [];
@@ -18,12 +19,11 @@ export function blockParser(blocks: BlockObjectResponse[]): Markup[] {
 
   blocks.forEach((block) => {
     const tag = new AbstractTag(AbstractTag.buildConfFromBlock(block));
-    const markup = tag.createMarkup();
 
     if (tag.getConf().type === BlockTypes.UNORDERED_LIST_ITEM) {
-      unorderedListItems = stackTag(unorderedListItems, markup);
+      unorderedListItems = stackTag(unorderedListItems, tag.createMarkup());
     } else if (tag.getConf().type === BlockTypes.ORDERED_LIST_ITEM) {
-      orderedListItems = stackTag(orderedListItems, markup);
+      orderedListItems = stackTag(orderedListItems, tag.createMarkup());
     } else {
       if (unorderedListItems.length > 0) {
         markups = stackTag(markups, createUnorderedListItemsMarkup());
@@ -33,7 +33,14 @@ export function blockParser(blocks: BlockObjectResponse[]): Markup[] {
         markups = stackTag(markups, createOrderedListItemsMarkup());
         orderedListItems = [];
       }
-      markups = stackTag(markups, markup);
+      if (tag.getConf().type === BlockTypes.CODE) {
+        const tag = new AbstractCode(AbstractCode.buildConfFromBlock(block));
+        const markup = tag.createMarkup();
+
+        markups = stackTag(markups, markup);
+      } else {
+        markups = stackTag(markups, tag.createMarkup());
+      }
     }
   });
 
