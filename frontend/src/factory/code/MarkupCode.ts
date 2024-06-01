@@ -8,7 +8,7 @@ const mandatoryConf: MarkupConfFields[] = [
   MarkupConfFields.KEY,
   MarkupConfFields.TAG,
   MarkupConfFields.CONTENT,
-  MarkupConfFields.LANGUAGE,
+  MarkupConfFields.CODE_LANGUAGE,
 ];
 
 export class MarkupCode extends FactoryMarkup<CodeProps> {

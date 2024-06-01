@@ -12,7 +12,7 @@ export enum MarkupConfFields {
   TYPE = "type",
   TAG = "tag",
   CONTENT = "content",
-  LANGUAGE = "language",
+  CODE_LANGUAGE = "code_language",
 }
 
 export type MarkupConf = {
@@ -20,5 +20,5 @@ export type MarkupConf = {
   type?: NotionBlockTypes | CustomBlockTypes;
   tag?: BlockTags;
   content?: string | ReactNode;
-  language?: string;
+  code_language?: string;
 };

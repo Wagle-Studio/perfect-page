@@ -32,7 +32,7 @@ export abstract class FactoryBlock {
       type: this._getType(block.type),
       tag: this._getTag(block.type),
       content: this._getContent(block),
-      language: this._getLanguage(block),
+      code_language: this._getCodeLanguage(block),
     };
   }
 
@@ -127,7 +127,7 @@ export abstract class FactoryBlock {
     }
   }
 
-  private static _getLanguage(block: BlockObjectResponse): string | undefined {
+  private static _getCodeLanguage(block: BlockObjectResponse): string | undefined {
     switch (block.type) {
       case NotionBlockTypes.CODE:
         return block.code?.language;
