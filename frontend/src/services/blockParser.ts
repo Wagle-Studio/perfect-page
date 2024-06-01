@@ -5,11 +5,13 @@ import { AbstractMarkup } from "@/types/Markup";
 import { BlockTypo } from "@/factory/typo/BlockTypo";
 import { BlockList } from "@/factory/list/BlockList";
 import { BlockCode } from "@/factory/code/BlockCode";
+import { BlockTodo } from "@/factory/todo/BlockTodo";
 
 export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
   let markups: AbstractMarkup[] = [];
   let unorderedListItems: AbstractMarkup[] = [];
   let orderedListItems: AbstractMarkup[] = [];
+  let todoListItems: AbstractMarkup[] = [];
 
   blocks.forEach((block) => {
     // Creates and stacks markups for unordered list items in Notion block.
@@ -30,9 +32,19 @@ export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
       }
     }
 
+    // Creates and stacks markups for todo list items in Notion block.
+    if (block.type === NotionBlockTypes.TODO) {
+      const markup = createMarkupInstanceFromBlock(block);
+
+      if (markup) {
+        todoListItems = [...todoListItems, markup];
+      }
+    }
+
     if (
       block.type !== NotionBlockTypes.UNORDERED_LIST_ITEM &&
-      block.type !== NotionBlockTypes.ORDERED_LIST_ITEM
+      block.type !== NotionBlockTypes.ORDERED_LIST_ITEM &&
+      block.type !== NotionBlockTypes.TODO
     ) {
       // Creates and stacks markup for unordered list in current markups stack.
       if (unorderedListItems.length > 0) {
@@ -57,6 +69,19 @@ export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
         if (markup) {
           markups = [...markups, markup];
           orderedListItems = [];
+        }
+      }
+
+      // Creates and stacks markup for todo list in current markups stack.
+      if (todoListItems.length > 0) {
+        const markup = createMarkupInstanceFromCustom(
+          CustomBlockTypes.UNORDERED_LIST,
+          todoListItems.map((item) => item.render())
+        );
+
+        if (markup) {
+          markups = [...markups, markup];
+          todoListItems = [];
         }
       }
 
@@ -110,6 +135,19 @@ export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
     }
   }
 
+  // Creates and stacks markup for todo list in current markups stack.
+  if (todoListItems.length > 0) {
+    const markup = createMarkupInstanceFromCustom(
+      CustomBlockTypes.UNORDERED_LIST,
+      todoListItems.map((item) => item.render())
+    );
+
+    if (markup) {
+      markups = [...markups, markup];
+      todoListItems = [];
+    }
+  }
+
   return markups;
 }
 
@@ -126,6 +164,8 @@ function createMarkupInstanceFromBlock(
       return new BlockTypo(BlockTypo.buildConfFromBlock(block)).createMarkup();
     case NotionBlockTypes.CODE:
       return new BlockCode(BlockCode.buildConfFromBlock(block)).createMarkup();
+    case NotionBlockTypes.TODO:
+      return new BlockTodo(BlockTodo.buildConfFromBlock(block)).createMarkup();
     default:
       return undefined;
   }

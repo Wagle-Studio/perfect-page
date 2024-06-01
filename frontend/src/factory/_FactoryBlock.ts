@@ -72,6 +72,8 @@ export abstract class FactoryBlock {
         return NotionBlockTypes.ORDERED_LIST_ITEM;
       case NotionBlockTypes.CODE:
         return NotionBlockTypes.CODE;
+      case NotionBlockTypes.TODO:
+        return NotionBlockTypes.TODO;
       default:
         undefined;
     }
@@ -118,6 +120,8 @@ export abstract class FactoryBlock {
         return block.numbered_list_item?.rich_text?.[0]?.plain_text;
       case NotionBlockTypes.CODE:
         return block.code?.rich_text?.[0]?.plain_text;
+      case NotionBlockTypes.TODO:
+        return block.to_do?.rich_text?.[0]?.plain_text;
       default:
         return undefined;
     }

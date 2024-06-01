@@ -1,8 +1,9 @@
 import { BlockCode } from "@/factory/code/BlockCode";
 import { BlockList } from "@/factory/list/BlockList";
+import { BlockTodo } from "@/factory/todo/BlockTodo";
 import { BlockTypo } from "@/factory/typo/BlockTypo";
 
-export type AbstractBlock = BlockTypo | BlockCode | BlockList;
+export type AbstractBlock = BlockTypo | BlockCode | BlockList | BlockTodo;
 
 export enum NotionBlockTypes {
   HEADING_1 = "heading_1",
@@ -12,6 +13,7 @@ export enum NotionBlockTypes {
   UNORDERED_LIST_ITEM = "bulleted_list_item",
   ORDERED_LIST_ITEM = "numbered_list_item",
   CODE = "code",
+  TODO = "to_do",
 }
 
 export enum CustomBlockTypes {
