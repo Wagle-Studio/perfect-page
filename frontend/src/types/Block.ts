@@ -1,13 +1,16 @@
-export enum BlockTypes {
+export enum NotionBlockTypes {
   HEADING_1 = "heading_1",
   HEADING_2 = "heading_2",
   HEADING_3 = "heading_3",
   PARAGRAPH = "paragraph",
-  UNORDERED_LIST = "ul",
-  ORDERED_LIST = "ol",
   UNORDERED_LIST_ITEM = "bulleted_list_item",
   ORDERED_LIST_ITEM = "numbered_list_item",
   CODE = "code",
+}
+
+export enum CustomBlockTypes {
+  UNORDERED_LIST = "ul",
+  ORDERED_LIST = "ol",
 }
 
 export enum BlockTags {

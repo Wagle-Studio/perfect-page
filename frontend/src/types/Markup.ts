@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { BlockTags, BlockTypes } from "@/types/Block";
+import { BlockTags, NotionBlockTypes, CustomBlockTypes } from "@/types/Block";
 import { Error } from "@/factory/error/Error";
 import { Typo } from "@/factory/typo/Typo";
 import { Code } from "@/factory/code/Code";
@@ -16,7 +16,7 @@ export enum MarkupConfFields {
 
 export type MarkupConf = {
   key: number;
-  type?: BlockTypes;
+  type?: NotionBlockTypes | CustomBlockTypes;
   tag?: BlockTags;
   content?: string | ReactNode;
   language?: string;

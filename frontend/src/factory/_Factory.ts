@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { BlockTags, BlockTypes } from "@/types/Block";
+import { BlockTags, NotionBlockTypes, CustomBlockTypes } from "@/types/Block";
 import { Markup, MarkupConf } from "@/types/Markup";
 
 export interface FactoryInterface<ComponentConf> {
@@ -37,7 +37,7 @@ export abstract class Factory {
   }
 
   public static buildConfFromCustom(
-    type: BlockTypes,
+    type: CustomBlockTypes,
     content: string | ReactNode
   ): MarkupConf {
     return {
@@ -54,24 +54,24 @@ export abstract class Factory {
 
   private static _getType(type: string): MarkupConf["type"] | undefined {
     switch (type) {
-      case BlockTypes.HEADING_1:
-        return BlockTypes.HEADING_1;
-      case BlockTypes.HEADING_2:
-        return BlockTypes.HEADING_2;
-      case BlockTypes.HEADING_3:
-        return BlockTypes.HEADING_3;
-      case BlockTypes.PARAGRAPH:
-        return BlockTypes.PARAGRAPH;
-      case BlockTypes.UNORDERED_LIST:
-        return BlockTypes.UNORDERED_LIST;
-      case BlockTypes.ORDERED_LIST:
-        return BlockTypes.ORDERED_LIST;
-      case BlockTypes.UNORDERED_LIST_ITEM:
-        return BlockTypes.UNORDERED_LIST_ITEM;
-      case BlockTypes.ORDERED_LIST_ITEM:
-        return BlockTypes.ORDERED_LIST_ITEM;
-      case BlockTypes.CODE:
-        return BlockTypes.CODE;
+      case NotionBlockTypes.HEADING_1:
+        return NotionBlockTypes.HEADING_1;
+      case NotionBlockTypes.HEADING_2:
+        return NotionBlockTypes.HEADING_2;
+      case NotionBlockTypes.HEADING_3:
+        return NotionBlockTypes.HEADING_3;
+      case NotionBlockTypes.PARAGRAPH:
+        return NotionBlockTypes.PARAGRAPH;
+      case CustomBlockTypes.UNORDERED_LIST:
+        return CustomBlockTypes.UNORDERED_LIST;
+      case CustomBlockTypes.ORDERED_LIST:
+        return CustomBlockTypes.ORDERED_LIST;
+      case NotionBlockTypes.UNORDERED_LIST_ITEM:
+        return NotionBlockTypes.UNORDERED_LIST_ITEM;
+      case NotionBlockTypes.ORDERED_LIST_ITEM:
+        return NotionBlockTypes.ORDERED_LIST_ITEM;
+      case NotionBlockTypes.CODE:
+        return NotionBlockTypes.CODE;
       default:
         undefined;
     }
@@ -79,23 +79,23 @@ export abstract class Factory {
 
   private static _getTag(type: string): MarkupConf["tag"] | undefined {
     switch (type) {
-      case BlockTypes.HEADING_1:
+      case NotionBlockTypes.HEADING_1:
         return BlockTags.HEADING_1;
-      case BlockTypes.HEADING_2:
+      case NotionBlockTypes.HEADING_2:
         return BlockTags.HEADING_2;
-      case BlockTypes.HEADING_3:
+      case NotionBlockTypes.HEADING_3:
         return BlockTags.HEADING_3;
-      case BlockTypes.PARAGRAPH:
+      case NotionBlockTypes.PARAGRAPH:
         return BlockTags.PARAGRAPH;
-      case BlockTypes.UNORDERED_LIST:
+      case CustomBlockTypes.UNORDERED_LIST:
         return BlockTags.UNORDERED_LIST;
-      case BlockTypes.ORDERED_LIST:
+      case CustomBlockTypes.ORDERED_LIST:
         return BlockTags.ORDERED_LIST;
-      case BlockTypes.UNORDERED_LIST_ITEM:
+      case NotionBlockTypes.UNORDERED_LIST_ITEM:
         return BlockTags.LIST_ITEM;
-      case BlockTypes.ORDERED_LIST_ITEM:
+      case NotionBlockTypes.ORDERED_LIST_ITEM:
         return BlockTags.LIST_ITEM;
-      case BlockTypes.CODE:
+      case NotionBlockTypes.CODE:
         return BlockTags.CODE;
       default:
         throw undefined;
@@ -104,19 +104,19 @@ export abstract class Factory {
 
   private static _getContent(block: BlockObjectResponse): string | undefined {
     switch (block.type) {
-      case BlockTypes.HEADING_1:
+      case NotionBlockTypes.HEADING_1:
         return block.heading_1?.rich_text?.[0]?.plain_text;
-      case BlockTypes.HEADING_2:
+      case NotionBlockTypes.HEADING_2:
         return block.heading_2?.rich_text?.[0]?.plain_text;
-      case BlockTypes.HEADING_3:
+      case NotionBlockTypes.HEADING_3:
         return block.heading_3?.rich_text?.[0]?.plain_text;
-      case BlockTypes.PARAGRAPH:
+      case NotionBlockTypes.PARAGRAPH:
         return block.paragraph?.rich_text?.[0]?.plain_text;
-      case BlockTypes.UNORDERED_LIST_ITEM:
+      case NotionBlockTypes.UNORDERED_LIST_ITEM:
         return block.bulleted_list_item?.rich_text?.[0]?.plain_text;
-      case BlockTypes.ORDERED_LIST_ITEM:
+      case NotionBlockTypes.ORDERED_LIST_ITEM:
         return block.numbered_list_item?.rich_text?.[0]?.plain_text;
-      case BlockTypes.CODE:
+      case NotionBlockTypes.CODE:
         return block.code?.rich_text?.[0]?.plain_text;
       default:
         throw undefined;
@@ -125,7 +125,7 @@ export abstract class Factory {
 
   private static _getLanguage(block: BlockObjectResponse): string | undefined {
     switch (block.type) {
-      case BlockTypes.CODE:
+      case NotionBlockTypes.CODE:
         return block.code?.language;
       default:
         return undefined;

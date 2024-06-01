@@ -1,5 +1,5 @@
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { BlockTypes } from "@/types/Block";
+import { NotionBlockTypes, CustomBlockTypes } from "@/types/Block";
 import { Markup } from "@/types/Markup";
 import { AbstractTypo } from "@/factory/typo/AbstractTypo";
 import { AbstractList } from "@/factory/list/AbstractList";
@@ -11,19 +11,22 @@ export function blockParser(blocks: BlockObjectResponse[]): Markup[] {
   let orderedListItems: Markup[] = [];
 
   function createUnorderedListItemsMarkup() {
-    return createListTagMarkup(BlockTypes.UNORDERED_LIST, unorderedListItems);
+    return createListTagMarkup(
+      CustomBlockTypes.UNORDERED_LIST,
+      unorderedListItems
+    );
   }
 
   function createOrderedListItemsMarkup() {
-    return createListTagMarkup(BlockTypes.ORDERED_LIST, orderedListItems);
+    return createListTagMarkup(CustomBlockTypes.ORDERED_LIST, orderedListItems);
   }
 
   blocks.forEach((block) => {
     const tag = new AbstractTypo(AbstractTypo.buildConfFromBlock(block));
 
-    if (tag.getConf().type === BlockTypes.UNORDERED_LIST_ITEM) {
+    if (tag.getConf().type === NotionBlockTypes.UNORDERED_LIST_ITEM) {
       unorderedListItems = stackTag(unorderedListItems, tag.createMarkup());
-    } else if (tag.getConf().type === BlockTypes.ORDERED_LIST_ITEM) {
+    } else if (tag.getConf().type === NotionBlockTypes.ORDERED_LIST_ITEM) {
       orderedListItems = stackTag(orderedListItems, tag.createMarkup());
     } else {
       if (unorderedListItems.length > 0) {
@@ -34,7 +37,7 @@ export function blockParser(blocks: BlockObjectResponse[]): Markup[] {
         markups = stackTag(markups, createOrderedListItemsMarkup());
         orderedListItems = [];
       }
-      if (tag.getConf().type === BlockTypes.CODE) {
+      if (tag.getConf().type === NotionBlockTypes.CODE) {
         const tag = new AbstractCode(AbstractCode.buildConfFromBlock(block));
         const markup = tag.createMarkup();
 
@@ -57,12 +60,20 @@ export function blockParser(blocks: BlockObjectResponse[]): Markup[] {
   return markups;
 }
 
+function createBlockAbstractMarkupInstance(block: BlockObjectResponse) {
+  switch (
+    block.type
+    // case:
+  ) {
+  }
+}
+
 function stackTag(tags: Markup[], tag: Markup): Markup[] {
   return [...tags, tag];
 }
 
 function createListTagMarkup(
-  listType: BlockTypes.UNORDERED_LIST | BlockTypes.ORDERED_LIST,
+  listType: CustomBlockTypes.UNORDERED_LIST | CustomBlockTypes.ORDERED_LIST,
   listItems: Markup[]
 ): Markup {
   return new AbstractList(
