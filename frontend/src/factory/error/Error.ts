@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { FactoryInterface } from "@/factory/_Factory";
-import { Error as Component } from "@/components/Error";
+import { Error as Component } from "@/components/factory/Error";
 
 export class Error implements FactoryInterface<null> {
   public conf: null;

@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { MarkupConf, MarkupConfFields } from "@/types/Markup";
 import { FactoryMarkup } from "@/factory/_FactoryMarkup";
-import { Typo as Component, TypoProps } from "@/components/Typo";
-import { Error } from "@/components/Error";
+import { Typo as Component, TypoProps } from "@/components/factory/Typo";
+import { Error } from "@/components/factory/Error";
 
 const mandatoryConf: MarkupConfFields[] = [
   MarkupConfFields.KEY,
