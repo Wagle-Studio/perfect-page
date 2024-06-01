@@ -2,6 +2,7 @@ import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { BlockTypes } from "@/types/Block";
 import { Markup } from "@/types/Markup";
 import { AbstractTypo } from "@/factory/typo/AbstractTypo";
+import { AbstractList } from "@/factory/list/AbstractList";
 import { AbstractCode } from "@/factory/code/AbstractCode";
 
 export function blockParser(blocks: BlockObjectResponse[]): Markup[] {
@@ -64,8 +65,8 @@ function createListTagMarkup(
   listType: BlockTypes.UNORDERED_LIST | BlockTypes.ORDERED_LIST,
   listItems: Markup[]
 ): Markup {
-  return new AbstractTypo(
-    AbstractTypo.buildConfFromCustom(
+  return new AbstractList(
+    AbstractList.buildConfFromCustom(
       listType,
       listItems.map((item) => item.render())
     )
