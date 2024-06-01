@@ -7,7 +7,7 @@ export type CodeProps = {
   key: number;
   tag: BlockTags;
   content: string;
-  language: string;
+  code_language: string;
 };
 
 export function Code(props: CodeProps) {
@@ -30,7 +30,7 @@ export function Code(props: CodeProps) {
       {!isClient && <p>chargement</p>}
       {isClient && (
         <pre>
-          <code className={`language-${props.language}`}>{props.content}</code>
+          <code className={`language-${props.code_language}`}>{props.content}</code>
         </pre>
       )}
     </div>

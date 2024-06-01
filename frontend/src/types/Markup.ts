@@ -4,8 +4,9 @@ import { MarkupCode } from "@/factory/code/MarkupCode";
 import { MarkupList } from "@/factory/list/MarkupList";
 import { MarkupTypo } from "@/factory/typo/MarkupTypo";
 import { MarkupTodo } from "@/factory/todo/MarkupTodo";
+import { MarkupImage } from "@/factory/image/MarkupImage";
 
-export type AbstractMarkup = MarkupTypo | MarkupCode | MarkupList | MarkupTodo;
+export type AbstractMarkup = MarkupTypo | MarkupCode | MarkupList | MarkupTodo | MarkupImage;
 
 export enum MarkupConfFields {
   KEY = "key",
@@ -14,6 +15,7 @@ export enum MarkupConfFields {
   CONTENT = "content",
   CODE_LANGUAGE = "code_language",
   TODO_CHECK = "todo_check",
+  IMAGE_URL = "image_url",
 }
 
 export type MarkupConf = {
@@ -23,4 +25,5 @@ export type MarkupConf = {
   content?: string | ReactNode;
   code_language?: string;
   todo_check?: boolean;
+  image_url?: string;
 };

@@ -34,6 +34,7 @@ export abstract class FactoryBlock {
       content: this._getContent(block),
       code_language: this._getCodeLanguage(block),
       todo_check: this._getTodoState(block),
+      image_url: this._getImageUrl(block),
     };
   }
 
@@ -123,6 +124,8 @@ export abstract class FactoryBlock {
         return block.code?.rich_text?.[0]?.plain_text;
       case NotionBlockTypes.TODO:
         return block.to_do?.rich_text?.[0]?.plain_text;
+      case NotionBlockTypes.IMAGE:
+        return block.image?.caption?.[0]?.plain_text;
       default:
         return undefined;
     }
@@ -145,6 +148,16 @@ export abstract class FactoryBlock {
     switch (block.type) {
       case NotionBlockTypes.TODO:
         return block.to_do?.checked;
+      default:
+        return undefined;
+    }
+  }
+
+  private static _getImageUrl(block: BlockObjectResponse): string | undefined {
+    switch (block.type) {
+      case NotionBlockTypes.IMAGE:
+        const image = block.image as any;
+        return image.external?.url;
       default:
         return undefined;
     }
