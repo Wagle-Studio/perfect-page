@@ -13,6 +13,7 @@ export enum MarkupConfFields {
   TAG = "tag",
   CONTENT = "content",
   CODE_LANGUAGE = "code_language",
+  TODO_CHECK = "todo_check",
 }
 
 export type MarkupConf = {
@@ -21,4 +22,5 @@ export type MarkupConf = {
   tag?: BlockTags;
   content?: string | ReactNode;
   code_language?: string;
+  todo_check?: boolean;
 };

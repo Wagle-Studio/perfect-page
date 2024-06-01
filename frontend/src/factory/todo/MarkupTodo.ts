@@ -7,6 +7,7 @@ import { Error } from "@/components/factory/Error";
 const mandatoryConf: MarkupConfFields[] = [
   MarkupConfFields.KEY,
   MarkupConfFields.CONTENT,
+  MarkupConfFields.TODO_CHECK,
 ];
 
 export class MarkupTodo extends FactoryMarkup<TodoProps> {

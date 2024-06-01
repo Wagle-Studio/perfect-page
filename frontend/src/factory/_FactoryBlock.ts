@@ -33,6 +33,7 @@ export abstract class FactoryBlock {
       tag: this._getTag(block.type),
       content: this._getContent(block),
       code_language: this._getCodeLanguage(block),
+      todo_check: this._getTodoState(block),
     };
   }
 
@@ -127,10 +128,23 @@ export abstract class FactoryBlock {
     }
   }
 
-  private static _getCodeLanguage(block: BlockObjectResponse): string | undefined {
+  private static _getCodeLanguage(
+    block: BlockObjectResponse
+  ): string | undefined {
     switch (block.type) {
       case NotionBlockTypes.CODE:
         return block.code?.language;
+      default:
+        return undefined;
+    }
+  }
+
+  private static _getTodoState(
+    block: BlockObjectResponse
+  ): boolean | undefined {
+    switch (block.type) {
+      case NotionBlockTypes.TODO:
+        return block.to_do?.checked;
       default:
         return undefined;
     }

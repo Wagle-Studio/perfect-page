@@ -26,9 +26,8 @@ export abstract class FactoryMarkup<ComponentProps>
     mandatoryFields: MarkupConfFields[]
   ): ComponentConf | null {
     const result: Partial<ComponentConf> = {};
-
     for (const field of mandatoryFields) {
-      if (!conf[field]) {
+      if (!conf.hasOwnProperty(field)) {
         return null;
       }
       (result as any)[field] = conf[field];
