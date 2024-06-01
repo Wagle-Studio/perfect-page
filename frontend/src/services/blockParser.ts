@@ -2,9 +2,9 @@ import { ReactNode } from "react";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { NotionBlockTypes, CustomBlockTypes } from "@/types/Block";
 import { AbstractMarkup } from "@/types/Markup";
-import { AbstractTypo } from "@/factory/typo/AbstractTypo";
-import { AbstractList } from "@/factory/list/AbstractList";
-import { AbstractCode } from "@/factory/code/AbstractCode";
+import { BlockTypo } from "@/factory/typo/BlockTypo";
+import { BlockList } from "@/factory/list/BlockList";
+import { BlockCode } from "@/factory/code/BlockCode";
 
 export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
   let markups: AbstractMarkup[] = [];
@@ -123,13 +123,9 @@ function createMarkupInstanceFromBlock(
     case NotionBlockTypes.PARAGRAPH:
     case NotionBlockTypes.UNORDERED_LIST_ITEM:
     case NotionBlockTypes.ORDERED_LIST_ITEM:
-      return new AbstractTypo(
-        AbstractTypo.buildConfFromBlock(block)
-      ).createMarkup();
+      return new BlockTypo(BlockTypo.buildConfFromBlock(block)).createMarkup();
     case NotionBlockTypes.CODE:
-      return new AbstractCode(
-        AbstractCode.buildConfFromBlock(block)
-      ).createMarkup();
+      return new BlockCode(BlockCode.buildConfFromBlock(block)).createMarkup();
     default:
       return undefined;
   }
@@ -141,12 +137,12 @@ function createMarkupInstanceFromCustom(
 ): AbstractMarkup | undefined {
   switch (type) {
     case CustomBlockTypes.UNORDERED_LIST:
-      return new AbstractList(
-        AbstractList.buildConfFromCustom(type, content)
+      return new BlockList(
+        BlockList.buildConfFromCustom(type, content)
       ).createMarkup();
     case CustomBlockTypes.ORDERED_LIST:
-      return new AbstractList(
-        AbstractList.buildConfFromCustom(type, content)
+      return new BlockList(
+        BlockList.buildConfFromCustom(type, content)
       ).createMarkup();
     default:
       return undefined;

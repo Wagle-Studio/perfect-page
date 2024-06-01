@@ -1,11 +1,10 @@
 import { ReactNode } from "react";
 import { BlockTags, NotionBlockTypes, CustomBlockTypes } from "@/types/Block";
-import { Error } from "@/factory/error/Error";
-import { Code } from "@/factory/code/Code";
-import { List } from "@/factory/list/List";
-import { Typo } from "@/factory/typo/Typo";
+import { MarkupCode } from "@/factory/code/MarkupCode";
+import { MarkupList } from "@/factory/list/MarkupList";
+import { MarkupTypo } from "@/factory/typo/MarkupTypo";
 
-export type AbstractMarkup = Error | Typo | Code | List;
+export type AbstractMarkup = MarkupTypo | MarkupCode | MarkupList;
 
 export enum MarkupConfFields {
   KEY = "key",

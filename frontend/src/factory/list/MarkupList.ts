@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { MarkupConf, MarkupConfFields } from "@/types/Markup";
 import { FactoryMarkup } from "@/factory/_FactoryMarkup";
-import { Typo as Component, TypoProps } from "@/components/factory/Typo";
+import { List as Component, ListProps } from "@/components/factory/List";
 import { Error } from "@/components/factory/Error";
 
 const mandatoryConf: MarkupConfFields[] = [
@@ -10,7 +10,7 @@ const mandatoryConf: MarkupConfFields[] = [
   MarkupConfFields.CONTENT,
 ];
 
-export class Typo extends FactoryMarkup<TypoProps> {
+export class MarkupList extends FactoryMarkup<ListProps> {
   public constructor(conf: MarkupConf) {
     super(conf, mandatoryConf);
   }

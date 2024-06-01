@@ -11,7 +11,7 @@ const mandatoryConf: MarkupConfFields[] = [
   MarkupConfFields.LANGUAGE,
 ];
 
-export class Code extends FactoryMarkup<CodeProps> {
+export class MarkupCode extends FactoryMarkup<CodeProps> {
   public constructor(conf: MarkupConf) {
     super(conf, mandatoryConf);
   }

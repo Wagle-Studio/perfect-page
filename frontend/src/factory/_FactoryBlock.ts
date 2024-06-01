@@ -3,12 +3,12 @@ import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { BlockTags, NotionBlockTypes, CustomBlockTypes } from "@/types/Block";
 import { AbstractMarkup, MarkupConf } from "@/types/Markup";
 
-export interface FactoryInterface<ComponentConf> {
+export interface FactoryBlockInterface<ComponentConf> {
   conf: ComponentConf;
   render(): ReactNode;
 }
 
-export abstract class Factory {
+export abstract class FactoryBlock {
   protected conf: MarkupConf;
 
   public constructor(conf: MarkupConf) {

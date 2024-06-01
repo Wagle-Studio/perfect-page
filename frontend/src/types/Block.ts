@@ -1,8 +1,8 @@
-import { AbstractCode } from "@/factory/code/AbstractCode";
-import { AbstractList } from "@/factory/list/AbstractList";
-import { AbstractTypo } from "@/factory/typo/AbstractTypo";
+import { BlockCode } from "@/factory/code/BlockCode";
+import { BlockList } from "@/factory/list/BlockList";
+import { BlockTypo } from "@/factory/typo/BlockTypo";
 
-export type AbstractBlock = AbstractTypo | AbstractCode | AbstractList;
+export type AbstractBlock = BlockTypo | BlockCode | BlockList;
 
 export enum NotionBlockTypes {
   HEADING_1 = "heading_1",

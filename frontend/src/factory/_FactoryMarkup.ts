@@ -5,15 +5,20 @@ export interface FactoryMarkupInterface {
   render(): ReactNode;
 }
 
-export abstract class FactoryMarkup<T> implements FactoryMarkupInterface {
+export abstract class FactoryMarkup<ComponentProps>
+  implements FactoryMarkupInterface
+{
   protected conf: MarkupConf;
   protected mandatoryConf: MarkupConfFields[];
-  protected props: T | null;
+  protected props: ComponentProps | null;
 
   public constructor(conf: MarkupConf, mandatoryConf: MarkupConfFields[]) {
     this.conf = conf;
     this.mandatoryConf = mandatoryConf;
-    this.props = this._extractConfProps<T>(this.conf, mandatoryConf);
+    this.props = this._extractConfProps<ComponentProps>(
+      this.conf,
+      mandatoryConf
+    );
   }
 
   private _extractConfProps<ComponentConf>(
