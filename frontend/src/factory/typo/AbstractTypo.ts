@@ -1,13 +1,13 @@
 import { MarkupConf } from "@/types/Markup";
 import { Factory } from "@/factory/_Factory";
-import { Tag } from "@/factory/tag/Tag";
+import { Typo } from "@/factory/typo/Typo";
 
-export class AbstractTag extends Factory {
+export class AbstractTypo extends Factory {
   public constructor(conf: MarkupConf) {
     super(conf);
   }
 
   public createMarkup() {
-    return new Tag(this.conf);
+    return new Typo(this.conf);
   }
 }

@@ -1,7 +1,7 @@
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { BlockTypes } from "@/types/Block";
 import { Markup } from "@/types/Markup";
-import { AbstractTag } from "@/factory/tag/AbstractTag";
+import { AbstractTypo } from "@/factory/typo/AbstractTypo";
 import { AbstractCode } from "@/factory/code/AbstractCode";
 
 export function blockParser(blocks: BlockObjectResponse[]): Markup[] {
@@ -18,7 +18,7 @@ export function blockParser(blocks: BlockObjectResponse[]): Markup[] {
   }
 
   blocks.forEach((block) => {
-    const tag = new AbstractTag(AbstractTag.buildConfFromBlock(block));
+    const tag = new AbstractTypo(AbstractTypo.buildConfFromBlock(block));
 
     if (tag.getConf().type === BlockTypes.UNORDERED_LIST_ITEM) {
       unorderedListItems = stackTag(unorderedListItems, tag.createMarkup());
@@ -64,8 +64,8 @@ function createListTagMarkup(
   listType: BlockTypes.UNORDERED_LIST | BlockTypes.ORDERED_LIST,
   listItems: Markup[]
 ): Markup {
-  return new AbstractTag(
-    AbstractTag.buildConfFromCustom(
+  return new AbstractTypo(
+    AbstractTypo.buildConfFromCustom(
       listType,
       listItems.map((item) => item.render())
     )

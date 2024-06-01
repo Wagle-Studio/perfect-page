@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import Prism from "prismjs";
 import "@/theme/prismVscDarkPlus.css";
-import { MarkupConf } from "@/types/Markup";
+import { BlockTags } from "@/types/Block";
 
-export function Code(props: MarkupConf) {
+export type CodeProps = {
+  key: number;
+  tag: BlockTags;
+  content: string;
+  language: string;
+};
+
+export function Code(props: CodeProps) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -23,7 +30,7 @@ export function Code(props: MarkupConf) {
       {!isClient && <p>chargement</p>}
       {isClient && (
         <pre>
-          <code className="language-javascript">{props.content}</code>
+          <code className={`language-${props.language}`}>{props.content}</code>
         </pre>
       )}
     </div>

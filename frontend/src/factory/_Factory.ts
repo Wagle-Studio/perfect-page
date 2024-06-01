@@ -3,7 +3,8 @@ import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { BlockTags, BlockTypes } from "@/types/Block";
 import { Markup, MarkupConf } from "@/types/Markup";
 
-export interface FactoryInterface {
+export interface FactoryInterface<ComponentConf> {
+  conf: ComponentConf;
   render(): ReactNode;
 }
 
@@ -31,6 +32,7 @@ export abstract class Factory {
       type: this._getType(block.type),
       tag: this._getTag(block.type),
       content: this._getContent(block),
+      language: this._getLanguage(block),
     };
   }
 
@@ -50,7 +52,7 @@ export abstract class Factory {
     return Math.floor(Math.random() * (10000 - 100 + 1)) + 100;
   }
 
-  private static _getType(type: string): MarkupConf["type"] {
+  private static _getType(type: string): MarkupConf["type"] | undefined {
     switch (type) {
       case BlockTypes.HEADING_1:
         return BlockTypes.HEADING_1;
@@ -71,11 +73,11 @@ export abstract class Factory {
       case BlockTypes.CODE:
         return BlockTypes.CODE;
       default:
-        throw new Error("Unsupported block type.");
+        undefined;
     }
   }
 
-  private static _getTag(type: string): MarkupConf["tag"] {
+  private static _getTag(type: string): MarkupConf["tag"] | undefined {
     switch (type) {
       case BlockTypes.HEADING_1:
         return BlockTags.HEADING_1;
@@ -96,28 +98,37 @@ export abstract class Factory {
       case BlockTypes.CODE:
         return BlockTags.CODE;
       default:
-        throw new Error("Unsupported block type.");
+        throw undefined;
     }
   }
 
-  private static _getContent(block: BlockObjectResponse): string {
+  private static _getContent(block: BlockObjectResponse): string | undefined {
     switch (block.type) {
       case BlockTypes.HEADING_1:
-        return block.heading_1?.rich_text?.[0]?.plain_text || "";
+        return block.heading_1?.rich_text?.[0]?.plain_text;
       case BlockTypes.HEADING_2:
-        return block.heading_2?.rich_text?.[0]?.plain_text || "";
+        return block.heading_2?.rich_text?.[0]?.plain_text;
       case BlockTypes.HEADING_3:
-        return block.heading_3?.rich_text?.[0]?.plain_text || "";
+        return block.heading_3?.rich_text?.[0]?.plain_text;
       case BlockTypes.PARAGRAPH:
-        return block.paragraph?.rich_text?.[0]?.plain_text || "";
+        return block.paragraph?.rich_text?.[0]?.plain_text;
       case BlockTypes.UNORDERED_LIST_ITEM:
-        return block.bulleted_list_item?.rich_text?.[0]?.plain_text || "";
+        return block.bulleted_list_item?.rich_text?.[0]?.plain_text;
       case BlockTypes.ORDERED_LIST_ITEM:
-        return block.numbered_list_item?.rich_text?.[0]?.plain_text || "";
+        return block.numbered_list_item?.rich_text?.[0]?.plain_text;
       case BlockTypes.CODE:
-        return block.code?.rich_text?.[0]?.plain_text || "";
+        return block.code?.rich_text?.[0]?.plain_text;
       default:
-        throw new Error("Unsupported block type.");
+        throw undefined;
+    }
+  }
+
+  private static _getLanguage(block: BlockObjectResponse): string | undefined {
+    switch (block.type) {
+      case BlockTypes.CODE:
+        return block.code?.language;
+      default:
+        return undefined;
     }
   }
 }
