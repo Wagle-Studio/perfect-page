@@ -1,3 +1,9 @@
+import { AbstractCode } from "@/factory/code/AbstractCode";
+import { AbstractList } from "@/factory/list/AbstractList";
+import { AbstractTypo } from "@/factory/typo/AbstractTypo";
+
+export type AbstractBlock = AbstractTypo | AbstractCode | AbstractList;
+
 export enum NotionBlockTypes {
   HEADING_1 = "heading_1",
   HEADING_2 = "heading_2",

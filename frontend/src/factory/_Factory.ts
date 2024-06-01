@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { BlockTags, NotionBlockTypes, CustomBlockTypes } from "@/types/Block";
-import { Markup, MarkupConf } from "@/types/Markup";
+import { AbstractMarkup, MarkupConf } from "@/types/Markup";
 
 export interface FactoryInterface<ComponentConf> {
   conf: ComponentConf;
@@ -15,14 +15,14 @@ export abstract class Factory {
     this.conf = conf;
   }
 
-  protected abstract createMarkup(): Markup;
+  protected abstract createMarkup(): AbstractMarkup;
 
   public getConf(): MarkupConf {
     return this.conf;
   }
 
   public render(): ReactNode {
-    const markup: Markup = this.createMarkup();
+    const markup: AbstractMarkup = this.createMarkup();
     return markup.render();
   }
 
@@ -98,7 +98,7 @@ export abstract class Factory {
       case NotionBlockTypes.CODE:
         return BlockTags.CODE;
       default:
-        throw undefined;
+        return undefined;
     }
   }
 
@@ -119,7 +119,7 @@ export abstract class Factory {
       case NotionBlockTypes.CODE:
         return block.code?.rich_text?.[0]?.plain_text;
       default:
-        throw undefined;
+        return undefined;
     }
   }
 
