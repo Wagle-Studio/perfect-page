@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { BlockTags, BlockTypes } from "@/types/Block";
-import { Error } from "@/factory/Error";
+import { Error } from "@/factory/error/Error";
 import { Typo } from "@/factory/typo/Typo";
 import { Code } from "@/factory/code/Code";
 
