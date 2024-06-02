@@ -15,7 +15,8 @@ export function Code(props: CodeProps) {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      setIsClient(true);
+      // DIY to avoid css not loading caused by images.
+      setTimeout(() => setIsClient(true), 1000);
     }
   }, []);
 
@@ -29,8 +30,10 @@ export function Code(props: CodeProps) {
     <div key={props.key}>
       {!isClient && <p>chargement</p>}
       {isClient && (
-        <pre>
-          <code className={`language-${props.code_language}`}>{props.content}</code>
+        <pre style={{ overflowX: "scroll" }}>
+          <code className={`language-${props.code_language}`}>
+            {props.content}
+          </code>
         </pre>
       )}
     </div>

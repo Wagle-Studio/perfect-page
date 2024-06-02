@@ -21,10 +21,6 @@ function ImageComponent(props: ImageProps) {
     };
   }, [props.image_url]);
 
-  const aspectRatio = dimensions
-    ? (dimensions.height / dimensions.width) * 100
-    : 0;
-
   return (
     <Fragment key={props.key}>
       {dimensions && (
@@ -32,22 +28,21 @@ function ImageComponent(props: ImageProps) {
           style={{
             position: "relative",
             width: "100%",
-            paddingBottom: `${aspectRatio}%`,
-            overflow: "hidden",
+            maxWidth: `${dimensions.width}px`,
+            height: "auto",
           }}
         >
           <NextImage
             src={props.image_url}
             alt={props.content ?? "Missing alt text."}
+            priority={false}
             width={dimensions.width}
             height={dimensions.height}
             style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
+              display: "block",
               width: "100%",
-              height: "100%",
-              objectFit: "cover",
+              height: "auto",
+              objectFit: "contain",
             }}
           />
         </div>
