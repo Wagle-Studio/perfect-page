@@ -1,3 +1,4 @@
+import { BlockCallout } from "@/factory/callout/BlockCallout";
 import { BlockCode } from "@/factory/code/BlockCode";
 import { BlockImage } from "@/factory/image/BlockImage";
 import { BlockList } from "@/factory/list/BlockList";
@@ -11,7 +12,8 @@ export type AbstractBlock =
   | BlockList
   | BlockTodo
   | BlockImage
-  | BlockQuote;
+  | BlockQuote
+  | BlockCallout;
 
 export enum NotionBlockTypes {
   HEADING_1 = "heading_1",
@@ -24,6 +26,7 @@ export enum NotionBlockTypes {
   TODO = "to_do",
   IMAGE = "image",
   QUOTE = "quote",
+  CALLOUT = "callout",
 }
 
 export enum CustomBlockTypes {
@@ -39,5 +42,4 @@ export enum BlockTags {
   UNORDERED_LIST = "ul",
   ORDERED_LIST = "ol",
   LIST_ITEM = "li",
-  CODE = "code",
 }

@@ -78,6 +78,8 @@ export abstract class FactoryBlock {
         return NotionBlockTypes.TODO;
       case NotionBlockTypes.QUOTE:
         return NotionBlockTypes.QUOTE;
+      case NotionBlockTypes.CALLOUT:
+        return NotionBlockTypes.CALLOUT;
       default:
         undefined;
     }
@@ -128,6 +130,8 @@ export abstract class FactoryBlock {
         return block.image?.caption?.[0]?.plain_text;
       case NotionBlockTypes.QUOTE:
         return block.quote?.rich_text?.[0]?.plain_text;
+      case NotionBlockTypes.CALLOUT:
+        return block.callout?.rich_text?.[0]?.plain_text;
       default:
         return undefined;
     }
@@ -160,6 +164,18 @@ export abstract class FactoryBlock {
       case NotionBlockTypes.IMAGE:
         const image = block.image as any;
         return image.external?.url;
+      default:
+        return undefined;
+    }
+  }
+
+  private static _getCalloutIcon(
+    block: BlockObjectResponse
+  ): string | undefined {
+    switch (block.type) {
+      case NotionBlockTypes.CALLOUT:
+        const icon = block.callout?.icon as any;
+        return icon.emoji;
       default:
         return undefined;
     }

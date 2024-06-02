@@ -6,6 +6,7 @@ import { MarkupTypo } from "@/factory/typo/MarkupTypo";
 import { MarkupTodo } from "@/factory/todo/MarkupTodo";
 import { MarkupImage } from "@/factory/image/MarkupImage";
 import { MarkupQuote } from "@/factory/quote/MarkupQuote";
+import { MarkupCallout } from "@/factory/callout/MarkupCallout";
 
 export type AbstractMarkup =
   | MarkupTypo
@@ -13,7 +14,8 @@ export type AbstractMarkup =
   | MarkupList
   | MarkupTodo
   | MarkupImage
-  | MarkupQuote;
+  | MarkupQuote
+  | MarkupCallout;
 
 export enum MarkupConfFields {
   KEY = "key",
@@ -23,6 +25,7 @@ export enum MarkupConfFields {
   CODE_LANGUAGE = "code_language",
   TODO_CHECK = "todo_check",
   IMAGE_URL = "image_url",
+  ICON = "icon",
 }
 
 export type MarkupConf = {
@@ -33,4 +36,5 @@ export type MarkupConf = {
   code_language?: string;
   todo_check?: boolean;
   image_url?: string;
+  icon?: string;
 };

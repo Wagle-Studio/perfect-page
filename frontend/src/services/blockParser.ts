@@ -8,6 +8,7 @@ import { BlockCode } from "@/factory/code/BlockCode";
 import { BlockTodo } from "@/factory/todo/BlockTodo";
 import { BlockImage } from "@/factory/image/BlockImage";
 import { BlockQuote } from "@/factory/quote/BlockQuote";
+import { BlockCallout } from "@/factory/callout/BlockCallout";
 
 export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
   let markups: AbstractMarkup[] = [];
@@ -114,6 +115,15 @@ export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
         }
       }
 
+      // Creates and stacks markup for callout block in current markups stack.
+      if (block.type === NotionBlockTypes.CALLOUT) {
+        const markup = createMarkupInstanceFromBlock(block);
+
+        if (markup) {
+          markups = [...markups, markup];
+        }
+      }
+
       // Creates and stacks markup for typo block in current markups stack.
       if (
         block.type === NotionBlockTypes.HEADING_1 ||
@@ -194,6 +204,10 @@ function createMarkupInstanceFromBlock(
     case NotionBlockTypes.QUOTE:
       return new BlockQuote(
         BlockQuote.buildConfFromBlock(block)
+      ).createMarkup();
+    case NotionBlockTypes.CALLOUT:
+      return new BlockCallout(
+        BlockCallout.buildConfFromBlock(block)
       ).createMarkup();
     default:
       return undefined;
