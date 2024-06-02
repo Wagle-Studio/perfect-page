@@ -21,6 +21,10 @@ export abstract class FactoryMarkup<ComponentProps>
     );
   }
 
+  public getConf(): MarkupConf {
+    return this.conf;
+  }
+
   private _extractConfProps<ComponentConf>(
     conf: MarkupConf,
     mandatoryFields: MarkupConfFields[]

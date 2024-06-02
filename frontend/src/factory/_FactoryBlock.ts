@@ -68,10 +68,10 @@ export abstract class FactoryBlock {
         return CustomBlockTypes.UNORDERED_LIST;
       case CustomBlockTypes.ORDERED_LIST:
         return CustomBlockTypes.ORDERED_LIST;
-      case NotionBlockTypes.UNORDERED_LIST_ITEM:
-        return NotionBlockTypes.UNORDERED_LIST_ITEM;
-      case NotionBlockTypes.ORDERED_LIST_ITEM:
-        return NotionBlockTypes.ORDERED_LIST_ITEM;
+      case NotionBlockTypes.BULLETED_LIST_ITEM:
+        return NotionBlockTypes.BULLETED_LIST_ITEM;
+      case NotionBlockTypes.NUMBERED_LIST_ITEM:
+        return NotionBlockTypes.NUMBERED_LIST_ITEM;
       case NotionBlockTypes.CODE:
         return NotionBlockTypes.CODE;
       case NotionBlockTypes.TODO:
@@ -99,9 +99,9 @@ export abstract class FactoryBlock {
         return BlockTags.UNORDERED_LIST;
       case CustomBlockTypes.ORDERED_LIST:
         return BlockTags.ORDERED_LIST;
-      case NotionBlockTypes.UNORDERED_LIST_ITEM:
+      case NotionBlockTypes.BULLETED_LIST_ITEM:
         return BlockTags.LIST_ITEM;
-      case NotionBlockTypes.ORDERED_LIST_ITEM:
+      case NotionBlockTypes.NUMBERED_LIST_ITEM:
         return BlockTags.LIST_ITEM;
       default:
         return undefined;
@@ -118,9 +118,9 @@ export abstract class FactoryBlock {
         return block.heading_3?.rich_text?.[0]?.plain_text;
       case NotionBlockTypes.PARAGRAPH:
         return block.paragraph?.rich_text?.[0]?.plain_text;
-      case NotionBlockTypes.UNORDERED_LIST_ITEM:
+      case NotionBlockTypes.BULLETED_LIST_ITEM:
         return block.bulleted_list_item?.rich_text?.[0]?.plain_text;
-      case NotionBlockTypes.ORDERED_LIST_ITEM:
+      case NotionBlockTypes.NUMBERED_LIST_ITEM:
         return block.numbered_list_item?.rich_text?.[0]?.plain_text;
       case NotionBlockTypes.CODE:
         return block.code?.rich_text?.[0]?.plain_text;
@@ -169,6 +169,7 @@ export abstract class FactoryBlock {
     }
   }
 
+  // TO USE
   private static _getCalloutIcon(
     block: BlockObjectResponse
   ): string | undefined {

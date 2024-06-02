@@ -36,5 +36,4 @@ export type MarkupConf = {
   code_language?: string;
   todo_check?: boolean;
   image_url?: string;
-  icon?: string;
 };

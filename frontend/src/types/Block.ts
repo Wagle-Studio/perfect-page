@@ -20,8 +20,9 @@ export enum NotionBlockTypes {
   HEADING_2 = "heading_2",
   HEADING_3 = "heading_3",
   PARAGRAPH = "paragraph",
-  UNORDERED_LIST_ITEM = "bulleted_list_item",
-  ORDERED_LIST_ITEM = "numbered_list_item",
+  // CHANGE KEY FOR SAME AS VALUE
+  BULLETED_LIST_ITEM = "bulleted_list_item",
+  NUMBERED_LIST_ITEM = "numbered_list_item",
   CODE = "code",
   TODO = "to_do",
   IMAGE = "image",

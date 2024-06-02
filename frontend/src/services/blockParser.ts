@@ -10,176 +10,129 @@ import { BlockImage } from "@/factory/image/BlockImage";
 import { BlockQuote } from "@/factory/quote/BlockQuote";
 import { BlockCallout } from "@/factory/callout/BlockCallout";
 
+enum ListTypes {
+  BULLETED_LIST_ITEM = "bulleted_list_item",
+  NUMBERED_LIST_ITEM = "numbered_list_item",
+  TODO = "to_do",
+}
+
+type MarkupLists = Record<ListTypes, AbstractMarkup[]>;
+
+const singleBlocks = [
+  NotionBlockTypes.CODE,
+  NotionBlockTypes.IMAGE,
+  NotionBlockTypes.QUOTE,
+  NotionBlockTypes.CALLOUT,
+  NotionBlockTypes.HEADING_1,
+  NotionBlockTypes.HEADING_2,
+  NotionBlockTypes.HEADING_3,
+  NotionBlockTypes.PARAGRAPH,
+];
+
+const listBlocks = [
+  NotionBlockTypes.BULLETED_LIST_ITEM,
+  NotionBlockTypes.NUMBERED_LIST_ITEM,
+  NotionBlockTypes.TODO,
+];
+
 export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
   let markups: AbstractMarkup[] = [];
-  let unorderedListItems: AbstractMarkup[] = [];
-  let orderedListItems: AbstractMarkup[] = [];
-  let todoListItems: AbstractMarkup[] = [];
+  let markupLists: MarkupLists = {
+    bulleted_list_item: [],
+    numbered_list_item: [],
+    to_do: [],
+  };
 
   blocks.forEach((block) => {
-    // Creates and stacks markups for unordered list items in Notion block.
-    if (block.type === NotionBlockTypes.UNORDERED_LIST_ITEM) {
-      const markup = createMarkupInstanceFromBlock(block);
-
-      if (markup) {
-        unorderedListItems = [...unorderedListItems, markup];
-      }
-    }
-
-    // Creates and stacks markups for ordered list items in Notion block.
-    if (block.type === NotionBlockTypes.ORDERED_LIST_ITEM) {
-      const markup = createMarkupInstanceFromBlock(block);
-
-      if (markup) {
-        orderedListItems = [...orderedListItems, markup];
-      }
-    }
-
-    // Creates and stacks markups for todo list items in Notion block.
-    if (block.type === NotionBlockTypes.TODO) {
-      const markup = createMarkupInstanceFromBlock(block);
-
-      if (markup) {
-        todoListItems = [...todoListItems, markup];
-      }
-    }
-
-    if (
-      block.type !== NotionBlockTypes.UNORDERED_LIST_ITEM &&
-      block.type !== NotionBlockTypes.ORDERED_LIST_ITEM &&
-      block.type !== NotionBlockTypes.TODO
-    ) {
-      // Creates and stacks markup for unordered list in current markups stack.
-      if (unorderedListItems.length > 0) {
-        const markup = createMarkupInstanceFromCustom(
-          CustomBlockTypes.UNORDERED_LIST,
-          unorderedListItems.map((item) => item.render())
-        );
-
-        if (markup) {
-          markups = [...markups, markup];
-          unorderedListItems = [];
-        }
-      }
-
-      // Creates and stacks markup for ordered list in current markups stack.
-      if (orderedListItems.length > 0) {
-        const markup = createMarkupInstanceFromCustom(
-          CustomBlockTypes.ORDERED_LIST,
-          orderedListItems.map((item) => item.render())
-        );
-
-        if (markup) {
-          markups = [...markups, markup];
-          orderedListItems = [];
-        }
-      }
-
-      // Creates and stacks markup for todo list in current markups stack.
-      if (todoListItems.length > 0) {
-        const markup = createMarkupInstanceFromCustom(
-          CustomBlockTypes.UNORDERED_LIST,
-          todoListItems.map((item) => item.render())
-        );
-
-        if (markup) {
-          markups = [...markups, markup];
-          todoListItems = [];
-        }
-      }
-
-      // Creates and stacks markup for code block in current markups stack.
-      if (block.type === NotionBlockTypes.CODE) {
-        const markup = createMarkupInstanceFromBlock(block);
-
-        if (markup) {
-          markups = [...markups, markup];
-        }
-      }
-
-      // Creates and stacks markup for code block in current markups stack.
-      if (block.type === NotionBlockTypes.IMAGE) {
-        const markup = createMarkupInstanceFromBlock(block);
-
-        if (markup) {
-          markups = [...markups, markup];
-        }
-      }
-
-      // Creates and stacks markup for quote block in current markups stack.
-      if (block.type === NotionBlockTypes.QUOTE) {
-        const markup = createMarkupInstanceFromBlock(block);
-
-        if (markup) {
-          markups = [...markups, markup];
-        }
-      }
-
-      // Creates and stacks markup for callout block in current markups stack.
-      if (block.type === NotionBlockTypes.CALLOUT) {
-        const markup = createMarkupInstanceFromBlock(block);
-
-        if (markup) {
-          markups = [...markups, markup];
-        }
-      }
-
-      // Creates and stacks markup for typo block in current markups stack.
+    // Handles Notion blocks that do not need list.
+    if (singleBlocks.includes(block.type as NotionBlockTypes)) {
+      // Flushs markup lists before create next Notion block markup.
       if (
-        block.type === NotionBlockTypes.HEADING_1 ||
-        block.type === NotionBlockTypes.HEADING_2 ||
-        block.type === NotionBlockTypes.HEADING_3 ||
-        block.type === NotionBlockTypes.PARAGRAPH
+        Object.values(markupLists).find((markupList) => markupList.length > 0)
       ) {
-        const markup = createMarkupInstanceFromBlock(block);
-
-        if (markup) {
-          markups = [...markups, markup];
-        }
+        const flushResult = flushLists(markups, markupLists);
+        markups = flushResult.markups;
+        markupLists = flushResult.markupLists;
       }
+
+      // Creates and stacks markup for the manipulated Notion block.
+      markups = stackMarkup(markups, createMarkupInstanceFromBlock(block));
+    }
+
+    // Handles Notion blocks that need list.
+    if (listBlocks.includes(block.type as NotionBlockTypes)) {
+      const markup = createMarkupInstanceFromBlock(block);
+
+      // Creates and stacks markups for list items in Notion block.
+      markupLists[block.type as ListTypes] = stackMarkup(
+        markupLists[block.type as ListTypes],
+        markup
+      );
     }
   });
 
-  // Creates and stacks markup for unordered list in current markups stack.
-  if (unorderedListItems.length > 0) {
-    const markup = createMarkupInstanceFromCustom(
-      CustomBlockTypes.UNORDERED_LIST,
-      unorderedListItems.map((item) => item.render())
-    );
-
-    if (markup) {
-      markups = [...markups, markup];
-      unorderedListItems = [];
-    }
-  }
-
-  // Creates and stacks markup for ordered list in current markups stack.
-  if (orderedListItems.length > 0) {
-    const markup = createMarkupInstanceFromCustom(
-      CustomBlockTypes.ORDERED_LIST,
-      orderedListItems.map((item) => item.render())
-    );
-
-    if (markup) {
-      markups = [...markups, markup];
-      orderedListItems = [];
-    }
-  }
-
-  // Creates and stacks markup for todo list in current markups stack.
-  if (todoListItems.length > 0) {
-    const markup = createMarkupInstanceFromCustom(
-      CustomBlockTypes.UNORDERED_LIST,
-      todoListItems.map((item) => item.render())
-    );
-
-    if (markup) {
-      markups = [...markups, markup];
-      todoListItems = [];
-    }
+  // Flushs markup lists after the end of the loop.
+  if (Object.values(markupLists).find((markupList) => markupList.length > 0)) {
+    const flushResult = flushLists(markups, markupLists);
+    markups = flushResult.markups;
+    markupLists = flushResult.markupLists;
   }
 
   return markups;
+}
+
+function stackMarkup(
+  markups: AbstractMarkup[],
+  markup: AbstractMarkup | undefined
+): AbstractMarkup[] {
+  let stack = markups;
+
+  if (markup) {
+    return (stack = [...stack, markup]);
+  }
+
+  return stack;
+}
+
+function flushLists(
+  markups: AbstractMarkup[],
+  markupLists: MarkupLists
+): {
+  markups: AbstractMarkup[];
+  markupLists: MarkupLists;
+} {
+  Object.keys(markupLists).forEach((listType) => {
+    const listItems = markupLists[listType as ListTypes];
+
+    if (listItems.length > 0) {
+      switch (listType) {
+        case ListTypes.BULLETED_LIST_ITEM:
+        case ListTypes.TODO:
+          markups = stackMarkup(
+            markups,
+            createMarkupInstanceFromCustom(
+              CustomBlockTypes.UNORDERED_LIST,
+              listItems.map((item) => item.render())
+            )
+          );
+          break;
+        case ListTypes.NUMBERED_LIST_ITEM:
+          markups = stackMarkup(
+            markups,
+            createMarkupInstanceFromCustom(
+              CustomBlockTypes.ORDERED_LIST,
+              listItems.map((item) => item.render())
+            )
+          );
+          break;
+        default:
+      }
+
+      markupLists[listType as ListTypes] = [];
+    }
+  });
+
+  return { markups, markupLists };
 }
 
 function createMarkupInstanceFromBlock(
@@ -190,8 +143,8 @@ function createMarkupInstanceFromBlock(
     case NotionBlockTypes.HEADING_2:
     case NotionBlockTypes.HEADING_3:
     case NotionBlockTypes.PARAGRAPH:
-    case NotionBlockTypes.UNORDERED_LIST_ITEM:
-    case NotionBlockTypes.ORDERED_LIST_ITEM:
+    case NotionBlockTypes.BULLETED_LIST_ITEM:
+    case NotionBlockTypes.NUMBERED_LIST_ITEM:
       return new BlockTypo(BlockTypo.buildConfFromBlock(block)).createMarkup();
     case NotionBlockTypes.CODE:
       return new BlockCode(BlockCode.buildConfFromBlock(block)).createMarkup();
