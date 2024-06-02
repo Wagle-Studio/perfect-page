@@ -5,8 +5,15 @@ import { MarkupList } from "@/factory/list/MarkupList";
 import { MarkupTypo } from "@/factory/typo/MarkupTypo";
 import { MarkupTodo } from "@/factory/todo/MarkupTodo";
 import { MarkupImage } from "@/factory/image/MarkupImage";
+import { MarkupQuote } from "@/factory/quote/MarkupQuote";
 
-export type AbstractMarkup = MarkupTypo | MarkupCode | MarkupList | MarkupTodo | MarkupImage;
+export type AbstractMarkup =
+  | MarkupTypo
+  | MarkupCode
+  | MarkupList
+  | MarkupTodo
+  | MarkupImage
+  | MarkupQuote;
 
 export enum MarkupConfFields {
   KEY = "key",

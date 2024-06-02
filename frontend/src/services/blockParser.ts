@@ -7,6 +7,7 @@ import { BlockList } from "@/factory/list/BlockList";
 import { BlockCode } from "@/factory/code/BlockCode";
 import { BlockTodo } from "@/factory/todo/BlockTodo";
 import { BlockImage } from "@/factory/image/BlockImage";
+import { BlockQuote } from "@/factory/quote/BlockQuote";
 
 export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
   let markups: AbstractMarkup[] = [];
@@ -104,6 +105,15 @@ export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
         }
       }
 
+      // Creates and stacks markup for quote block in current markups stack.
+      if (block.type === NotionBlockTypes.QUOTE) {
+        const markup = createMarkupInstanceFromBlock(block);
+
+        if (markup) {
+          markups = [...markups, markup];
+        }
+      }
+
       // Creates and stacks markup for typo block in current markups stack.
       if (
         block.type === NotionBlockTypes.HEADING_1 ||
@@ -178,7 +188,13 @@ function createMarkupInstanceFromBlock(
     case NotionBlockTypes.TODO:
       return new BlockTodo(BlockTodo.buildConfFromBlock(block)).createMarkup();
     case NotionBlockTypes.IMAGE:
-      return new BlockImage(BlockImage.buildConfFromBlock(block)).createMarkup();
+      return new BlockImage(
+        BlockImage.buildConfFromBlock(block)
+      ).createMarkup();
+    case NotionBlockTypes.QUOTE:
+      return new BlockQuote(
+        BlockQuote.buildConfFromBlock(block)
+      ).createMarkup();
     default:
       return undefined;
   }

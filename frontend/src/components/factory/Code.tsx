@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import Prism from "prismjs";
 import "@/theme/prismVscDarkPlus.css";
-import { BlockTags } from "@/types/Block";
 
 export type CodeProps = {
   key: number;
-  tag: BlockTags;
   content: string;
   code_language: string;
 };
