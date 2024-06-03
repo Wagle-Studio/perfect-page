@@ -52,7 +52,7 @@ export abstract class FactoryBlock {
   }
 
   private static _getRandomKey(): number {
-    return Math.floor(Math.random() * (10000 - 100 + 1)) + 100;
+    return Math.floor(Math.random() * (1000000 - 100 + 1)) + 100;
   }
 
   private static _getType(type: string): MarkupConf["type"] | undefined {
