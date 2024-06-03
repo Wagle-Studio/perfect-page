@@ -38,6 +38,7 @@ function ImageComponent(props: ImageProps) {
             width={dimensions.width}
             height={dimensions.height}
           />
+          <p>{props.content}</p>
         </div>
       )}
     </Fragment>

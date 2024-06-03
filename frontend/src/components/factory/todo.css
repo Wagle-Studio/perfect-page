@@ -12,7 +12,7 @@
         margin-right: 8px;
 
         &.checked {
-            background-color: lightgray;
+            background-color: black;
         }
 
         input {
