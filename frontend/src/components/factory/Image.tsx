@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import NextImage from "next/image";
+import "./image.css";
 
 export type ImageProps = {
   key: number;
@@ -25,11 +26,9 @@ function ImageComponent(props: ImageProps) {
     <Fragment key={props.key}>
       {dimensions && (
         <div
+          className="image_container"
           style={{
-            position: "relative",
-            width: "100%",
             maxWidth: `${dimensions.width}px`,
-            height: "auto",
           }}
         >
           <NextImage
@@ -38,12 +37,6 @@ function ImageComponent(props: ImageProps) {
             priority={false}
             width={dimensions.width}
             height={dimensions.height}
-            style={{
-              display: "block",
-              width: "100%",
-              height: "auto",
-              objectFit: "contain",
-            }}
           />
         </div>
       )}
