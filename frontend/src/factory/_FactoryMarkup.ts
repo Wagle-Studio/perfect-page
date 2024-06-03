@@ -34,7 +34,7 @@ export abstract class FactoryMarkup<ComponentProps>
       if (!conf.hasOwnProperty(field)) {
         return null;
       }
-      (result as any)[field] = conf[field];
+      (result as any)[field] = conf[field as keyof MarkupConf];
     }
 
     return result as ComponentConf;

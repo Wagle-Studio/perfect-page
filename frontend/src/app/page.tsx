@@ -8,7 +8,7 @@ export default async function Home() {
   });
 
   const data = await notionClient.blocks.children.list({
-    block_id: process.env.NOTION_BLOCK_TEST_ID ?? "",
+    block_id: process.env.NOTION_BLOCK_DEV_ID ?? "",
   });
 
   const blocks = data.results as BlockObjectResponse[];
