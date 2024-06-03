@@ -9,7 +9,7 @@ type ArticleProps = {
 
 export function Article(props: ArticleProps) {
   return (
-    <article>
+    <article style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {props.blocks &&
         blockParser(props.blocks).map((markup) => markup.render())}
     </article>
