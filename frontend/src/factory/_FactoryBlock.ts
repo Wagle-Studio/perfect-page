@@ -35,6 +35,7 @@ export abstract class FactoryBlock {
       code_language: this._getCodeLanguage(block),
       todo_check: this._getTodoState(block),
       image_url: this._getImageUrl(block),
+      callout_icon: this._getCalloutIcon(block),
     };
   }
 
@@ -169,7 +170,6 @@ export abstract class FactoryBlock {
     }
   }
 
-  // TO USE
   private static _getCalloutIcon(
     block: BlockObjectResponse
   ): string | undefined {

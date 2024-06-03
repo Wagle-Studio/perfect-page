@@ -26,6 +26,7 @@ export enum MarkupConfFields {
   TODO_CHECK = "todo_check",
   IMAGE_URL = "image_url",
   ICON = "icon",
+  CALLOUT_ICON = "callout_icon",
 }
 
 export type MarkupConf = {
@@ -36,4 +37,5 @@ export type MarkupConf = {
   code_language?: string;
   todo_check?: boolean;
   image_url?: string;
+  callout_icon?: string;
 };

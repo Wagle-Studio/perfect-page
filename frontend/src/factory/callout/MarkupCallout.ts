@@ -11,6 +11,7 @@ const mandatoryConf: MarkupConfFields[] = [
   MarkupConfFields.KEY,
   MarkupConfFields.TAG,
   MarkupConfFields.CONTENT,
+  MarkupConfFields.CALLOUT_ICON,
 ];
 
 export class MarkupCallout extends FactoryMarkup<CalloutProps> {
