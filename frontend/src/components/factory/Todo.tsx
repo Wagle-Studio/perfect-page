@@ -1,3 +1,5 @@
+import "./todo.css";
+
 export type TodoProps = {
   key: number;
   content: string;
@@ -5,5 +7,12 @@ export type TodoProps = {
 };
 
 export function Todo(props: TodoProps) {
-  return <p key={props.key}>{props.todo_check + " - " + props.content}</p>;
+  return (
+    <div key={props.key} className="todo_container">
+      <label className={props.todo_check ? "checked" : ""}>
+        <input type="checkbox" checked={props.todo_check} readOnly />
+      </label>
+      <p>{props.content}</p>
+    </div>
+  );
 }
