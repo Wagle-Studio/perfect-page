@@ -5,7 +5,7 @@
     width: 100%;
     padding: 16px 16px 16px 12px;
     border-radius: 4px;
-    background-color: #f1f1ef;
+    background-color: lightgray;
     box-sizing: border-box;
 
     >* {
