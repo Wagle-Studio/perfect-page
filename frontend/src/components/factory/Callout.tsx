@@ -1,3 +1,5 @@
+import "./callout.css";
+
 export type CalloutProps = {
   key: number;
   content: string;
@@ -5,11 +7,10 @@ export type CalloutProps = {
 };
 
 export function Callout(props: CalloutProps) {
-  console.log(props);
-
   return (
-    <div key={props.key}>
-      {props.callout_icon} {props.content}
+    <div key={props.key} className="callout_container">
+      <span>{props.callout_icon}</span>
+      <p>{props.content}</p>
     </div>
   );
 }
