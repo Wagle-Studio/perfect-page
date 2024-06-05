@@ -41,12 +41,13 @@ export abstract class FactoryBlock {
 
   public static buildConfFromCustom(
     type: CustomBlockTypes,
+    tag: BlockTags,
     content: string | ReactNode
   ): MarkupConf {
     return {
       key: this._getRandomKey(),
       type: this._getType(type),
-      tag: this._getTag(type),
+      tag: this._getTag(tag),
       content,
     };
   }
@@ -55,7 +56,9 @@ export abstract class FactoryBlock {
     return Math.floor(Math.random() * (1000000 - 100 + 1)) + 100;
   }
 
-  private static _getType(type: string): MarkupConf["type"] | undefined {
+  private static _getType(
+    type: string
+  ): NotionBlockTypes | CustomBlockTypes | undefined {
     switch (type) {
       case NotionBlockTypes.HEADING_1:
         return NotionBlockTypes.HEADING_1;
@@ -75,8 +78,8 @@ export abstract class FactoryBlock {
         return NotionBlockTypes.NUMBERED_LIST_ITEM;
       case NotionBlockTypes.CODE:
         return NotionBlockTypes.CODE;
-      case NotionBlockTypes.TODO:
-        return NotionBlockTypes.TODO;
+      case NotionBlockTypes.TO_DO:
+        return NotionBlockTypes.TO_DO;
       case NotionBlockTypes.QUOTE:
         return NotionBlockTypes.QUOTE;
       case NotionBlockTypes.CALLOUT:
@@ -86,7 +89,7 @@ export abstract class FactoryBlock {
     }
   }
 
-  private static _getTag(type: string): MarkupConf["tag"] | undefined {
+  private static _getTag(type: string): BlockTags | undefined {
     switch (type) {
       case NotionBlockTypes.HEADING_1:
         return BlockTags.HEADING_1;
@@ -100,6 +103,8 @@ export abstract class FactoryBlock {
         return BlockTags.UNORDERED_LIST;
       case CustomBlockTypes.ORDERED_LIST:
         return BlockTags.ORDERED_LIST;
+      case CustomBlockTypes.TODO_LIST:
+        return BlockTags.UNORDERED_LIST;
       case NotionBlockTypes.BULLETED_LIST_ITEM:
         return BlockTags.LIST_ITEM;
       case NotionBlockTypes.NUMBERED_LIST_ITEM:
@@ -125,7 +130,7 @@ export abstract class FactoryBlock {
         return block.numbered_list_item?.rich_text?.[0]?.plain_text;
       case NotionBlockTypes.CODE:
         return block.code?.rich_text?.[0]?.plain_text;
-      case NotionBlockTypes.TODO:
+      case NotionBlockTypes.TO_DO:
         return block.to_do?.rich_text?.[0]?.plain_text;
       case NotionBlockTypes.IMAGE:
         return block.image?.caption?.[0]?.plain_text;
@@ -153,7 +158,7 @@ export abstract class FactoryBlock {
     block: BlockObjectResponse
   ): boolean | undefined {
     switch (block.type) {
-      case NotionBlockTypes.TODO:
+      case NotionBlockTypes.TO_DO:
         return block.to_do?.checked;
       default:
         return undefined;

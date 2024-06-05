@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import NextImage from "next/image";
-import "./image.css";
+import "./image.scss";
 
 export type ImageProps = {
   key: number;
@@ -26,19 +26,20 @@ function ImageComponent(props: ImageProps) {
     <Fragment key={props.key}>
       {dimensions && (
         <div
-          className="image_container"
+          className="media"
           style={{
             maxWidth: `${dimensions.width}px`,
           }}
         >
           <NextImage
+            className="media__image"
             src={props.image_url}
             alt={props.content ?? "Missing alt text."}
             priority={false}
             width={dimensions.width}
             height={dimensions.height}
           />
-          <p>{props.content}</p>
+          {props.content && <p className="media__content">{props.content}</p>}
         </div>
       )}
     </Fragment>

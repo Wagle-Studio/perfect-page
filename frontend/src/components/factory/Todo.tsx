@@ -1,4 +1,4 @@
-import "./todo.css";
+import "./todo.scss";
 
 export type TodoProps = {
   key: number;
@@ -8,11 +8,21 @@ export type TodoProps = {
 
 export function Todo(props: TodoProps) {
   return (
-    <div key={props.key} className="todo_container">
-      <label className={props.todo_check ? "checked" : ""}>
-        <input type="checkbox" checked={props.todo_check} readOnly />
+    <div key={props.key} className="to_do">
+      <label
+        className={`to_do__label to_do__label--${
+          props.todo_check ? "checked" : "unchecked"
+        }`}
+      >
+        <input
+          className="to_do__label__input"
+          type="checkbox"
+          checked={props.todo_check}
+          readOnly
+        />
       </label>
-      <p>{props.content}</p>
+
+      <p className="to_do__content">{props.content}</p>
     </div>
   );
 }

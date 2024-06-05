@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { NotionBlockTypes, CustomBlockTypes } from "@/types/Block";
+import { NotionBlockTypes, CustomBlockTypes, BlockTags } from "@/types/Block";
 import { AbstractMarkup } from "@/types/Markup";
 import { BlockTypo } from "@/factory/typo/BlockTypo";
 import { BlockList } from "@/factory/list/BlockList";
@@ -13,7 +13,7 @@ import { BlockCallout } from "@/factory/callout/BlockCallout";
 enum ListTypes {
   BULLETED_LIST_ITEM = "bulleted_list_item",
   NUMBERED_LIST_ITEM = "numbered_list_item",
-  TODO = "to_do",
+  TO_DO = "to_do",
 }
 
 type MarkupLists = Record<ListTypes, AbstractMarkup[]>;
@@ -32,7 +32,7 @@ const singleBlocks = [
 const listBlocks = [
   NotionBlockTypes.BULLETED_LIST_ITEM,
   NotionBlockTypes.NUMBERED_LIST_ITEM,
-  NotionBlockTypes.TODO,
+  NotionBlockTypes.TO_DO,
 ];
 
 export function blockParser(blocks: BlockObjectResponse[]): AbstractMarkup[] {
@@ -105,24 +105,43 @@ function flushLists(
     const listItems = markupLists[listType as ListTypes];
 
     if (listItems.length > 0) {
+      const items = listItems.map((item) => item.render());
+
       switch (listType) {
         case ListTypes.BULLETED_LIST_ITEM:
-        case ListTypes.TODO:
           markups = stackMarkup(
             markups,
-            createMarkupInstanceFromCustom(
-              CustomBlockTypes.UNORDERED_LIST,
-              listItems.map((item) => item.render())
-            )
+            new BlockList(
+              BlockList.buildConfFromCustom(
+                CustomBlockTypes.UNORDERED_LIST,
+                BlockTags.UNORDERED_LIST,
+                items
+              )
+            ).createMarkup()
           );
           break;
         case ListTypes.NUMBERED_LIST_ITEM:
           markups = stackMarkup(
             markups,
-            createMarkupInstanceFromCustom(
-              CustomBlockTypes.ORDERED_LIST,
-              listItems.map((item) => item.render())
-            )
+            new BlockList(
+              BlockList.buildConfFromCustom(
+                CustomBlockTypes.ORDERED_LIST,
+                BlockTags.ORDERED_LIST,
+                items
+              )
+            ).createMarkup()
+          );
+          break;
+        case ListTypes.TO_DO:
+          markups = stackMarkup(
+            markups,
+            new BlockList(
+              BlockList.buildConfFromCustom(
+                CustomBlockTypes.TODO_LIST,
+                BlockTags.UNORDERED_LIST,
+                items
+              )
+            ).createMarkup()
           );
           break;
         default:
@@ -148,7 +167,7 @@ function createMarkupInstanceFromBlock(
       return new BlockTypo(BlockTypo.buildConfFromBlock(block)).createMarkup();
     case NotionBlockTypes.CODE:
       return new BlockCode(BlockCode.buildConfFromBlock(block)).createMarkup();
-    case NotionBlockTypes.TODO:
+    case NotionBlockTypes.TO_DO:
       return new BlockTodo(BlockTodo.buildConfFromBlock(block)).createMarkup();
     case NotionBlockTypes.IMAGE:
       return new BlockImage(
@@ -161,24 +180,6 @@ function createMarkupInstanceFromBlock(
     case NotionBlockTypes.CALLOUT:
       return new BlockCallout(
         BlockCallout.buildConfFromBlock(block)
-      ).createMarkup();
-    default:
-      return undefined;
-  }
-}
-
-function createMarkupInstanceFromCustom(
-  type: CustomBlockTypes,
-  content: string | ReactNode
-): AbstractMarkup | undefined {
-  switch (type) {
-    case CustomBlockTypes.UNORDERED_LIST:
-      return new BlockList(
-        BlockList.buildConfFromCustom(type, content)
-      ).createMarkup();
-    case CustomBlockTypes.ORDERED_LIST:
-      return new BlockList(
-        BlockList.buildConfFromCustom(type, content)
       ).createMarkup();
     default:
       return undefined;

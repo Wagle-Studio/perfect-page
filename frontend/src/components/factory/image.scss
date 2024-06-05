@@ -1,0 +1,23 @@
+.media {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  &__content {
+    padding: 0;
+    margin: 0;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+}

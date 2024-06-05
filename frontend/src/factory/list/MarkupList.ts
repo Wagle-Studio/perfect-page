@@ -6,6 +6,7 @@ import { Error } from "@/components/factory/Error";
 
 const mandatoryConf: MarkupConfFields[] = [
   MarkupConfFields.KEY,
+  MarkupConfFields.TYPE,
   MarkupConfFields.TAG,
   MarkupConfFields.CONTENT,
 ];

@@ -23,7 +23,7 @@ export enum NotionBlockTypes {
   BULLETED_LIST_ITEM = "bulleted_list_item",
   NUMBERED_LIST_ITEM = "numbered_list_item",
   CODE = "code",
-  TODO = "to_do",
+  TO_DO = "to_do",
   IMAGE = "image",
   QUOTE = "quote",
   CALLOUT = "callout",
@@ -32,6 +32,7 @@ export enum NotionBlockTypes {
 export enum CustomBlockTypes {
   UNORDERED_LIST = "ul",
   ORDERED_LIST = "ol",
+  TODO_LIST = "to_do",
 }
 
 export enum BlockTags {

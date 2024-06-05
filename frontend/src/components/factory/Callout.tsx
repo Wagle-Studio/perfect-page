@@ -1,4 +1,4 @@
-import "./callout.css";
+import "./callout.scss";
 
 export type CalloutProps = {
   key: number;
@@ -8,9 +8,9 @@ export type CalloutProps = {
 
 export function Callout(props: CalloutProps) {
   return (
-    <div key={props.key} className="callout_container">
-      <span>{props.callout_icon}</span>
-      <p>{props.content}</p>
+    <div key={props.key} className="callout">
+      <span className="callout__icon">{props.callout_icon}</span>
+      <p className="callout__content">{props.content}</p>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import "./quote.css";
+import "./quote.scss";
 
 export type QuoteProps = {
   key: number;
@@ -7,7 +7,7 @@ export type QuoteProps = {
 
 export function Quote(props: QuoteProps) {
   return (
-    <blockquote key={props.key} className="quote_container">
+    <blockquote key={props.key} className="quote">
       {props.content}
     </blockquote>
   );
