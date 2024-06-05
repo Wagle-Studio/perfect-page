@@ -1,3 +1,4 @@
+import "./typo.css";
 import { BlockTags } from "@/types/Block";
 
 export type TypoProps = {
