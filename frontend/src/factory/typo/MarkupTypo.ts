@@ -1,26 +1,20 @@
 import { ReactNode } from "react";
-import { MarkupConf, MarkupConfFields } from "@/types/Markup";
+import {
+  BlockConf,
+  NotionHeadingData,
+  NotionParagraphData,
+} from "@/types/Block";
 import { FactoryMarkup } from "@/factory/_FactoryMarkup";
-import { Typo as Component, TypoProps } from "@/components/factory/Typo";
-import { Error } from "@/components/factory/Error";
+import { Typo as Component } from "@/components/factory/Typo";
 
-const mandatoryConf: MarkupConfFields[] = [
-  MarkupConfFields.KEY,
-  MarkupConfFields.TYPE,
-  MarkupConfFields.TAG,
-  MarkupConfFields.CONTENT,
-];
-
-export class MarkupTypo extends FactoryMarkup<TypoProps> {
-  public constructor(conf: MarkupConf) {
-    super(conf, mandatoryConf);
+export class MarkupTypo extends FactoryMarkup<
+  NotionHeadingData | NotionParagraphData
+> {
+  public constructor(conf: BlockConf<NotionHeadingData | NotionParagraphData>) {
+    super(conf);
   }
 
   public render(): ReactNode {
-    if (this.props) {
-      return Component(this.props);
-    } else {
-      return Error();
-    }
+    return Component(this.conf);
   }
 }

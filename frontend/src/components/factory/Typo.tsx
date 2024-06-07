@@ -1,19 +1,46 @@
+import { Fragment } from "react";
+import {
+  BlockConf,
+  NotionBlockTypes,
+  NotionHeadingData,
+  NotionParagraphData,
+} from "@/types/Block";
 import "./typo.scss";
-import { BlockTags, CustomBlockTypes, NotionBlockTypes } from "@/types/Block";
 
-export type TypoProps = {
-  key: number;
-  type: NotionBlockTypes | CustomBlockTypes;
-  tag: BlockTags;
-  content: string;
-};
+export function Typo(
+  props: BlockConf<NotionHeadingData | NotionParagraphData>
+) {
+  let Tag: keyof JSX.IntrinsicElements | undefined = undefined;
 
-export function Typo(props: TypoProps) {
-  const Tag = props.tag;
+  switch (props.type) {
+    case NotionBlockTypes.HEADING_1:
+      Tag = "h1";
+      break;
+    case NotionBlockTypes.HEADING_2:
+      Tag = "h2";
+      break;
+    case NotionBlockTypes.HEADING_3:
+      Tag = "h3";
+      break;
+    case NotionBlockTypes.BULLETED_LIST_ITEM:
+    case NotionBlockTypes.NUMBERED_LIST_ITEM:
+      Tag = "li";
+      break;
+    case NotionBlockTypes.PARAGRAPH:
+      Tag = "p";
+      break;
+    default:
+      Tag = undefined;
+      break;
+  }
 
   return (
-    <Tag key={props.key} className={`typo--${props.type}`}>
-      {props.content}
-    </Tag>
+    <Fragment key={props.key}>
+      {Tag && (
+        <Tag className={`typo--${props.type}`}>
+          {props.data?.rich_text[0].plain_text}
+        </Tag>
+      )}
+    </Fragment>
   );
 }

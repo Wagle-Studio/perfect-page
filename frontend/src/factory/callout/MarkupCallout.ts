@@ -1,29 +1,14 @@
 import { ReactNode } from "react";
-import { MarkupConf, MarkupConfFields } from "@/types/Markup";
+import { BlockConf, NotionCalloutData } from "@/types/Block";
 import { FactoryMarkup } from "@/factory/_FactoryMarkup";
-import {
-  Callout as Component,
-  CalloutProps,
-} from "@/components/factory/Callout";
-import { Error } from "@/components/factory/Error";
+import { Callout as Component } from "@/components/factory/Callout";
 
-const mandatoryConf: MarkupConfFields[] = [
-  MarkupConfFields.KEY,
-  MarkupConfFields.TAG,
-  MarkupConfFields.CONTENT,
-  MarkupConfFields.CALLOUT_ICON,
-];
-
-export class MarkupCallout extends FactoryMarkup<CalloutProps> {
-  public constructor(conf: MarkupConf) {
-    super(conf, mandatoryConf);
+export class MarkupCallout extends FactoryMarkup<NotionCalloutData> {
+  public constructor(conf: BlockConf<NotionCalloutData>) {
+    super(conf);
   }
 
   public render(): ReactNode {
-    if (this.props) {
-      return Component(this.props);
-    } else {
-      return Error();
-    }
+    return Component(this.conf);
   }
 }

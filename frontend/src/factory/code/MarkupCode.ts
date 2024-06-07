@@ -1,25 +1,14 @@
 import { ReactNode } from "react";
-import { MarkupConf, MarkupConfFields } from "@/types/Markup";
+import { BlockConf, NotionCodeData } from "@/types/Block";
 import { FactoryMarkup } from "@/factory/_FactoryMarkup";
-import { Code as Component, CodeProps } from "@/components/factory/Code";
-import { Error } from "@/components/factory/Error";
+import { Code as Component } from "@/components/factory/Code";
 
-const mandatoryConf: MarkupConfFields[] = [
-  MarkupConfFields.KEY,
-  MarkupConfFields.CONTENT,
-  MarkupConfFields.CODE_LANGUAGE,
-];
-
-export class MarkupCode extends FactoryMarkup<CodeProps> {
-  public constructor(conf: MarkupConf) {
-    super(conf, mandatoryConf);
+export class MarkupCode extends FactoryMarkup<NotionCodeData> {
+  public constructor(conf: BlockConf<NotionCodeData>) {
+    super(conf);
   }
 
   public render(): ReactNode {
-    if (this.props) {
-      return Component(this.props);
-    } else {
-      return Error();
-    }
+    return Component(this.conf);
   }
 }

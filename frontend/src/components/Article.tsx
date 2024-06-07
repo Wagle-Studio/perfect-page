@@ -11,7 +11,7 @@ export function Article(props: ArticleProps) {
   return (
     <article style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
       {props.blocks &&
-        blockParser(props.blocks).map((markup) => markup.render())}
+        blockParser(props.blocks).map((block) => block.render())}
     </article>
   );
 }

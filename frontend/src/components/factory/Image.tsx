@@ -1,30 +1,41 @@
 import { Fragment, useEffect, useState } from "react";
 import NextImage from "next/image";
+import { BlockConf, NotionImageData } from "@/types/Block";
 import "./image.scss";
 
-export type ImageProps = {
-  key: number;
-  content: string;
-  image_url: string;
+type ImageDimensions = {
+  width: number;
+  height: number;
 };
 
-function ImageComponent(props: ImageProps) {
-  const [dimensions, setDimensions] = useState<{
-    width: number;
-    height: number;
-  } | null>(null);
+function ImageComponent(props: BlockConf<NotionImageData>) {
+  const [imageSource, setImageSource] = useState<string>();
+  const [imageCaption, setImageCaption] = useState<string>();
+  const [dimensions, setDimensions] = useState<ImageDimensions>();
 
   useEffect(() => {
     const img = new Image();
-    img.src = props.image_url;
+
+    if (props.data?.type === "external") {
+      img.src = props.data.external.url;
+      setImageSource(props.data.external.url);
+    } else if (props.data?.type === "file") {
+      img.src = props.data.file.url;
+      setImageSource(props.data.file.url);
+    }
+
+    setImageCaption(
+      (props.data?.caption[0] && props.data?.caption[0].plain_text) ??
+        "Missing alt text."
+    );
     img.onload = () => {
       setDimensions({ width: img.width, height: img.height });
     };
-  }, [props.image_url]);
+  }, [props.data]);
 
   return (
     <Fragment key={props.key}>
-      {dimensions && (
+      {dimensions && imageSource && imageCaption && (
         <div
           className="media"
           style={{
@@ -33,13 +44,13 @@ function ImageComponent(props: ImageProps) {
         >
           <NextImage
             className="media__image"
-            src={props.image_url}
-            alt={props.content ?? "Missing alt text."}
+            src={imageSource}
+            alt={imageCaption}
             priority={false}
             width={dimensions.width}
             height={dimensions.height}
           />
-          {props.content && <p className="media__content">{props.content}</p>}
+          {imageCaption && <p className="media__content">{imageCaption}</p>}
         </div>
       )}
     </Fragment>

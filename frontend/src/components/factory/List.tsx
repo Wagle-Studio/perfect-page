@@ -1,19 +1,30 @@
-import { BlockTags, CustomBlockTypes, NotionBlockTypes } from "@/types/Block";
+import { Fragment } from "react";
+import { CustomBlockTypes, BlockConf } from "@/types/Block";
 import "./list.scss";
 
-export type ListProps = {
-  key: number;
-  type: NotionBlockTypes | CustomBlockTypes;
-  tag: BlockTags;
-  content: string;
-};
+export function List(props: BlockConf<null>) {
+  let Tag: keyof JSX.IntrinsicElements | undefined = undefined;
 
-export function List(props: ListProps) {
-  const Tag = props.tag;
+  switch (props.type) {
+    case CustomBlockTypes.BULLETED_LIST:
+      Tag = "ul";
+      break;
+    case CustomBlockTypes.NUMBERED_LIST:
+      Tag = "ol";
+      break;
+    case CustomBlockTypes.TODO_LIST:
+      Tag = "ul";
+      break;
+    default:
+      Tag = undefined;
+      break;
+  }
 
   return (
-    <Tag key={props.key} className={`list list--${props.type}`}>
-      {props.content}
-    </Tag>
+    <Fragment key={props.key}>
+      {Tag && (
+        <Tag className={`list list--${props.type}`}>{props.children}</Tag>
+      )}
+    </Fragment>
   );
 }

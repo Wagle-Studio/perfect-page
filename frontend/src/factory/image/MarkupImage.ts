@@ -1,25 +1,14 @@
 import { ReactNode } from "react";
-import { MarkupConf, MarkupConfFields } from "@/types/Markup";
+import { BlockConf, NotionImageData } from "@/types/Block";
 import { FactoryMarkup } from "@/factory/_FactoryMarkup";
-import { Image as Component, ImageProps } from "@/components/factory/Image";
-import { Error } from "@/components/factory/Error";
+import { Image as Component } from "@/components/factory/Image";
 
-const mandatoryConf: MarkupConfFields[] = [
-  MarkupConfFields.KEY,
-  MarkupConfFields.CONTENT,
-  MarkupConfFields.IMAGE_URL,
-];
-
-export class MarkupImage extends FactoryMarkup<ImageProps> {
-  public constructor(conf: MarkupConf) {
-    super(conf, mandatoryConf);
+export class MarkupImage extends FactoryMarkup<NotionImageData> {
+  public constructor(conf: BlockConf<NotionImageData>) {
+    super(conf);
   }
 
   public render(): ReactNode {
-    if (this.props) {
-      return Component(this.props);
-    } else {
-      return Error();
-    }
+    return Component(this.conf);
   }
 }

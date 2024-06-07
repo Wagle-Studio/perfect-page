@@ -1,25 +1,14 @@
 import { ReactNode } from "react";
-import { MarkupConf, MarkupConfFields } from "@/types/Markup";
+import { BlockConf, NotionTodoData } from "@/types/Block";
 import { FactoryMarkup } from "@/factory/_FactoryMarkup";
-import { Todo as Component, TodoProps } from "@/components/factory/Todo";
-import { Error } from "@/components/factory/Error";
+import { Todo as Component } from "@/components/factory/Todo";
 
-const mandatoryConf: MarkupConfFields[] = [
-  MarkupConfFields.KEY,
-  MarkupConfFields.CONTENT,
-  MarkupConfFields.TODO_CHECK,
-];
-
-export class MarkupTodo extends FactoryMarkup<TodoProps> {
-  public constructor(conf: MarkupConf) {
-    super(conf, mandatoryConf);
+export class MarkupTodo extends FactoryMarkup<NotionTodoData> {
+  public constructor(conf: BlockConf<NotionTodoData>) {
+    super(conf);
   }
 
   public render(): ReactNode {
-    if (this.props) {
-      return Component(this.props);
-    } else {
-      return Error();
-    }
+    return Component(this.conf);
   }
 }
