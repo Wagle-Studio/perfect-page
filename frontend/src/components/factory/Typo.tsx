@@ -5,6 +5,7 @@ import {
   NotionHeadingData,
   NotionParagraphData,
 } from "@/types/Block";
+import { RichText } from "@/components/factory/RichText";
 import "./typo.scss";
 
 export function Typo(
@@ -38,7 +39,9 @@ export function Typo(
     <Fragment key={props.key}>
       {Tag && (
         <Tag className={`typo--${props.type}`}>
-          {props.data?.rich_text[0].plain_text}
+          {props.data?.rich_text.map((rich_text, index) => (
+            <RichText key={props.key + "_" + index} content={rich_text} />
+          ))}
         </Tag>
       )}
     </Fragment>

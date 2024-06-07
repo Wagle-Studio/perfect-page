@@ -118,6 +118,15 @@ export type NotionFileImageData = {
 
 export type NotionImageData = NotionExternalImageData | NotionFileImageData;
 
+export type NotionRichTextAnnotation = {
+  bold: boolean;
+  italic: boolean;
+  strikethrough: boolean;
+  underline: boolean;
+  code: boolean;
+  color: NotionColor;
+};
+
 export type NotionColor =
   | "default"
   | "gray"

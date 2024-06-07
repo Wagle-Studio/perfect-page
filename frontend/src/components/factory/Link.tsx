@@ -1,18 +1,14 @@
-// import "./typo.scss";
-// import Link from "next/link";
+import { ReactNode } from "react";
+import "./typo.scss";
+import Link from "next/link";
 
-// export type LinkProps = {
-//   key: number;
-//   href: string;
-//   content: string;
-// };
+export type LinkProps = {
+  href: string;
+  children: ReactNode;
+};
 
-// function LinkComponent(props: LinkProps) {
-//   return (
-//     <a key={props.key} href={props.href}>
-//       {props.content}
-//     </a>
-//   );
-// }
+function LinkComponent(props: LinkProps) {
+  return <Link href={props.href}>{props.children}</Link>;
+}
 
-// export { LinkComponent as Link };
+export { LinkComponent as Link };

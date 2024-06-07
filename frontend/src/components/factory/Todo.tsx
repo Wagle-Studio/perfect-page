@@ -1,4 +1,5 @@
 import { BlockConf, NotionTodoData } from "@/types/Block";
+import { RichText } from "@/components/factory/RichText";
 import "./todo.scss";
 
 export function Todo(props: BlockConf<NotionTodoData>) {
@@ -17,7 +18,11 @@ export function Todo(props: BlockConf<NotionTodoData>) {
         />
       </label>
 
-      <p className="to_do__content">{props.data?.rich_text[0].plain_text}</p>
+      <p className="to_do__content">
+        {props.data?.rich_text.map((rich_text, index) => (
+          <RichText key={props.key + "_" + index} content={rich_text} />
+        ))}
+      </p>
     </div>
   );
 }

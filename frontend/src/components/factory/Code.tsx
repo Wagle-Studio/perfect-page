@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Prism from "prismjs";
 import "@/theme/prismVscDarkPlus.css";
 import { BlockConf, NotionCodeData } from "@/types/Block";
+import { RichText } from "@/components/factory/RichText";
 
 export function Code(props: BlockConf<NotionCodeData>) {
   const [isClient, setIsClient] = useState(false);
@@ -25,7 +26,9 @@ export function Code(props: BlockConf<NotionCodeData>) {
       {isClient && (
         <pre style={{ overflowX: "scroll" }}>
           <code className={`language-${props.data?.language}`}>
-            {props.data?.rich_text[0].plain_text}
+            {props.data?.rich_text.map((rich_text, index) => (
+              <RichText key={props.key + "_" + index} content={rich_text} />
+            ))}
           </code>
         </pre>
       )}
