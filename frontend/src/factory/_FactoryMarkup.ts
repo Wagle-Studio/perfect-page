@@ -1,18 +1,18 @@
 import { ReactNode } from "react";
-import { BlockConf } from "@/types/Block";
+import { FactoryBlockConf } from "@/factory/types/FactoryTypes";
 
 export interface FactoryMarkupInterface {
   render(): ReactNode;
 }
 
 export abstract class FactoryMarkup<T> implements FactoryMarkupInterface {
-  protected conf: BlockConf<T>;
+  protected conf: FactoryBlockConf<T>;
 
-  public constructor(conf: BlockConf<T>) {
+  public constructor(conf: FactoryBlockConf<T>) {
     this.conf = conf;
   }
 
-  public getConf(): BlockConf<T> {
+  public getConf(): FactoryBlockConf<T> {
     return this.conf;
   }
 

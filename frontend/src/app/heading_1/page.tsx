@@ -1,6 +1,6 @@
 import { Client } from "@notionhq/client";
 import { BlockObjectResponse } from "@notionhq/client/build/src/api-endpoints";
-import { Article } from "@/components/Article";
+import { FactoryPage } from "@/ui/factory/layouts/FactoryPage";
 
 export default async function Heading1() {
   const notionClient = new Client({
@@ -13,5 +13,5 @@ export default async function Heading1() {
 
   const blocks = data.results as BlockObjectResponse[];
 
-  return <div>{blocks && <Article blocks={blocks} />}</div>;
+  return <div>{blocks && <FactoryPage blocks={blocks} />}</div>;
 }
