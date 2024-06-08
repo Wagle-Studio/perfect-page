@@ -13,27 +13,44 @@ type ImageDimensions = {
 };
 
 function ImageComponent(props: FactoryBlockConf<FactoryNotionImageData>) {
-  const [imageSource, setImageSource] = useState<string>();
+  const [source, setSource] = useState<string>();
   const [dimensions, setDimensions] = useState<ImageDimensions>();
+  const [extension, setExtension] = useState<string>();
 
   useEffect(() => {
-    const img = new Image();
+    const img: HTMLImageElement = new Image();
+    let source: string | undefined = undefined;
 
     if (props.data?.type === "external") {
-      img.src = props.data.external.url;
-      setImageSource(props.data.external.url);
+      source = props.data.external.url;
     } else if (props.data?.type === "file") {
-      img.src = props.data.file.url;
-      setImageSource(props.data.file.url);
+      source = props.data.file.url;
     }
+
+    if (source) {
+      setSource(source);
+
+      img.src = source;
+
+      const extensionFilematches = source.match(/\.([a-zA-Z0-9]+)(?:[?#]|$)/);
+
+      if (extensionFilematches) {
+        setExtension(extensionFilematches[1]);
+      }
+    }
+
     img.onload = () => {
       setDimensions({ width: img.width, height: img.height });
     };
   }, [props.data]);
 
+  const MediaContent = props.data?.caption.map((caption, index) => (
+    <RichText key={props.key + "_" + index} content={caption} />
+  ));
+
   return (
     <Fragment key={props.key}>
-      {dimensions && imageSource && (
+      {dimensions && source && extension !== "svg" && (
         <div
           className="media"
           style={{
@@ -42,17 +59,28 @@ function ImageComponent(props: FactoryBlockConf<FactoryNotionImageData>) {
         >
           <NextImage
             className="media__image"
-            src={imageSource}
+            src={source}
             alt="No alt text."
             priority={false}
             width={dimensions.width}
             height={dimensions.height}
           />
-          <p className="media__content">
-            {props.data?.caption.map((caption, index) => (
-              <RichText key={props.key + "_" + index} content={caption} />
-            ))}
-          </p>
+          <p className="media__content">{MediaContent}</p>
+        </div>
+      )}
+      {source && extension === "svg" && (
+        <div
+          className="media"
+          style={{
+            maxWidth: "100%",
+          }}
+        >
+          <img
+            className="media__image media__image--svg"
+            src={source}
+            alt="No alt text."
+          />
+          <p className="media__content">{MediaContent}</p>
         </div>
       )}
     </Fragment>
