@@ -3,4 +3,13 @@
   flex-direction: column;
   gap: 20px;
   font-size: 62.5%;
+
+  h1,
+  h2,
+  h3,
+  p,
+  li,
+  span {
+    margin: 0;
+  }
 }

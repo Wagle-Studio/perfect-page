@@ -1,6 +1,6 @@
 import { FactoryBlockConf } from "@/factory/types/FactoryTypes";
 import { FactoryNotionQuoteData } from "@/factory/types/NotionTypes";
-import { RichText } from "@/ui/factory/components/RichText";
+import { RichText } from "@/ui/factory/components/richText/RichText";
 import "./quote.scss";
 
 export function Quote(props: FactoryBlockConf<FactoryNotionQuoteData>) {

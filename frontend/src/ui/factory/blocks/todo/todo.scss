@@ -31,5 +31,11 @@
   &__content {
     margin: 0;
     font-size: 1.6em;
+
+    &--checked {
+      text-decoration: line-through rgba(55, 53, 47, 0.25);
+      opacity: 1;
+      color: rgba(55, 53, 47, 0.65);
+    }
   }
 }

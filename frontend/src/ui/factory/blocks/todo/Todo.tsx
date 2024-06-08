@@ -1,6 +1,6 @@
 import { FactoryBlockConf } from "@/factory/types/FactoryTypes";
 import { FactoryNotionTodoData } from "@/factory/types/NotionTypes";
-import { RichText } from "@/ui/factory/components/RichText";
+import { RichText } from "@/ui/factory/components/richText/RichText";
 import "./todo.scss";
 
 export function Todo(props: FactoryBlockConf<FactoryNotionTodoData>) {
@@ -18,8 +18,11 @@ export function Todo(props: FactoryBlockConf<FactoryNotionTodoData>) {
           readOnly
         />
       </label>
-
-      <p className="to_do__content">
+      <p
+        className={`to_do__content to_do__content--${
+          props.data?.checked ? "checked" : "unchecked"
+        }`}
+      >
         {props.data?.rich_text.map((rich_text, index) => (
           <RichText key={props.key + "_" + index} content={rich_text} />
         ))}

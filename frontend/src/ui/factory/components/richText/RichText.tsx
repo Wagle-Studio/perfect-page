@@ -7,8 +7,12 @@ type RichTextProps = {
 };
 
 export function RichText(props: RichTextProps) {
-  if (props.content.href) {
-    return <Link href={props.content.href}>{props.content.plain_text}</Link>;
+  if (props.content.annotations.code) {
+    return (
+      <span className="rich-text rich-text__text--code">
+        {props.content.plain_text}
+      </span>
+    );
   }
 
   const annotations = props.content.annotations;
@@ -40,6 +44,14 @@ export function RichText(props: RichTextProps) {
   ]
     .filter(Boolean)
     .join(" ");
+
+  if (props.content.href) {
+    return (
+      <Link className={className} href={props.content.href}>
+        {props.content.plain_text}
+      </Link>
+    );
+  }
 
   return <span className={className}>{props.content.plain_text}</span>;
 }

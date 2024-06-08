@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Prism from "prismjs";
 import { FactoryBlockConf } from "@/factory/types/FactoryTypes";
 import { FactoryNotionCodeData } from "@/factory/types/NotionTypes";
-import { RichText } from "@/ui/factory/components/RichText";
+import { RichText } from "@/ui/factory/components/richText/RichText";
 import "./prismVscDarkPlus.scss";
 
 export function Code(props: FactoryBlockConf<FactoryNotionCodeData>) {

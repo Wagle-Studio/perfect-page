@@ -131,8 +131,8 @@ function createAbstractBlock(
       return new BlockCode(block);
     case FactoryNotionBlockTypes.TO_DO:
       return new BlockTodo(block);
-    // case NotionBlockTypes.IMAGE:
-    //   return new BlockImage(block);
+    case FactoryNotionBlockTypes.IMAGE:
+      return new BlockImage(block);
     case FactoryNotionBlockTypes.QUOTE:
       return new BlockQuote(block);
     case FactoryNotionBlockTypes.CALLOUT:

@@ -1,6 +1,6 @@
 import { FactoryBlockConf } from "@/factory/types/FactoryTypes";
 import { FactoryNotionCalloutData } from "@/factory/types/NotionTypes";
-import { RichText } from "@/ui/factory/components/RichText";
+import { RichText } from "@/ui/factory/components/richText/RichText";
 import "./callout.scss";
 
 export function Callout(props: FactoryBlockConf<FactoryNotionCalloutData>) {

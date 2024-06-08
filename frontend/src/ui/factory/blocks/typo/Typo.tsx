@@ -7,7 +7,7 @@ import {
   FactoryNotionHeadingData,
   FactoryNotionParagraphData,
 } from "@/factory/types/NotionTypes";
-import { RichText } from "@/ui/factory/components/RichText";
+import { RichText } from "@/ui/factory/components/richText/RichText";
 import "./typo.scss";
 
 export function Typo(
