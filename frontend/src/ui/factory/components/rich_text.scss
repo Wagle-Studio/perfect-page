@@ -1,0 +1,80 @@
+.rich-text {
+  &__text {
+    &--bold {
+      font-weight: bold;
+    }
+    &--italic {
+      font-style: italic;
+    }
+    &--strikethrough {
+      text-decoration: line-through;
+    }
+    &--underline {
+      text-decoration: underline;
+    }
+    &--code {
+      background-color: gray;
+      color: red;
+    }
+  }
+
+  &__background-color {
+    &--gray {
+      background-color: gray;
+    }
+    &--brown_background {
+      background-color: brown;
+    }
+    &--orange_background {
+      background-color: orange;
+    }
+    &--yellow_background {
+      background-color: yellow;
+    }
+    &--green_background {
+      background-color: green;
+    }
+    &--blue_background {
+      background-color: blue;
+    }
+    &--purple_background {
+      background-color: purple;
+    }
+    &--pink_background {
+      background-color: pink;
+    }
+    &--red_background {
+      background-color: red;
+    }
+  }
+
+  &__text-color {
+    &--gray {
+      color: gray;
+    }
+    &--brown {
+      color: brown;
+    }
+    &--orange {
+      color: orange;
+    }
+    &--yellow {
+      color: yellow;
+    }
+    &--green {
+      color: green;
+    }
+    &--blue {
+      color: blue;
+    }
+    &--purple {
+      color: purple;
+    }
+    &--pink {
+      color: pink;
+    }
+    &--red {
+      color: red;
+    }
+  }
+}
