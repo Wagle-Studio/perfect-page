@@ -6,6 +6,7 @@ import { FactoryBlockConf } from "@/factory/types/FactoryTypes";
 import { FactoryNotionCodeData } from "@/factory/types/NotionTypes";
 import { RichText } from "@/ui/factory/components/richText/RichText";
 import "./prismVscDarkPlus.scss";
+import "./code.scss";
 
 export function Code(props: FactoryBlockConf<FactoryNotionCodeData>) {
   const [isClient, setIsClient] = useState(false);
@@ -13,7 +14,7 @@ export function Code(props: FactoryBlockConf<FactoryNotionCodeData>) {
   useEffect(() => {
     if (typeof window !== "undefined") {
       // DIY to avoid css unloading caused by images.
-      setTimeout(() => setIsClient(true), 1000);
+      setTimeout(() => setIsClient(true), 2000);
     }
   }, []);
 
@@ -25,11 +26,11 @@ export function Code(props: FactoryBlockConf<FactoryNotionCodeData>) {
 
   // TODO : upgrade loading UI.
   return (
-    <div key={props.key}>
+    <div key={props.key} className="code">
       {!isClient && <p>chargement</p>}
       {isClient && (
-        <pre style={{ overflowX: "scroll" }}>
-          <code className={`language-${props.data?.language}`}>
+        <pre className="code__pre">
+          <code className={`language language-${props.data?.language}`}>
             {props.data?.rich_text.map((rich_text, index) => (
               <RichText key={props.key + "_" + index} content={rich_text} />
             ))}

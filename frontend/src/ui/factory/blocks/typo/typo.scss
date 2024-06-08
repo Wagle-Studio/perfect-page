@@ -25,10 +25,15 @@
 
   &--paragraph {
     font-size: 1.6em;
+    line-height: 200%;
   }
 
   &--numbered_list_item,
   &--bulleted_list_item {
     font-size: 1.6em;
+  }
+
+  &--line-break {
+    margin: 16px 0;
   }
 }
