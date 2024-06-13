@@ -1,0 +1,17 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 12rem;
+  padding: 3rem 2rem;
+  margin-top: -9rem;
+  height: 1500px; // TODO: remove
+  border-radius: 0.8rem;
+  background-image: linear-gradient(
+    to right bottom,
+    rgba(225, 193, 255, 0.6),
+    rgba(204, 211, 255, 0.6),
+    rgba(194, 226, 255, 0.6),
+    rgba(198, 238, 255, 0.6),
+    rgba(215, 247, 255, 0.6)
+  );
+}
