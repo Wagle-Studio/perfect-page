@@ -18,31 +18,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 
     &__brand {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
       width: 100%;
 
       &__logo {
         > p {
-          font-size: 3rem;
+          font-size: 2.4rem;
           font-weight: 600;
-        }
-      }
-
-      &__menu-button {
-        &--open > button {
-          :first-child {
-            background-color: red;
-          }
-        }
-
-        &--close > button {
-          :last-child {
-            background-color: purple;
-          }
         }
       }
     }
@@ -59,6 +48,10 @@
         list-style: none;
         padding: 0;
         margin: 0;
+
+        > li > a {
+          font-size: 1.6rem;
+        }
       }
 
       &__buttons {
@@ -66,6 +59,10 @@
         flex-direction: column;
         gap: 2rem;
         text-align: center;
+
+        > a {
+          font-size: 1.6rem;
+        }
       }
 
       &--close {
@@ -75,64 +72,94 @@
       &--open {
         display: flex;
         flex-direction: column;
-        gap: 4rem;
+        gap: 3rem;
         padding-top: 2rem;
+        margin-top: 0.75rem;
         background-color: $white;
-        border-radius: 0 0 3px 3px;
+        border-radius: 3px;
+        box-shadow: 0 1.5rem 2rem -0.5rem rgba(0, 0, 0, 0.07),
+          0 0.25rem 2rem 0 rgba(0, 0, 0, 0.03);
 
         > ul {
           display: flex;
           flex-direction: column;
           gap: 2rem;
+
+          > li > a {
+            display: block;
+            padding: 0.5rem 0;
+            width: 100%;
+            font-size: 1.6rem;
+          }
         }
       }
     }
   }
 
-  @container (min-width: 700px) {
-    .header {
-      &__nav {
+  @container (min-width: 730px) {
+    &__nav {
+      flex-direction: row;
+      justify-content: unset;
+
+      &__brand {
+        width: auto;
+
+        &__logo {
+          width: max-content;
+        }
+
+        &__menu-button {
+          display: none;
+        }
+      }
+
+      &__list-links {
+        position: static;
+        display: flex;
         flex-direction: row;
-        justify-content: unset;
+        align-items: center;
+        padding: 0;
+        width: 100%;
+        box-shadow: unset;
+        background-color: unset;
+        margin-top: 0;
 
-        &__brand {
-          width: auto;
+        > ul {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          gap: 4rem;
+          flex-grow: 1;
 
-          &__logo {
-            width: max-content;
+          > li > a {
+            display: inline;
+            padding: 0;
+            width: unset;
+            font-size: 1.4rem;
+            border-radius: unset;
+            box-sizing: unset;
+            transition: unset;
           }
 
-          &__menu-button {
-            display: none;
+          > li:hover > a {
+            padding-left: unset;
+            background-color: unset;
           }
         }
 
-        &__list-links {
-          position: static;
-          display: flex;
+        &__buttons {
           flex-direction: row;
-          align-items: center;
-          padding: 0;
-          width: 100%;
+          gap: 1.5rem;
+          text-align: left;
 
-          > ul {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 4rem;
-            flex-grow: 1;
+          > a {
+            font-size: 1.4rem;
           }
+        }
 
-          &__buttons {
-            flex-direction: row;
-            gap: 1.5rem;
-            text-align: left;
-          }
-
-          &--open,
-          &--close {
-            gap: 3rem;
-          }
+        &--open,
+        &--close {
+          gap: 2rem;
         }
       }
     }

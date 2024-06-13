@@ -9,16 +9,19 @@ import { Button } from "@/ui/web/components/button/Button";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  let headerClasses = ["header"];
   let menuButtonClasses = ["header__nav__brand__menu-button"];
   let listLinksClasses = ["header__nav__list-links"];
 
   if (isMenuOpen) {
+    headerClasses = [...headerClasses, "header--open"];
     menuButtonClasses = [
       ...menuButtonClasses,
       "header__nav__brand__menu-button--open",
     ];
     listLinksClasses = [...listLinksClasses, "header__nav__list-links--open"];
   } else {
+    headerClasses = [...headerClasses, "header--close"];
     menuButtonClasses = [
       ...menuButtonClasses,
       "header__nav__brand__menu-button--close",
@@ -27,7 +30,7 @@ export function Header() {
   }
 
   return (
-    <header className="header">
+    <header className={headerClasses.join(" ")}>
       <nav className="header__nav">
         <div className="header__nav__brand">
           <div className="header__nav__brand__logo">
@@ -38,8 +41,8 @@ export function Header() {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               severity="invisible"
             >
-              <MenuIcon size="large" />
-              <CrossIcon size="large" />
+              {!isMenuOpen && <MenuIcon size="large" />}
+              {isMenuOpen && <CrossIcon size="large" />}
             </Button>
           </div>
         </div>
