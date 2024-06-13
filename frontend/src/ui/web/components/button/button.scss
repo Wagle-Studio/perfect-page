@@ -1,0 +1,23 @@
+@import "../../globals.scss";
+
+.button {
+  margin: 0;
+  padding: 0.8rem 1.6rem;
+  border: none;
+  border-radius: 3px;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  &--invisible {
+    color: $black;
+    padding: 0;
+  }
+}
