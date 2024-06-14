@@ -1,5 +1,5 @@
 import { Section } from "@/ui/web/layouts/section/Section";
-import "./home.scss";
+import "./page.scss";
 
 export default async function Home() {
   return (

@@ -1,18 +1,21 @@
-import { ReactNode } from "react";
+import { HTMLAttributes } from "react";
+import classNames from "classnames";
 import "./button.scss";
 
 type ButtonProps = {
-  children: ReactNode;
-  onClick: () => void;
   severity: "invisible";
-};
+} & HTMLAttributes<HTMLElement>;
 
-export function Button(props: ButtonProps) {
+export function Button({
+  severity,
+  className,
+  onClick,
+  ...props
+}: ButtonProps) {
+  const buttonClasses = classNames("button", `button--${severity}`, className);
+
   return (
-    <button
-      className={`button button--${props.severity}`}
-      onClick={props.onClick}
-    >
+    <button className={buttonClasses} onClick={onClick} {...props}>
       {props.children}
     </button>
   );

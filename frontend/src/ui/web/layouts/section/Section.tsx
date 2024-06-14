@@ -1,15 +1,12 @@
 import { HTMLAttributes } from "react";
+import classNames from "classnames";
 import "./section.scss";
 
 export function Section({ className, ...props }: HTMLAttributes<HTMLElement>) {
-  let classes = ["section"];
-
-  if (className) {
-    classes = [...classes, className];
-  }
+  const classes = classNames("section", className);
 
   return (
-    <section className={classes.join(" ")} {...props}>
+    <section className={classes} {...props}>
       {props.children}
     </section>
   );
