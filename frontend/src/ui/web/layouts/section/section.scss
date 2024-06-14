@@ -1,9 +1,8 @@
-.hero {
+.section {
   display: flex;
   flex-direction: column;
-  gap: 12rem;
-  padding: 3rem 2rem;
-  margin-top: -9rem;
+  align-items: center;
+  padding: 2rem;
   height: 1500px; // TODO: remove
   border-radius: 0.8rem;
   background-image: linear-gradient(
