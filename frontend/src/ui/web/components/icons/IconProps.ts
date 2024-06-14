@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
 
 export type IconProps = {
-  size: "large";
+  size: "small" | "medium" | "large";
 } & HTMLAttributes<HTMLOrSVGElement>;
