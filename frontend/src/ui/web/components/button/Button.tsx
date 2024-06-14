@@ -1,13 +1,15 @@
+"use client";
+
 import { HTMLAttributes } from "react";
 import classNames from "classnames";
 import "./button.scss";
 
 type ButtonProps = {
-  severity: "invisible";
+  severity?: "default" | "black" | "invisible";
 } & HTMLAttributes<HTMLElement>;
 
 export function Button({
-  severity,
+  severity = "default",
   className,
   onClick,
   ...props
