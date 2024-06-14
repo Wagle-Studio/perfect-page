@@ -1,6 +1,7 @@
 @import "../../globals.scss";
 
 .header {
+  z-index: 100;
   position: sticky;
   top: 0;
   padding: 1.25rem 2rem;

@@ -1,6 +1,11 @@
 @import "../../globals.scss";
 
 .button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
   margin: 0;
   padding: 0.8rem 1.6rem;
   border: none;
@@ -9,11 +14,23 @@
   box-shadow: none;
   color: inherit;
   font: inherit;
+  font-size: 1.4rem;
+  font-weight: 500;
   text-align: inherit;
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
+
+  &--default {
+    background-color: $gray;
+    color: $black;
+  }
+
+  &--black {
+    background-color: $black;
+    color: $white;
+  }
 
   &--invisible {
     color: $black;

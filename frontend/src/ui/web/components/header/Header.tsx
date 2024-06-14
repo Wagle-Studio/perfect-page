@@ -57,10 +57,10 @@ export function Header() {
             </li>
           </ul>
           <div className="header__nav__list-links__buttons">
-            <Link href="/login" variant="button" severity="gray">
+            <Link href="/auth" variant="button" severity="gray">
               Log in
             </Link>
-            <Link href="/signup" variant="button" severity="black">
+            <Link href="/auth" variant="button" severity="black">
               Sign up
             </Link>
           </div>
