@@ -34,7 +34,7 @@ export function Header() {
       <nav className="header__nav">
         <div className="header__nav__brand">
           <div className="header__nav__brand__logo">
-            <p>Perfect Page</p>
+            <Link href="/" content="Perfect Page" />
           </div>
           <div className={menuButtonClasses.join(" ")}>
             <Button
@@ -49,19 +49,24 @@ export function Header() {
         <div className={listLinksClasses.join(" ")}>
           <ul>
             <li>
-              <Link href="#" content="Features" />
+              <Link href="#features" content="Features" />
             </li>
             <li>
-              <Link href="#" content="Pricing" />
+              <Link href="#pricing" content="Pricing" />
             </li>
             <li>
-              <Link href="#" content="Roadmap" />
+              <Link href="#roadmap" content="Roadmap" />
             </li>
           </ul>
           <div className="header__nav__list-links__buttons">
-            <Link href="#" content="Log in" variant="button" severity="gray" />
             <Link
-              href="#"
+              href="/login"
+              content="Log in"
+              variant="button"
+              severity="gray"
+            />
+            <Link
+              href="/signup"
               content="Sign up"
               variant="button"
               severity="black"
