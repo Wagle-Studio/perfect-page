@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import { SessionWrapper } from "@/app/(web)/api/auth/[...nextauth]/SessionWrapper";
+import { SessionWrapper } from "@/app/api/auth/[...nextauth]/SessionWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
