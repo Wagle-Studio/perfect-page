@@ -22,7 +22,13 @@ export default function SignUp() {
                 yet
               </p>
               <div className="sign-up__hero__container__prodivers">
-                <Button onClick={() => signIn("google")}>
+                <Button
+                  onClick={() =>
+                    signIn("google", {
+                      callbackUrl: "http://localhost:3000/dashboard",
+                    })
+                  }
+                >
                   <GoogleIcon size="small" />
                   Continue with Google
                 </Button>

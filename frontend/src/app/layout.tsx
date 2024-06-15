@@ -1,5 +1,5 @@
 import { Inter } from "next/font/google";
-import { SessionWrapper } from "@/app/api/auth/[...nextauth]/SessionWrapper";
+import { SessionProvider } from "@/libs/NextAuth/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -9,10 +9,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <SessionWrapper>
+    <SessionProvider>
       <html lang="en">
         <body className={inter.className}>{children}</body>
       </html>
-    </SessionWrapper>
+    </SessionProvider>
   );
 }
