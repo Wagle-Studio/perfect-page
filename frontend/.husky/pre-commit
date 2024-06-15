@@ -1,1 +1,1 @@
-cd frontend && npm run typescript
+npm run typescript
