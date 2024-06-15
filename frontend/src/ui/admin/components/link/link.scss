@@ -1,0 +1,24 @@
+@import "../../globals.scss";
+
+.link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+
+  &--button {
+    padding: 0.8rem 1.6rem;
+    border-radius: 3px;
+  }
+
+  &--gray {
+    background-color: $gray;
+    color: $black;
+  }
+
+  &--black {
+    background-color: $black;
+    color: $white;
+  }
+}
