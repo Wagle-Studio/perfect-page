@@ -4,8 +4,8 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { Section } from "@/ui/web/layouts/section/Section";
 import { Button } from "@/ui/web/components/button/Button";
 import { GoogleIcon } from "@/ui/web/components/icons/GoogleIcon";
-import "./page.scss";
 import { Link } from "@/ui/web/components/link/Link";
+import "./page.scss";
 
 export default function SignUp() {
   const { data: session, status } = useSession();

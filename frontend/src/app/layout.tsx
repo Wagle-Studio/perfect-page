@@ -1,14 +1,7 @@
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { SessionWrapper } from "@/app/api/auth/[...nextauth]/SessionWrapper";
-import { Header } from "@/ui/web/components/header/Header";
+import { SessionWrapper } from "@/app/(web)/api/auth/[...nextauth]/SessionWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Perfect Page",
-  description: "Perfect Page",
-};
 
 export default function RootLayout({
   children,
@@ -18,10 +11,7 @@ export default function RootLayout({
   return (
     <SessionWrapper>
       <html lang="en">
-        <body className={inter.className}>
-          <Header />
-          {children}
-        </body>
+        <body className={inter.className}>{children}</body>
       </html>
     </SessionWrapper>
   );
