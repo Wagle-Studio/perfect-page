@@ -1,0 +1,39 @@
+@import "../../globals.scss";
+
+.side-pannel {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+
+  &__menu-list {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    &__item {
+      &:first-child {
+        border-radius: 6px 6px 0 0;
+      }
+
+      &:hover {
+        background-color: $gray;
+      }
+
+      a {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 100%;
+        height: 100%;
+        padding: 1.5rem;
+        font-size: 1.6rem;
+        box-sizing: border-box;
+      }
+    }
+  }
+}

@@ -1,4 +1,33 @@
 .layout-admin {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-  background: rgba(204, 211, 255, 0.3);
+  background-color: #eff3f8;
+
+  &__dashboard {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1280px;
+    height: 100%;
+    padding: 1.25rem 2rem;
+    margin: 0 auto;
+    box-sizing: border-box;
+
+    &__side-pannel {
+      background-color: #ffffff;
+      width: 100%;
+      max-width: 200px;
+      height: 100%;
+    }
+
+    &__main-pannel {
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      height: 100%;
+    }
+  }
 }
