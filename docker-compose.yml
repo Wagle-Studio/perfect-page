@@ -8,15 +8,17 @@ services:
       - "3000:3000"
     networks:
       - dev
+    env_file:
+      - .env
 
   db:
     image: mysql
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: perfect_page
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - "3306:3306"
     networks:
@@ -27,7 +29,7 @@ services:
     environment:
       PMA_HOST: db
       PMA_USER: root
-      PMA_PASSWORD: root
+      PMA_PASSWORD: ${DATABASE_ROOT_PASSWORD}
     ports:
       - "8080:80"
     networks:
