@@ -3,7 +3,7 @@ import { IconProps } from "@/ui/web/components/icons/IconProps";
 import "./icon.scss";
 
 export function MenuIcon({ size, className, ...props }: IconProps) {
-  const iconClasses = classNames("icon", `icon--${size}`, className);
+  const iconClasses = classNames("web__icon", `web__icon--${size}`, className);
 
   return (
     <svg

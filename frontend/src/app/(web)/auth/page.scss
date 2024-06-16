@@ -1,6 +1,4 @@
-@import "../../../ui/web/globals.scss";
-
-.sign-up {
+.web__sign-up {
   &__hero {
     margin-top: -9rem;
     padding-top: 25rem !important;
@@ -13,8 +11,9 @@
       gap: 2.5rem;
       padding: 4rem 3rem;
       border-radius: 3px;
-      background-color: $white;
-      box-shadow: $box-shadow;
+      background-color: #ffffff;
+      box-shadow: 0 1.5rem 2rem -0.5rem rgba(0, 0, 0, 0.07),
+        0 0.25rem 2rem 0 rgba(0, 0, 0, 0.03);
 
       > * {
         width: 100%;
@@ -41,7 +40,7 @@
         flex-direction: column;
         gap: 1.5rem;
         padding-top: 3rem;
-        border-top: 1px solid $black;
+        border-top: 1px solid #000000;
       }
     }
   }

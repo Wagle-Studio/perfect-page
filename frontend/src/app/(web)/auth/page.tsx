@@ -11,9 +11,9 @@ export default function SignUp() {
   const { data: session, status } = useSession();
 
   return (
-    <main className="sign-up">
-      <Section className="sign-up__hero">
-        <div className="sign-up__hero__container">
+    <div className="web__sign-up">
+      <Section className="web__sign-up__hero">
+        <div className="web__sign-up__hero__container">
           <h1>Perfect Page</h1>
           {(status === "loading" || status === "unauthenticated") && (
             <>
@@ -21,7 +21,7 @@ export default function SignUp() {
                 We'll sign you in or create a new account if you don't have one
                 yet
               </p>
-              <div className="sign-up__hero__container__prodivers">
+              <div className="web__sign-up__hero__container__prodivers">
                 <Button
                   onClick={() =>
                     signIn("google", {
@@ -38,11 +38,11 @@ export default function SignUp() {
           {status === "authenticated" && session && (
             <>
               <p>You are logged in with the Google account :</p>
-              <div className="sign-up__hero__container__user-data">
+              <div className="web__sign-up__hero__container__user-data">
                 <p>{session.user?.name}</p>
                 <p>{session.user?.email}</p>
               </div>
-              <div className="sign-up__hero__container__prodivers">
+              <div className="web__sign-up__hero__container__prodivers">
                 <Link href="/dashboard" variant="button" severity="gray">
                   <GoogleIcon size="small" />
                   Continue as {session.user?.name}
@@ -55,6 +55,6 @@ export default function SignUp() {
           )}
         </div>
       </Section>
-    </main>
+    </div>
   );
 }

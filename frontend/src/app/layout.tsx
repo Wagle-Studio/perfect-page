@@ -1,7 +1,4 @@
-import { Inter } from "next/font/google";
 import { SessionProvider } from "@/libs/NextAuth/SessionProvider";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -10,9 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <SessionProvider>
-      <html lang="en">
-        <body className={inter.className}>{children}</body>
-      </html>
+      <html lang="en">{children}</html>
     </SessionProvider>
   );
 }

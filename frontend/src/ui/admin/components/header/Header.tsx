@@ -10,15 +10,15 @@ export function Header() {
   const { data: session, status } = useSession();
 
   return (
-    <header className="header">
-      <div className="header__nav">
-        <div className="header__nav__brand">
-          <div className="header__nav__brand__logo">
+    <header className="admin__header">
+      <div className="admin__header__nav">
+        <div className="admin__header__nav__brand">
+          <div className="admin__header__nav__brand__logo">
             <Link href="/">Perfect Page</Link>
           </div>
         </div>
         {status === "authenticated" && session && (
-          <div className="header__nav__user">
+          <div className="admin__header__nav__user">
             <Button severity="invisible" onClick={() => signOut()}>
               {session?.user.name}
               <LogoutIcon size="medium" />

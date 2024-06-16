@@ -1,7 +1,4 @@
-import { Header } from "@/ui/admin/components/header/Header";
-import { Section } from "@/ui/admin/components/section/Section";
-import { SidePannel } from "@/ui/admin/components/sidePannel/SidePannel";
-import "./layout.scss";
+import { Layout } from "@/ui/admin/Layout";
 
 export const metadata = {
   title: "Next.js",
@@ -13,17 +10,5 @@ export default function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <div className="layout-admin">
-      <Header />
-      <div className="layout-admin__dashboard">
-        <Section className="layout-admin__dashboard__side-pannel">
-          <SidePannel />
-        </Section>
-        <Section className="layout-admin__dashboard__main-pannel">
-          {children}
-        </Section>
-      </div>
-    </div>
-  );
+  return <Layout>{children}</Layout>;
 }

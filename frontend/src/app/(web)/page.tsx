@@ -3,14 +3,14 @@ import "./page.scss";
 
 export default async function Home() {
   return (
-    <main className="home">
-      <Section className="home__hero">
-        <h1 className="home__hero__title">Magnify your Notion pages</h1>
-        <div className="home__hero__subtitle">
+    <div className="web__home">
+      <Section className="web__home__hero">
+        <h1 className="web__home__hero__title">Magnify your Notion pages</h1>
+        <div className="web__home__hero__subtitle">
           <p>Elevate your Notion pages to professional websites</p>
           <p>with customizable themes and designs</p>
         </div>
       </Section>
-    </main>
+    </div>
   );
 }

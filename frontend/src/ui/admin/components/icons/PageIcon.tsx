@@ -3,7 +3,7 @@ import { IconProps } from "@/ui/web/components/icons/IconProps";
 import "./icon.scss";
 
 export function PageIcon({ size, className, ...props }: IconProps) {
-  const iconClasses = classNames("icon", `icon--${size}`, className);
+  const iconClasses = classNames("admin__icon", `admin__icon--${size}`, className);
 
   return (
     <svg

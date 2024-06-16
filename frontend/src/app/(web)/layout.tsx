@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Header } from "@/ui/web/components/header/Header";
+import { Layout } from "@/ui/web/Layout";
 
 export const metadata: Metadata = {
   title: "Perfect Page",
@@ -11,10 +11,5 @@ export default function WebLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <>
-      <Header />
-      {children}
-    </>
-  );
+  return <Layout>{children}</Layout>;
 }

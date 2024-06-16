@@ -7,27 +7,27 @@ import "./side_pannel.scss";
 
 export function SidePannel() {
   return (
-    <nav className="side-pannel">
-      <ul className="side-pannel__menu-list">
-        <li className="side-pannel__menu-list__item">
+    <nav className="admin__side-pannel">
+      <ul className="admin__side-pannel__menu-list">
+        <li className="admin__side-pannel__menu-list__item">
           <Link href="#">
             <UserIcon size="small" />
             Profile
           </Link>
         </li>
-        <li className="side-pannel__menu-list__item">
+        <li className="admin__side-pannel__menu-list__item">
           <Link href="#">
             <PageIcon size="small" />
             Pages
           </Link>
         </li>
-        <li className="side-pannel__menu-list__item">
+        <li className="admin__side-pannel__menu-list__item">
           <Link href="#">
             <DatabaseIcon size="small" />
             Databases
           </Link>
         </li>
-        <li className="side-pannel__menu-list__item">
+        <li className="admin__side-pannel__menu-list__item">
           <Link href="#">
             <ThemeIcon size="small" />
             Themes

@@ -26,7 +26,7 @@ export function List(props: FactoryBlockConf<null>) {
   return (
     <Fragment key={props.key}>
       {Tag && (
-        <Tag className={`list list--${props.type}`}>{props.children}</Tag>
+        <Tag className={`factory__list factory__list--${props.type}`}>{props.children}</Tag>
       )}
     </Fragment>
   );

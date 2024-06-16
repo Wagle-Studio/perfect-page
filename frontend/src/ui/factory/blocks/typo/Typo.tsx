@@ -40,14 +40,14 @@ export function Typo(
   return (
     <Fragment key={props.key}>
       {Tag && props.data && props.data.rich_text.length > 0 && (
-        <Tag className={`typo typo--${props.type}`}>
+        <Tag className={`factory__typo factory__typo--${props.type}`}>
           {props.data?.rich_text.map((rich_text, index) => (
             <RichText key={props.key + "_" + index} content={rich_text} />
           ))}
         </Tag>
       )}
       {Tag && props.data && props.data.rich_text.length === 0 && (
-        <div className="typo typo--line-break" />
+        <div className="factory__typo factory__typo--line-break" />
       )}
     </Fragment>
   );

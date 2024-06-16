@@ -26,10 +26,10 @@ export function Code(props: FactoryBlockConf<FactoryNotionCodeData>) {
 
   // TODO : upgrade loading UI.
   return (
-    <div key={props.key} className="code">
+    <div key={props.key} className="factory__code">
       {!isClient && <p>chargement</p>}
       {isClient && (
-        <pre className="code__pre">
+        <pre className="factory__code__pre">
           <code className={`language language-${props.data?.language}`}>
             {props.data?.rich_text.map((rich_text, index) => (
               <RichText key={props.key + "_" + index} content={rich_text} />

@@ -1,7 +1,8 @@
-.layout-admin {
+.admin__layout {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  padding: 0;
   background-color: #eff3f8;
 
   &__dashboard {

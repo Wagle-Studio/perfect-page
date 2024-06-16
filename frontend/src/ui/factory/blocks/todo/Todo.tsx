@@ -5,21 +5,21 @@ import "./todo.scss";
 
 export function Todo(props: FactoryBlockConf<FactoryNotionTodoData>) {
   return (
-    <div key={props.key} className="to_do">
+    <div key={props.key} className="factory__to_do">
       <label
-        className={`to_do__label to_do__label--${
+        className={`factory__to_do__label factory__to_do__label--${
           props.data?.checked ? "checked" : "unchecked"
         }`}
       >
         <input
-          className="to_do__label__input"
+          className="factory__to_do__label__input"
           type="checkbox"
           checked={props.data?.checked}
           readOnly
         />
       </label>
       <p
-        className={`to_do__content to_do__content--${
+        className={`factory__to_do__content factory__to_do__content--${
           props.data?.checked ? "checked" : "unchecked"
         }`}
       >

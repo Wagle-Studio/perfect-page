@@ -52,35 +52,35 @@ function ImageComponent(props: FactoryBlockConf<FactoryNotionImageData>) {
     <Fragment key={props.key}>
       {dimensions && source && extension !== "svg" && (
         <div
-          className="media"
+          className="factory__media"
           style={{
             maxWidth: `${dimensions.width}px`,
           }}
         >
           <NextImage
-            className="media__image"
+            className="factory__media__image"
             src={source}
             alt="No alt text."
             priority={false}
             width={dimensions.width}
             height={dimensions.height}
           />
-          <p className="media__content">{MediaContent}</p>
+          <p className="factory__media__content">{MediaContent}</p>
         </div>
       )}
       {source && extension === "svg" && (
         <div
-          className="media"
+          className="factory__media"
           style={{
             maxWidth: "100%",
           }}
         >
           <img
-            className="media__image media__image--svg"
+            className="factory__media__image media__image--svg"
             src={source}
             alt="No alt text."
           />
-          <p className="media__content">{MediaContent}</p>
+          <p className="factory__media__content">{MediaContent}</p>
         </div>
       )}
     </Fragment>

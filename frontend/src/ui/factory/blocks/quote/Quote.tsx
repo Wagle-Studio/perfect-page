@@ -5,7 +5,7 @@ import "./quote.scss";
 
 export function Quote(props: FactoryBlockConf<FactoryNotionQuoteData>) {
   return (
-    <blockquote key={props.key} className="quote">
+    <blockquote key={props.key} className="factory__quote">
       {props.data?.rich_text.map((rich_text, index) => (
         <RichText key={props.key + "_" + index} content={rich_text} />
       ))}

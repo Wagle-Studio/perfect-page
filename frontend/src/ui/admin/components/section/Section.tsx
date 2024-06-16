@@ -3,7 +3,7 @@ import classNames from "classnames";
 import "./section.scss";
 
 export function Section({ className, ...props }: HTMLAttributes<HTMLElement>) {
-  const classes = classNames("section", className);
+  const classes = classNames("admin__section", className);
 
   return (
     <section className={classes} {...props}>

@@ -5,9 +5,9 @@ import "./callout.scss";
 
 export function Callout(props: FactoryBlockConf<FactoryNotionCalloutData>) {
   return (
-    <div key={props.key} className="callout">
-      <span className="callout__icon">{props.data?.icon.emoji}</span>
-      <p className="callout__content">
+    <div key={props.key} className="factory__callout">
+      <span className="factory__callout__icon">{props.data?.icon.emoji}</span>
+      <p className="factory__callout__content">
         {props.data?.rich_text.map((rich_text, index) => (
           <RichText key={props.key + "_" + index} content={rich_text} />
         ))}

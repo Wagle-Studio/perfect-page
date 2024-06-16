@@ -17,10 +17,10 @@ function LinkComponent({
   ...props
 }: LinkProps) {
   const linkClasses = classNames(
-    "link",
+    "web__link",
     {
-      [`link--${variant}`]: variant,
-      [`link--${severity}`]: severity,
+      [`web__link--${variant}`]: variant,
+      [`web__link--${severity}`]: severity,
     },
     className
   );

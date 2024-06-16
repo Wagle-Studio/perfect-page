@@ -14,7 +14,7 @@ export function Button({
   onClick,
   ...props
 }: ButtonProps) {
-  const buttonClasses = classNames("button", `button--${severity}`, className);
+  const buttonClasses = classNames("admin__button", `admin__button--${severity}`, className);
 
   return (
     <button className={buttonClasses} onClick={onClick} {...props}>
