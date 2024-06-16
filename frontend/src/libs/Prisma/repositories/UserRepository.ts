@@ -1,4 +1,4 @@
-import { Settings, User } from "@prisma/client";
+import { Settings } from "@prisma/client";
 import { Repository } from "./_Repository";
 
 export class UserRepository extends Repository {

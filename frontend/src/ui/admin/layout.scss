@@ -24,11 +24,20 @@
     }
 
     &__main-pannel {
+      background-color: lightsteelblue;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      height: 100%;
+    }
+
+    &__welcome-pannel {
       background-color: #ffffff;
       display: flex;
       flex-direction: column;
       flex-grow: 1;
       height: 100%;
+      padding: 2rem 4rem;
     }
   }
 }
