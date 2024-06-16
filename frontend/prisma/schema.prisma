@@ -17,8 +17,8 @@ model User {
   image         String?
   Session       Session[]
   Account       Account?
-  // Optional for WebAuthn support
   Authenticator Authenticator[]
+  Settings      Settings?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -68,7 +68,6 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-// Optional for WebAuthn support
 model Authenticator {
   credentialID         String  @unique
   userId               String
@@ -82,4 +81,15 @@ model Authenticator {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([userId, credentialID])
+}
+
+model Settings {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User?    @relation(fields: [userId], references: [id])
+  api_key   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
 }
