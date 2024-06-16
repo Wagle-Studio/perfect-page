@@ -47,13 +47,13 @@ export function Header() {
         <div className={listLinksClasses}>
           <ul>
             <li>
-              <Link href="#features">Features</Link>
+              <Link href="/#features">Features</Link>
             </li>
             <li>
-              <Link href="#pricing">Pricing</Link>
+              <Link href="/#pricing">Pricing</Link>
             </li>
             <li>
-              <Link href="#roadmap">Roadmap</Link>
+              <Link href="/#roadmap">Roadmap</Link>
             </li>
           </ul>
           <div className="header__nav__list-links__buttons">

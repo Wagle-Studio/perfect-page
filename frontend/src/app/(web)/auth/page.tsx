@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession, signIn, signOut } from "next-auth/react";
-import { Section } from "@/ui/web/layouts/section/Section";
+import { Section } from "@/ui/web/components/section/Section";
 import { Button } from "@/ui/web/components/button/Button";
 import { GoogleIcon } from "@/ui/web/components/icons/GoogleIcon";
 import { Link } from "@/ui/web/components/link/Link";

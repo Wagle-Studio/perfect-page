@@ -8,6 +8,11 @@
   box-sizing: border-box;
 
   &__nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+
     &__brand {
       &__logo {
         a {
@@ -15,6 +20,17 @@
           font-size: 2.4rem;
           font-weight: 600;
         }
+      }
+    }
+
+    &__user {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 1rem;
+
+      p {
+        font-size: 1.6rem;
       }
     }
   }

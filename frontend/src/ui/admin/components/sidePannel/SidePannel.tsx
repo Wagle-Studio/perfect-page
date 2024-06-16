@@ -12,7 +12,7 @@ export function SidePannel() {
         <li className="side-pannel__menu-list__item">
           <Link href="#">
             <UserIcon size="small" />
-            Profil
+            Profile
           </Link>
         </li>
         <li className="side-pannel__menu-list__item">
@@ -24,13 +24,13 @@ export function SidePannel() {
         <li className="side-pannel__menu-list__item">
           <Link href="#">
             <DatabaseIcon size="small" />
-            Base de données
+            Databases
           </Link>
         </li>
         <li className="side-pannel__menu-list__item">
           <Link href="#">
             <ThemeIcon size="small" />
-            Thèmes
+            Themes
           </Link>
         </li>
       </ul>

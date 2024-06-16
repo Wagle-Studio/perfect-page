@@ -1,8 +1,7 @@
 import { Header } from "@/ui/admin/components/header/Header";
-import { Section } from "@/ui/admin/layouts/section/Section";
-import "./layout.scss";
-import { Link } from "@/ui/admin/components/link/Link";
+import { Section } from "@/ui/admin/components/section/Section";
 import { SidePannel } from "@/ui/admin/components/sidePannel/SidePannel";
+import "./layout.scss";
 
 export const metadata = {
   title: "Next.js",

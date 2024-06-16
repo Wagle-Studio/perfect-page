@@ -1,4 +1,4 @@
-import { Section } from "@/ui/web/layouts/section/Section";
+import { Section } from "@/ui/web/components/section/Section";
 import "./not_found.scss";
 
 export default function NotFound() {
