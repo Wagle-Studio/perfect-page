@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Section } from "@/ui/web/components/section/Section";
 import { Button } from "@/ui/web/components/button/Button";
@@ -39,8 +40,18 @@ export default function SignUp() {
             <>
               <p>You are logged in with the Google account :</p>
               <div className="web__sign-up__hero__container__user-data">
-                <p>{session.user?.name}</p>
-                <p>{session.user?.email}</p>
+                {session.user.image && (
+                  <Image
+                    src={session.user.image}
+                    alt={`Profile picture of ${session.user.name}`}
+                    width={50}
+                    height={50}
+                  />
+                )}
+                <div className="web__sign-up__hero__container__user-data__name-email">
+                  <p>{session.user?.name}</p>
+                  <p>{session.user?.email}</p>
+                </div>
               </div>
               <div className="web__sign-up__hero__container__prodivers">
                 <Link href="/dashboard" variant="button" severity="gray">

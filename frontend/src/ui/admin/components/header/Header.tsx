@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { Link } from "@/ui/admin/components/link/Link";
 import { Button } from "@/ui/admin/components/button/Button";
-import { LogoutIcon } from "@/ui/admin/components/icons/LogoutIcon";
 import "./header.scss";
 
 export function Header() {
@@ -19,10 +19,15 @@ export function Header() {
         </div>
         {status === "authenticated" && session && (
           <div className="admin__header__nav__user">
-            <Button severity="invisible" onClick={() => signOut()}>
-              {session?.user.name}
-              <LogoutIcon size="medium" />
-            </Button>
+            <p>{session?.user.name}</p>
+            {session.user.image && (
+              <Image
+                src={session.user.image}
+                alt={`Profile picture of ${session.user.name}`}
+                width={50}
+                height={50}
+              />
+            )}
           </div>
         )}
       </div>
