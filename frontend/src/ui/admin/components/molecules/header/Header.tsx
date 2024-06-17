@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useSession, signOut } from "next-auth/react";
-import { Link } from "@/ui/admin/components/link/Link";
-import { Button } from "@/ui/admin/components/button/Button";
+import { useSession } from "next-auth/react";
+import { Link } from "@/ui/admin/components/atoms/link/Link";
 import "./header.scss";
 
 export function Header() {
