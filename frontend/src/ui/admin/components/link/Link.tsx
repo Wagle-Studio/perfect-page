@@ -5,7 +5,7 @@ import "./link.scss";
 
 type LinkProps = {
   href: string;
-  variant?: "button";
+  variant?: "inline" | "button";
   severity?: "gray" | "black";
 } & HTMLAttributes<HTMLElement>;
 

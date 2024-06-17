@@ -1,0 +1,41 @@
+@import "../globals.scss";
+
+.admin__form__integration-key {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    label {
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+
+    > div {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      gap: 1rem;
+
+      input {
+        padding: 0.75rem;
+        width: 100%;
+        max-width: 300px;
+        background-color: #eff3f8;
+        border: 2px solid $gray;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: flex-end;
+  }
+}

@@ -7,6 +7,15 @@
   justify-content: center;
   gap: 1.5rem;
 
+  &--inline {
+    display: inline;
+    flex-direction: unset;
+    align-items: unset;
+    justify-content: unset;
+    gap: unset;
+    text-decoration: underline;
+  }
+
   &--button {
     padding: 0.8rem 1.6rem;
     border-radius: 3px;
