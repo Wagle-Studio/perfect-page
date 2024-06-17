@@ -1,12 +1,10 @@
 import { Inter } from "next/font/google";
 import { getServerSession } from "next-auth";
 import { UserRepository } from "@/libs/Prisma/repositories/UserRepository";
-import { IntegrationKey } from "@/ui/admin/forms/IntegrationKey";
-import { Header } from "@/ui/admin/components/header/Header";
-import { SidePannel } from "@/ui/admin/components/sidePannel/SidePannel";
-import { Section } from "@/ui/admin/components/section/Section";
-import { Link } from "@/ui/admin/components/link/Link";
-import { KeyIcon } from "@/ui/admin/components/icons/KeyIcon";
+import { IntegrationKeyCard } from "./components/organisms/integrationKeyCard/IntegrationKeyCard";
+import { Header } from "@/ui/admin/components/molecules/header/Header";
+import { SidePannel } from "@/ui/admin/components/molecules/sidePannel/SidePannel";
+import { Section } from "@/ui/admin/components/atoms/section/Section";
 import "./globals.scss";
 import "./layout.scss";
 
@@ -29,70 +27,21 @@ export async function Layout({
       <Header />
       <div className="admin__layout__dashboard">
         {userSettings && (
-          <Section className="admin__layout__dashboard__side-pannel">
-            <SidePannel />
-          </Section>
-        )}
-        {userSettings && (
-          <Section className="admin__layout__dashboard__main-pannel">
-            <main>{children}</main>
-          </Section>
+          <>
+            <Section className="admin__layout__dashboard__side-pannel">
+              <SidePannel />
+            </Section>
+            <Section className="admin__layout__dashboard__main-pannel">
+              <main>{children}</main>
+            </Section>
+          </>
         )}
         {!userSettings && (
-          <Section className="admin__layout__dashboard__welcome-pannel">
-            <main>
-              <div className="admin__layout__dashboard__welcome-pannel__card">
-                <div className="admin__layout__dashboard__welcome-pannel__card__header">
-                  <div className="admin__layout__dashboard__welcome-pannel__card__header__title">
-                    <KeyIcon size="large" />
-                    <h1>Notion integration</h1>
-                  </div>
-                  <div className="admin__layout__dashboard__welcome-pannel__card__header__sub-title">
-                    <p>
-                      This integration enables interaction between Perfect Page
-                      and Notion, allowing you to access the pages you choose to
-                      share effortlessly
-                    </p>
-                    <p>
-                      Your data's security and privacy are our top priorities
-                    </p>
-                  </div>
-                </div>
-                <div className="admin__layout__dashboard__welcome-pannel__card__body">
-                  <div className="admin__layout__dashboard__welcome-pannel__card__body__guide">
-                    <div className="admin__layout__dashboard__welcome-pannel__card__body__guide__step">
-                      <div>
-                        <p>
-                          <span>Step</span>1
-                        </p>
-                      </div>
-                      <p>
-                        Visit{" "}
-                        <Link
-                          variant="inline"
-                          href="https://www.notion.so/my-integrations"
-                        >
-                          https://www.notion.so/my-integrations
-                        </Link>{" "}
-                        to create an integration
-                      </p>
-                    </div>
-                    <div className="admin__layout__dashboard__welcome-pannel__card__body__guide__step">
-                      <div>
-                        <p>
-                          <span>Step</span>2
-                        </p>
-                      </div>
-                      <p>Get your secret key and register it below</p>
-                    </div>
-                  </div>
-                  <div className="admin__layout__dashboard__welcome-pannel__card__body__form">
-                    <IntegrationKey />
-                  </div>
-                </div>
-              </div>
-            </main>
-          </Section>
+          <main className="admin__layout__dashboard__welcome-pannel">
+            <Section>
+              <IntegrationKeyCard />
+            </Section>
+          </main>
         )}
       </div>
     </body>

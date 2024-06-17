@@ -1,8 +1,8 @@
-import { Link } from "@/ui/admin/components/link/Link";
-import { PageIcon } from "@/ui/admin/components/icons/PageIcon";
-import { DatabaseIcon } from "@/ui/admin/components/icons/DatabaseIcon";
-import { ThemeIcon } from "@/ui/admin/components/icons/ThemeIcon";
-import { UserIcon } from "@/ui/admin/components/icons/UserIcon";
+import { Link } from "@/ui/admin/components/atoms/link/Link";
+import { PageIcon } from "@/ui/admin/components/atoms/icons/PageIcon";
+import { DatabaseIcon } from "@/ui/admin/components/atoms/icons/DatabaseIcon";
+import { ThemeIcon } from "@/ui/admin/components/atoms/icons/ThemeIcon";
+import { UserIcon } from "@/ui/admin/components/atoms/icons/UserIcon";
 import "./side_pannel.scss";
 
 export function SidePannel() {

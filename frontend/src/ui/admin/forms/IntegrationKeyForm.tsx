@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/ui/admin/components/button/Button";
-import { EyeOpenIcon } from "@/ui/admin/components/icons/EyeOpenIcon";
-import { EyeCloseIcon } from "@/ui/admin/components/icons/EyeCloseIcon";
-import "./integration_key.scss";
+import { Button } from "@/ui/admin/components/atoms/button/Button";
+import { EyeOpenIcon } from "@/ui/admin/components/atoms/icons/EyeOpenIcon";
+import { EyeCloseIcon } from "@/ui/admin/components/atoms/icons/EyeCloseIcon";
+import "./integration_key_form.scss";
 
-export function IntegrationKey() {
+export function IntegrationKeyForm() {
   const [showKey, setShowKey] = useState<boolean>(false);
 
   const handleShowKeyClick = (event: React.MouseEvent<HTMLButtonElement>) => {
