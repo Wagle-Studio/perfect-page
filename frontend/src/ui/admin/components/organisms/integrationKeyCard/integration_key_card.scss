@@ -80,7 +80,9 @@
       border-top: 1px solid $black;
 
       &__error {
+        text-align: center;
         line-height: 2.5rem;
+        color: $error;
       }
     }
   }

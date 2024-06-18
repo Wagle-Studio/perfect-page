@@ -1,47 +1,38 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { usePost } from "@/cdn/hooks/usePost";
 import {
   IntegrationKeyForm,
   IntegrationKeyFormSchema,
 } from "@/ui/admin/forms/IntegrationKeyForm";
-import { toaster } from "@/ui/admin/components/atoms/toast/toaster";
 import { Loader } from "@/ui/admin/components/atoms/loader/Loader";
 import { Link } from "@/ui/admin/components/atoms/link/Link";
 import { KeyIcon } from "@/ui/admin/components/atoms/icons/KeyIcon";
 import "./integration_key_card.scss";
 
 export function IntegrationKeyCard() {
+  const router = useRouter();
   const { data: session, status } = useSession();
 
   const integrationKeyFormDefaultValues: IntegrationKeyFormSchema = {
     integrationKey: "",
   };
 
-  async function handleFormSubmit(fieldValues: IntegrationKeyFormSchema) {
-    const response = await fetch("/api/admin/user/settings", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userEmail: session?.user.email,
-        integrationKey: fieldValues.integrationKey,
-      }),
-    });
+  const integrationKeyPost = usePost({
+    url: "/api/admin/user/settings",
+    toastTitle: "Integration key",
+    onSuccess: () => {
+      router.push("/dashboard/pages");
+    },
+  });
 
-    if (response.ok) {
-      await response.json();
-      toaster.success({
-        title: "Integration key",
-        message: "Registered with success",
-      });
-    } else {
-      toaster.error({
-        title: "Integration key",
-        message: "Registration failed",
-      });
-    }
+  async function handleFormSubmit(fieldValues: IntegrationKeyFormSchema) {
+    integrationKeyPost.send({
+      userEmail: session?.user.email,
+      integrationKey: fieldValues.integrationKey,
+    });
   }
 
   return (
@@ -94,18 +85,28 @@ export function IntegrationKeyCard() {
           </div>
         </div>
         <div className="admin__integration-key-card__body__form">
-          {status === "loading" && <Loader />}
-          {status === "unauthenticated" && (
-            <p className="admin__integration-key-card__body__form_error">
-              We're sorry, an error has occurred
-            </p>
+          {!integrationKeyPost.loading && (
+            <>
+              {status === "loading" && <Loader />}
+              {status === "unauthenticated" && (
+                <p className="admin__integration-key-card__body__form__error">
+                  We're sorry, an error occurred while retrieving your data
+                </p>
+              )}
+              {status === "authenticated" && session && (
+                <IntegrationKeyForm
+                  defaultValues={integrationKeyFormDefaultValues}
+                  onSubmit={handleFormSubmit}
+                />
+              )}
+              {integrationKeyPost.error && (
+                <p className="admin__integration-key-card__body__form__error">
+                  We're sorry, an error occurred while sending your data
+                </p>
+              )}
+            </>
           )}
-          {status === "authenticated" && session && (
-            <IntegrationKeyForm
-              defaultValues={integrationKeyFormDefaultValues}
-              onSubmit={handleFormSubmit}
-            />
-          )}
+          {integrationKeyPost.loading && <Loader />}
         </div>
       </div>
     </div>
