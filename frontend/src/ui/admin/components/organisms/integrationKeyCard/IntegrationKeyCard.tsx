@@ -1,9 +1,42 @@
-import { IntegrationKeyForm } from "@/ui/admin/forms/IntegrationKeyForm";
+"use client";
+
+import { useSession } from "next-auth/react";
+import {
+  IntegrationKeyForm,
+  IntegrationKeyFormSchema,
+} from "@/ui/admin/forms/IntegrationKeyForm";
+import { Loader } from "@/ui/admin/components/atoms/loader/Loader";
 import { Link } from "@/ui/admin/components/atoms/link/Link";
 import { KeyIcon } from "@/ui/admin/components/atoms/icons/KeyIcon";
 import "./integration_key_card.scss";
 
 export function IntegrationKeyCard() {
+  const { data: session, status } = useSession();
+
+  const integrationKeyFormDefaultValues: IntegrationKeyFormSchema = {
+    integration_key: "",
+  };
+
+  async function handleFormSubmit(fieldValues: IntegrationKeyFormSchema) {
+    const response = await fetch("/api/admin/settings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_email: session?.user.email,
+        api_key: fieldValues.integration_key,
+      }),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      console.log("Setting created:", result);
+    } else {
+      console.error("Failed to create setting");
+    }
+  }
+
   return (
     <div className="admin__integration-key-card">
       <div className="admin__integration-key-card__header">
@@ -17,7 +50,12 @@ export function IntegrationKeyCard() {
             Notion, allowing you to access the pages you choose to share
             effortlessly
           </p>
-          <p>Your data's security and privacy are our top priorities</p>
+          <p>
+            Your data's security and privacy are our top priorities,{" "}
+            <Link variant="inline" href="#">
+              read more
+            </Link>
+          </p>
         </div>
       </div>
       <div className="admin__integration-key-card__body">
@@ -49,7 +87,18 @@ export function IntegrationKeyCard() {
           </div>
         </div>
         <div className="admin__integration-key-card__body__form">
-          <IntegrationKeyForm />
+          {status === "loading" && <Loader />}
+          {status === "unauthenticated" && (
+            <p className="admin__integration-key-card__body__form_error">
+              We're sorry, an error has occurred
+            </p>
+          )}
+          {status === "authenticated" && session && (
+            <IntegrationKeyForm
+              defaultValues={integrationKeyFormDefaultValues}
+              onSubmit={handleFormSubmit}
+            />
+          )}
         </div>
       </div>
     </div>

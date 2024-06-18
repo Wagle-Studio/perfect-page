@@ -1,0 +1,46 @@
+@import "../../../globals.scss";
+
+.admin__form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__label {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 1rem;
+
+    &__input {
+      padding: 0.75rem;
+      width: 100%;
+      max-width: 300px;
+      background-color: #eff3f8;
+      border: 2px solid $gray;
+      border-radius: 3px;
+    }
+  }
+
+  &__messages {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    &__item{
+      font-size: 1.2rem;
+
+      &--error {
+        color: $error;
+      }
+
+      &--help {
+        color: $gray--dark;
+      }
+    }
+  }
+}

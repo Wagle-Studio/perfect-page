@@ -4,9 +4,11 @@
   background-color: $white;
   display: flex;
   flex-direction: column;
-  padding: 3rem 4rem;
+  padding: 3rem 2rem;
+  width: 100%;
   max-width: 600px;
   border-radius: 6px;
+  box-sizing: border-box;
 
   &__header {
     display: flex;
@@ -76,6 +78,16 @@
       gap: 3rem;
       padding-top: 4.5rem;
       border-top: 1px solid $black;
+
+      &__error {
+        line-height: 2.5rem;
+      }
     }
+  }
+}
+
+@media screen and (min-width: 450px) {
+  .admin__integration-key-card {
+    padding: 3rem 4rem;
   }
 }
