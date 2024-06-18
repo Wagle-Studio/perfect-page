@@ -8,7 +8,7 @@ import { FormFieldPassword } from "@/ui/admin/components/atoms/formFields/FormFi
 import "./integration_key_form.scss";
 
 export type IntegrationKeyFormSchema = {
-  integration_key: string;
+  integrationKey: string;
 };
 
 type FormHandler<T extends FieldValues> = {
@@ -20,7 +20,7 @@ export function IntegrationKeyForm(
   props: FormHandler<IntegrationKeyFormSchema>
 ) {
   const schema: ObjectSchema<IntegrationKeyFormSchema> = object({
-    integration_key: string()
+    integrationKey: string()
       .min(10, "Minimum 10 characters")
       .max(50, "Maximum 50 characters")
       .required("Required field"),
@@ -37,10 +37,10 @@ export function IntegrationKeyForm(
       <div>
         <FormFieldPassword
           label="Your integration secret key :"
-          name="integration_key"
+          name="integrationKey"
           control={form.control}
           placeholder="Your Notion integration key here"
-          error={form.formState.errors.integration_key?.message}
+          error={form.formState.errors.integrationKey?.message}
           required
           showButton
         />

@@ -1,7 +1,7 @@
 import { Inter } from "next/font/google";
 import { getServerSession } from "next-auth";
-import { UserRepository } from "@/libs/Prisma/repositories/UserRepository";
-import { IntegrationKeyCard } from "./components/organisms/integrationKeyCard/IntegrationKeyCard";
+import { UserRepository } from "@/cdn/backend/repositories/UserRepository";
+import { IntegrationKeyCard } from "@/ui/admin/components/organisms/integrationKeyCard/IntegrationKeyCard";
 import { Header } from "@/ui/admin/components/molecules/header/Header";
 import { SidePannel } from "@/ui/admin/components/molecules/sidePannel/SidePannel";
 import { Section } from "@/ui/admin/components/atoms/section/Section";
@@ -17,16 +17,13 @@ export async function Layout({
 }>) {
   const session = await getServerSession();
   const userRepository = new UserRepository();
-
-  const userSettings = await userRepository.getUserSettings(
-    session?.user.email
-  );
+  const user = await userRepository.getSettings(session?.user.email);
 
   return (
     <body className={`${inter.className} admin__layout`}>
       <Header />
       <div className="admin__layout__dashboard">
-        {userSettings && (
+        {user && user.Settings && user.Settings.integration_key && (
           <>
             <Section className="admin__layout__dashboard__side-pannel">
               <SidePannel />
@@ -36,7 +33,7 @@ export async function Layout({
             </Section>
           </>
         )}
-        {!userSettings && (
+        {(!user || !user.Settings) && (
           <main className="admin__layout__dashboard__welcome-pannel">
             <Section>
               <IntegrationKeyCard />

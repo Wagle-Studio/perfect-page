@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-export abstract class Repository {
+export class Repository {
   protected client: PrismaClient;
 
   public constructor() {

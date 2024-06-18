@@ -14,7 +14,7 @@ export function IntegrationKeyCard() {
   const { data: session, status } = useSession();
 
   const integrationKeyFormDefaultValues: IntegrationKeyFormSchema = {
-    integration_key: "",
+    integrationKey: "",
   };
 
   async function handleFormSubmit(fieldValues: IntegrationKeyFormSchema) {
@@ -24,8 +24,8 @@ export function IntegrationKeyCard() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        user_email: session?.user.email,
-        api_key: fieldValues.integration_key,
+        userEmail: session?.user.email,
+        integrationKey: fieldValues.integrationKey,
       }),
     });
 
