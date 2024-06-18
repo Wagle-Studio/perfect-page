@@ -18,7 +18,7 @@ export function IntegrationKeyCard() {
   };
 
   async function handleFormSubmit(fieldValues: IntegrationKeyFormSchema) {
-    const response = await fetch("/api/admin/settings", {
+    const response = await fetch("/api/admin/user/settings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

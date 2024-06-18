@@ -1,4 +1,4 @@
-import { SessionProvider } from "@/libs/NextAuth/SessionProvider";
+import { SessionProvider } from "@/cdn/authentication/SessionProvider";
 
 export default function RootLayout({
   children,
