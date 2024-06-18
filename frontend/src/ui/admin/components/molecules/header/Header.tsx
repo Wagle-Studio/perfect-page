@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { Link } from "@/ui/admin/components/atoms/link/Link";
 import "./header.scss";
 
+// TODO: update to server side.
 export function Header() {
   const { data: session, status } = useSession();
 
