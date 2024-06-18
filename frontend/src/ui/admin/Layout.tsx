@@ -4,6 +4,7 @@ import { UserRepository } from "@/cdn/backend/repositories/UserRepository";
 import { IntegrationKeyCard } from "@/ui/admin/components/organisms/integrationKeyCard/IntegrationKeyCard";
 import { Header } from "@/ui/admin/components/molecules/header/Header";
 import { SidePannel } from "@/ui/admin/components/molecules/sidePannel/SidePannel";
+import { ToastProvider } from "./components/atoms/toast/ToastProvider";
 import { Section } from "@/ui/admin/components/atoms/section/Section";
 import "./globals.scss";
 import "./layout.scss";
@@ -41,6 +42,7 @@ export async function Layout({
           </main>
         )}
       </div>
+      <ToastProvider />
     </body>
   );
 }

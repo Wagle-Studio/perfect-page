@@ -5,6 +5,7 @@ import {
   IntegrationKeyForm,
   IntegrationKeyFormSchema,
 } from "@/ui/admin/forms/IntegrationKeyForm";
+import { toaster } from "@/ui/admin/components/atoms/toast/toaster";
 import { Loader } from "@/ui/admin/components/atoms/loader/Loader";
 import { Link } from "@/ui/admin/components/atoms/link/Link";
 import { KeyIcon } from "@/ui/admin/components/atoms/icons/KeyIcon";
@@ -30,10 +31,16 @@ export function IntegrationKeyCard() {
     });
 
     if (response.ok) {
-      const result = await response.json();
-      console.log("Setting created:", result);
+      await response.json();
+      toaster.success({
+        title: "Integration key",
+        message: "Registered with success",
+      });
     } else {
-      console.error("Failed to create setting");
+      toaster.error({
+        title: "Integration key",
+        message: "Registration failed",
+      });
     }
   }
 

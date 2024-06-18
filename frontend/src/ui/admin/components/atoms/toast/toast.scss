@@ -1,0 +1,13 @@
+@import "../../../globals.scss";
+
+.admin__toast {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 0.5rem;
+
+  &__title {
+    font-weight: 600;
+    color: $black;
+  }
+}
