@@ -1,7 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Settings, User } from "@prisma/client";
+import { BotUserObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { usePost } from "@/cdn/hooks/usePost";
 import {
   IntegrationKeyForm,
@@ -10,27 +13,59 @@ import {
 import { Loader } from "@/ui/admin/components/atoms/loader/Loader";
 import { Link } from "@/ui/admin/components/atoms/link/Link";
 import { KeyIcon } from "@/ui/admin/components/atoms/icons/KeyIcon";
+import { toaster } from "@/ui/admin/components/atoms/toast/toaster";
 import "./integration_key_card.scss";
 
 export function IntegrationKeyCard() {
   const router = useRouter();
+  const [subIntegrationKey, setSubIntegrationKey] = useState<string>();
   const { data: session, status } = useSession();
 
   const integrationKeyFormDefaultValues: IntegrationKeyFormSchema = {
     integrationKey: "",
   };
 
-  const integrationKeyPost = usePost({
+  const testIntegrationKeyPost = usePost<BotUserObjectResponse>({
+    url: "/api/admin/user/integration_key",
+    onSuccess: async (res) => {
+      toaster.success({
+        title: "Integration key",
+        message: "Test succeeded",
+      });
+
+      await integrationKeyPost.send({
+        userEmail: session?.user.email,
+        integrationKey: subIntegrationKey,
+      });
+    },
+    onError: () => {
+      toaster.error({
+        title: "Integration key",
+        message: "Test failed",
+      });
+    },
+  });
+
+  const integrationKeyPost = usePost<User & { Settings: Settings | null }>({
     url: "/api/admin/user/settings",
-    toastTitle: "Integration key",
-    onSuccess: () => {
-      router.push("/dashboard/pages");
+    onSuccess: (res) => {
+      toaster.success({
+        title: "Integration key",
+        message: "Registered with success",
+      });
+    },
+    onError: () => {
+      toaster.error({
+        title: "Integration key",
+        message: "Registered failed",
+      });
     },
   });
 
   async function handleFormSubmit(fieldValues: IntegrationKeyFormSchema) {
-    integrationKeyPost.send({
-      userEmail: session?.user.email,
+    setSubIntegrationKey(fieldValues.integrationKey);
+
+    await testIntegrationKeyPost.send({
       integrationKey: fieldValues.integrationKey,
     });
   }
@@ -85,7 +120,7 @@ export function IntegrationKeyCard() {
           </div>
         </div>
         <div className="admin__integration-key-card__body__form">
-          {!integrationKeyPost.loading && (
+          {(!testIntegrationKeyPost.loading || !integrationKeyPost) && (
             <>
               {status === "loading" && <Loader />}
               {status === "unauthenticated" && (
@@ -99,14 +134,22 @@ export function IntegrationKeyCard() {
                   onSubmit={handleFormSubmit}
                 />
               )}
+              {testIntegrationKeyPost.error && (
+                <p className="admin__integration-key-card__body__form__error">
+                  It appears that the provided key is not recognized by Notion
+                </p>
+              )}
               {integrationKeyPost.error && (
                 <p className="admin__integration-key-card__body__form__error">
-                  We're sorry, an error occurred while sending your data
+                  We're sorry, an error occurred while registering your
+                  integration key
                 </p>
               )}
             </>
           )}
-          {integrationKeyPost.loading && <Loader />}
+          {(testIntegrationKeyPost.loading || integrationKeyPost.loading) && (
+            <Loader />
+          )}
         </div>
       </div>
     </div>
