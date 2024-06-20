@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Settings, User } from "@prisma/client";
@@ -18,8 +17,8 @@ import "./integration_key_card.scss";
 
 export function IntegrationKeyCard() {
   const router = useRouter();
-  const [subIntegrationKey, setSubIntegrationKey] = useState<string>();
   const { data: session, status } = useSession();
+  let integrationKeyHolder: string | undefined;
 
   const integrationKeyFormDefaultValues: IntegrationKeyFormSchema = {
     integrationKey: "",
@@ -35,7 +34,7 @@ export function IntegrationKeyCard() {
 
       await integrationKeyPost.send({
         userEmail: session?.user.email,
-        integrationKey: subIntegrationKey,
+        integrationKey: integrationKeyHolder,
       });
     },
     onError: () => {
@@ -57,13 +56,13 @@ export function IntegrationKeyCard() {
     onError: () => {
       toaster.error({
         title: "Integration key",
-        message: "Registered failed",
+        message: "Registration failed",
       });
     },
   });
 
   async function handleFormSubmit(fieldValues: IntegrationKeyFormSchema) {
-    setSubIntegrationKey(fieldValues.integrationKey);
+    integrationKeyHolder = fieldValues.integrationKey;
 
     await testIntegrationKeyPost.send({
       integrationKey: fieldValues.integrationKey,

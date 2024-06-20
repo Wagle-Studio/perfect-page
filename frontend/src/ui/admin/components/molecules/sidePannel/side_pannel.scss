@@ -13,6 +13,7 @@
     flex-direction: column;
     padding: 0;
     margin: 0;
+    height: 100%;
     list-style: none;
 
     &__item {
@@ -20,11 +21,20 @@
         border-radius: 6px 6px 0 0;
       }
 
+      &:nth-child(4) {
+        margin-top: auto;
+      }
+
+      &:last-child {
+        border-radius: 0 0 6px 6px;
+      }
+
       &:hover {
         background-color: $gray;
       }
 
-      a {
+      a,
+      button {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
