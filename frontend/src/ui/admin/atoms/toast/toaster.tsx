@@ -1,5 +1,5 @@
 import { toast, Id } from "react-toastify";
-import { Toast, ToastProps } from "@/ui/admin/components/atoms/toast/Toast";
+import { Toast, ToastProps } from "@/ui/admin/atoms/toast/Toast";
 
 export const toaster = (props: ToastProps): Id => {
   return toast(<Toast {...props} />, {});
