@@ -3,7 +3,7 @@
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { object, ObjectSchema, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormFieldPassword } from "@/ui/admin/components/atoms/formFields/FormFieldPassword";
+import { FormFieldPassword } from "@/ui/admin/atoms/formFields/FormFieldPassword";
 import "./integration_key_form.scss";
 
 import { Button } from "@/ui/admin/atoms/button/Button";

@@ -1,4 +1,4 @@
-@import "../../../globals.scss";
+@import "../../variables.scss";
 
 .admin__form-field {
   display: flex;
@@ -20,7 +20,7 @@
       padding: 0.75rem;
       width: 100%;
       max-width: 300px;
-      background-color: #eff3f8;
+      background-color: $gray--light;
       border: 2px solid $gray;
       border-radius: 3px;
     }
