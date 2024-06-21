@@ -6,7 +6,7 @@ import "./link.scss";
 type LinkProps = {
   href: string;
   variant?: "inline" | "button";
-  severity?: "gray" | "black";
+  severity?: "primary" | "secondary";
 } & HTMLAttributes<HTMLElement>;
 
 function LinkComponent({
@@ -19,8 +19,9 @@ function LinkComponent({
   const linkClasses = classNames(
     "admin__link",
     {
-      [`admin__link--${variant}`]: variant,
-      [`admin__link--${severity}`]: severity,
+      [`admin__link--inline`]: variant === "inline",
+      [`admin__link--button admin__link--button--${severity}`]:
+        variant === "button" && severity,
     },
     className
   );

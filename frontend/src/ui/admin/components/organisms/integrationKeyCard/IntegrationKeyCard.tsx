@@ -10,10 +10,11 @@ import {
   IntegrationKeyFormSchema,
 } from "@/ui/admin/forms/IntegrationKeyForm";
 import { Loader } from "@/ui/admin/components/atoms/loader/Loader";
-import { Link } from "@/ui/admin/components/atoms/link/Link";
 import { KeyIcon } from "@/ui/admin/components/atoms/icons/KeyIcon";
 import { toaster } from "@/ui/admin/components/atoms/toast/toaster";
 import "./integration_key_card.scss";
+
+import { Link } from "@/ui/admin/atoms/link/Link";
 
 export function IntegrationKeyCard() {
   const router = useRouter();

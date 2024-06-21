@@ -1,0 +1,30 @@
+@import "../../variables.scss";
+
+.admin__link {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-decoration: none;
+
+  &--inline {
+    display: inline;
+    text-decoration: underline;
+  }
+
+  &--button {
+    padding: 0.8rem 1.6rem;
+    border-radius: 3px;
+
+    &--primary {
+      background-color: $primary;
+      color: $primary--reverse;
+    }
+
+    &--secondary {
+      background-color: $secondary;
+      color: $secondary--reverse;
+    }
+  }
+}

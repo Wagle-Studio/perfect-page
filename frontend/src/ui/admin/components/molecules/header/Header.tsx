@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { Link } from "@/ui/admin/components/atoms/link/Link";
 import "./header.scss";
+
+import { Link } from "@/ui/admin/atoms/link/Link";
 
 // TODO: update to server side.
 export function Header() {
