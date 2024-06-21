@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { IconProps } from "@/ui/web/components/icons/IconProps";
+import { IconProps } from "@/ui/admin/atoms/icons/IconProps";
 import "./icon.scss";
 
 export function UserIcon({ size, className, ...props }: IconProps) {

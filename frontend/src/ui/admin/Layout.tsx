@@ -1,11 +1,11 @@
-import { Inter } from "next/font/google";
 import { getServerSession } from "next-auth";
+import { Inter } from "next/font/google";
 import { UserRepository } from "@/cdn/backend/repositories/UserRepository";
-import { IntegrationKeyCard } from "@/ui/admin/components/organisms/integrationKeyCard/IntegrationKeyCard";
-import { Header } from "@/ui/admin/components/molecules/header/Header";
-import { SidePannel } from "@/ui/admin/components/molecules/sidePannel/SidePannel";
-import { ToastProvider } from "./components/atoms/toast/ToastProvider";
-import { Section } from "@/ui/admin/components/atoms/section/Section";
+import { IntegrationKeyCard } from "@/ui/admin/organisms/integrationKeyCard/IntegrationKeyCard";
+import { SidePannel } from "@/ui/admin/molecules/sidePannel/SidePannel";
+import { Header } from "@/ui/admin/molecules/header/Header";
+import { Section } from "@/ui/admin/atoms/section/Section";
+import { ToastProvider } from "@/ui/admin/atoms/toast/ToastProvider";
 import "./globals.scss";
 import "./layout.scss";
 
@@ -20,28 +20,37 @@ export async function Layout({
   const userRepository = new UserRepository();
   const user = await userRepository.getSettings(session?.user.email);
 
+  // TODO: create error pannel
   return (
-    <body className={`${inter.className} admin__layout`}>
+    <body className={`${inter.className} dashboard__layout`}>
       <Header />
-      <div className="admin__layout__dashboard">
-        {user && user.Settings && user.Settings.integration_key && (
-          <>
-            <Section className="admin__layout__dashboard__side-pannel">
-              <SidePannel />
-            </Section>
-            <Section className="admin__layout__dashboard__main-pannel">
-              <main>{children}</main>
-            </Section>
-          </>
-        )}
-        {(!user || !user.Settings) && (
-          <main className="admin__layout__dashboard__welcome-pannel">
+      {session && user && user.Settings && user.Settings.integration_key && (
+        <div className="dashboard__layout__content">
+          <Section className="dashboard__layout__content__side-pannel">
+            <SidePannel />
+          </Section>
+          <Section className="dashboard__layout__content__main-pannel">
+            <main>{children}</main>
+          </Section>
+        </div>
+      )}
+      {session &&
+        user &&
+        (!user.Settings || !user.Settings.integration_key) && (
+          <main className="dashboard__layout__content__welcome-pannel">
             <Section>
-              <IntegrationKeyCard />
+              <IntegrationKeyCard user={user} />
             </Section>
           </main>
         )}
-      </div>
+      {!session ||
+        (!user && (
+          <main className="dashboard__layout__content__error-pannel">
+            <Section>
+              <h1>ERROR</h1>
+            </Section>
+          </main>
+        ))}
       <ToastProvider />
     </body>
   );

@@ -2,8 +2,8 @@ import { HTMLAttributes } from "react";
 import classNames from "classnames";
 import "./loader.scss";
 
-export function Loader(props: HTMLAttributes<HTMLElement>) {
-  const loaderClasses = classNames("loader", props.className);
+export function Loader({ className, ...props }: HTMLAttributes<HTMLElement>) {
+  const loaderClasses = classNames("loader", className);
 
   return (
     <div className={loaderClasses} {...props}>
