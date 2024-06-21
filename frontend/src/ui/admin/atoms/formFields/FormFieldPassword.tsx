@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { useState } from "react";
+import { HTMLAttributes, useState } from "react";
 import {
   Control,
   Controller,
@@ -24,7 +24,7 @@ type FormField<T extends FieldValues> = {
   error: FieldError["message"] | undefined;
   help?: string;
   showButton?: boolean;
-};
+} & HTMLAttributes<HTMLElement>;
 
 type FormFieldPassword<T extends FieldValues> = FormField<T>;
 
@@ -33,6 +33,7 @@ export function FormFieldPassword<T extends FieldValues>(
 ) {
   const [showKey, setShowKey] = useState<boolean>(false);
 
+  const inputWrapperClasses = classNames("admin__form-field", props.className);
   const inputClasses = classNames("admin__form-field__wrapper__input", {
     [`admin__form-field__wrapper__input--error`]: props.error,
   });
@@ -43,7 +44,7 @@ export function FormFieldPassword<T extends FieldValues>(
   };
 
   return (
-    <div className="admin__form-field">
+    <div className={inputWrapperClasses}>
       <label className="admin__form-field__label" htmlFor={props.name}>
         {props.label}
       </label>
