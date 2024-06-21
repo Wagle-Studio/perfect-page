@@ -1,11 +1,11 @@
-@import "../../../globals.scss";
+@import "../../variables.scss";
 
 .admin__button {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1rem;
   margin: 0;
   padding: 0.8rem 1.6rem;
   border: none;
@@ -22,18 +22,17 @@
   -webkit-appearance: none;
   -moz-appearance: none;
 
-  &--default {
-    background-color: $gray;
-    color: $black;
+  &--primary {
+    background-color: $primary;
+    color: $primary--reverse;
   }
 
-  &--black {
-    background-color: $black;
-    color: $white;
+  &--secondary {
+    background-color: $secondary;
+    color: $secondary--reverse;
   }
 
   &--invisible {
     color: $black;
-    padding: 0;
   }
 }

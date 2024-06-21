@@ -1,7 +1,6 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import { Button } from "@/ui/admin/components/atoms/button/Button";
 import { PageIcon } from "@/ui/admin/components/atoms/icons/PageIcon";
 import { DatabaseIcon } from "@/ui/admin/components/atoms/icons/DatabaseIcon";
 import { ThemeIcon } from "@/ui/admin/components/atoms/icons/ThemeIcon";
@@ -10,6 +9,7 @@ import { LogoutIcon } from "@/ui/admin/components/atoms/icons/LogoutIcon";
 import "./side_pannel.scss";
 
 import { Link } from "@/ui/admin/atoms/link/Link";
+import { Button } from "@/ui/admin/atoms/button/Button";
 
 export function SidePannel() {
   return (

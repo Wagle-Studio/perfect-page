@@ -5,16 +5,20 @@ import classNames from "classnames";
 import "./button.scss";
 
 type ButtonProps = {
-  severity?: "default" | "black" | "invisible";
+  severity: "primary" | "secondary" | "invisible";
 } & HTMLAttributes<HTMLElement>;
 
 export function Button({
-  severity = "default",
+  severity,
   className,
   onClick,
   ...props
 }: ButtonProps) {
-  const buttonClasses = classNames("admin__button", `admin__button--${severity}`, className);
+  const buttonClasses = classNames(
+    "admin__button",
+    `admin__button--${severity}`,
+    className
+  );
 
   return (
     <button className={buttonClasses} onClick={onClick} {...props}>
