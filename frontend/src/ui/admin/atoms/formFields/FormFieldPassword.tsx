@@ -1,30 +1,14 @@
 "use client";
 
-import { HTMLAttributes, useState } from "react";
-import {
-  Control,
-  Controller,
-  FieldError,
-  FieldValues,
-  Path,
-} from "react-hook-form";
+import { useState } from "react";
+import { Controller, FieldValues } from "react-hook-form";
 import classNames from "classnames";
 import { EyeCloseIcon } from "@/ui/admin/atoms/icons/EyeCloseIcon";
 import { EyeOpenIcon } from "@/ui/admin/atoms/icons/EyeOpenIcon";
 import "./form_field.scss";
 
 import { Button } from "@/ui/admin/atoms/button/Button";
-
-type FormField<T extends FieldValues> = {
-  label: string;
-  name: Path<T>;
-  control: Control<T>;
-  required: boolean;
-  placeholder?: string;
-  error: FieldError["message"] | undefined;
-  help?: string;
-  showButton?: boolean;
-} & HTMLAttributes<HTMLElement>;
+import { FormField } from "./FormField";
 
 type FormFieldPassword<T extends FieldValues> = FormField<T>;
 

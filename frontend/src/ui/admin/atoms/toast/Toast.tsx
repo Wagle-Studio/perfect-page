@@ -7,8 +7,8 @@ export type ToastProps = {
   message: string;
 } & HTMLAttributes<HTMLElement>;
 
-export function Toast(props: ToastProps) {
-  const toastClasses = classNames("admin__toast", props.className);
+export function Toast({ className, ...props }: ToastProps) {
+  const toastClasses = classNames("admin__toast", className);
 
   return (
     <div className={toastClasses} {...props}>

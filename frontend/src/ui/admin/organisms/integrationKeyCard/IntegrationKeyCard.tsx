@@ -8,13 +8,13 @@ import { usePost } from "@/cdn/hooks/usePost";
 import {
   IntegrationKeyForm,
   IntegrationKeyFormSchema,
-} from "@/ui/admin/forms/IntegrationKeyForm";
+} from "@/ui/admin/molecules/forms/IntegrationKeyForm";
 import { Loader } from "@/ui/admin/atoms/loader/Loader";
+import { Link } from "@/ui/admin/atoms/link/Link";
 import { KeyIcon } from "@/ui/admin/atoms/icons/KeyIcon";
 import { toaster } from "@/ui/admin/atoms/toast/toaster";
 import "./integration_key_card.scss";
 
-import { Link } from "@/ui/admin/atoms/link/Link";
 
 export function IntegrationKeyCard() {
   const router = useRouter();
