@@ -1,25 +1,19 @@
 "use client";
 
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { object, ObjectSchema, string } from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormFieldPassword } from "@/ui/admin/atoms/formFields/FormFieldPassword";
 import "./integration_key_form.scss";
 
 import { Button } from "@/ui/admin/atoms/button/Button";
+import { Form } from "./Form";
 
 export type IntegrationKeyFormSchema = {
   integrationKey: string;
 };
 
-type FormHandler<T extends FieldValues> = {
-  defaultValues: T;
-  onSubmit: SubmitHandler<T>;
-};
-
-export function IntegrationKeyForm(
-  props: FormHandler<IntegrationKeyFormSchema>
-) {
+export function IntegrationKeyForm(props: Form<IntegrationKeyFormSchema>) {
   const schema: ObjectSchema<IntegrationKeyFormSchema> = object({
     integrationKey: string()
       .min(10, "Minimum 10 characters")
@@ -47,7 +41,10 @@ export function IntegrationKeyForm(
         />
       </div>
       <div className="admin__form__integration-key__actions">
-        <Button severity="secondary" onClick={form.handleSubmit(props.onSubmit)}>
+        <Button
+          severity="secondary"
+          onClick={form.handleSubmit(props.onSubmit)}
+        >
           Register key
         </Button>
       </div>
