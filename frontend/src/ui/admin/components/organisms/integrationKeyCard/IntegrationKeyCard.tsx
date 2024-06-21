@@ -9,7 +9,7 @@ import {
   IntegrationKeyForm,
   IntegrationKeyFormSchema,
 } from "@/ui/admin/forms/IntegrationKeyForm";
-import { Loader } from "@/ui/admin/components/atoms/loader/Loader";
+import { Loader } from "@/ui/admin/atoms/loader/Loader";
 import { KeyIcon } from "@/ui/admin/atoms/icons/KeyIcon";
 import { toaster } from "@/ui/admin/components/atoms/toast/toaster";
 import "./integration_key_card.scss";
