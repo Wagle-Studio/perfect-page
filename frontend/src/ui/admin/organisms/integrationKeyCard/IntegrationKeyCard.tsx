@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import { Settings, User } from "@prisma/client";
 import { BotUserObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import { usePost } from "@/cdn/hooks/usePost";
+import { usePut } from "@/cdn/hooks/usePut";
 import {
   IntegrationKeyForm,
   IntegrationKeyFormSchema,
@@ -15,8 +16,11 @@ import { KeyIcon } from "@/ui/admin/atoms/icons/KeyIcon";
 import { toaster } from "@/ui/admin/atoms/toast/toaster";
 import "./integration_key_card.scss";
 
+type IntegrationKeyCardProps = {
+  user: User & { Settings: Settings | null };
+};
 
-export function IntegrationKeyCard() {
+export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
   const router = useRouter();
   const { data: session, status } = useSession();
   let integrationKeyHolder: string | undefined;
@@ -25,7 +29,7 @@ export function IntegrationKeyCard() {
     integrationKey: "",
   };
 
-  const testIntegrationKeyPost = usePost<BotUserObjectResponse>({
+  const testIntegrationKeyPost = usePost<BotUserObjectResponse | null>({
     url: "/api/admin/user/integration_key",
     onSuccess: async (res) => {
       toaster.success({
@@ -33,10 +37,17 @@ export function IntegrationKeyCard() {
         message: "Test succeeded",
       });
 
-      await integrationKeyPost.send({
-        userEmail: session?.user.email,
-        integrationKey: integrationKeyHolder,
-      });
+      if (props.user.Settings && props.user.Settings.userId) {
+        await updateUserSettings.send({
+          userId: props.user.Settings?.userId,
+          integrationKey: integrationKeyHolder,
+        });
+      } else {
+        await createUserSettings.send({
+          userEmail: session?.user.email,
+          integrationKey: integrationKeyHolder,
+        });
+      }
     },
     onError: () => {
       toaster.error({
@@ -46,7 +57,25 @@ export function IntegrationKeyCard() {
     },
   });
 
-  const integrationKeyPost = usePost<User & { Settings: Settings | null }>({
+  const createUserSettings = usePost<
+    (User & { Settings: Settings | null }) | null
+  >({
+    url: "/api/admin/user/settings",
+    onSuccess: (res) => {
+      toaster.success({
+        title: "Integration key",
+        message: "Registered with success",
+      });
+    },
+    onError: () => {
+      toaster.error({
+        title: "Integration key",
+        message: "Registration failed",
+      });
+    },
+  });
+
+  const updateUserSettings = usePut<Settings | null>({
     url: "/api/admin/user/settings",
     onSuccess: (res) => {
       toaster.success({
@@ -120,7 +149,7 @@ export function IntegrationKeyCard() {
           </div>
         </div>
         <div className="admin__integration-key-card__body__form">
-          {(!testIntegrationKeyPost.loading || !integrationKeyPost) && (
+          {(!testIntegrationKeyPost.loading || !createUserSettings) && (
             <>
               {status === "loading" && <Loader />}
               {status === "unauthenticated" && (
@@ -139,7 +168,7 @@ export function IntegrationKeyCard() {
                   It appears that the provided key is not recognized by Notion
                 </p>
               )}
-              {integrationKeyPost.error && (
+              {createUserSettings.error && (
                 <p className="admin__integration-key-card__body__form__error">
                   We're sorry, an error occurred while registering your
                   integration key
@@ -147,7 +176,7 @@ export function IntegrationKeyCard() {
               )}
             </>
           )}
-          {(testIntegrationKeyPost.loading || integrationKeyPost.loading) && (
+          {(testIntegrationKeyPost.loading || createUserSettings.loading) && (
             <Loader />
           )}
         </div>
