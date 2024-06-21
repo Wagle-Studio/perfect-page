@@ -9,10 +9,11 @@ import {
   Path,
 } from "react-hook-form";
 import classNames from "classnames";
-import { Button } from "@/ui/admin/components/atoms/button/Button";
 import { EyeCloseIcon } from "@/ui/admin/components/atoms/icons/EyeCloseIcon";
 import { EyeOpenIcon } from "@/ui/admin/components/atoms/icons/EyeOpenIcon";
 import "./form_field.scss";
+
+import { Button } from "@/ui/admin/atoms/button/Button";
 
 type FormField<T extends FieldValues> = {
   label: string;
@@ -70,7 +71,7 @@ export function FormFieldPassword<T extends FieldValues>(
           )}
         />
         {props.showButton && (
-          <Button onClick={handleShowKeyClick}>
+          <Button severity="primary" onClick={handleShowKeyClick}>
             {showKey && <EyeCloseIcon size="small" />}
             {!showKey && <EyeOpenIcon size="small" />}
           </Button>
