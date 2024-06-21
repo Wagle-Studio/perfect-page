@@ -1,6 +1,10 @@
 "use client";
 
+import { HTMLAttributes } from "react";
 import { signOut } from "next-auth/react";
+import classNames from "classnames";
+import { Link } from "@/ui/admin/atoms/link/Link";
+import { Button } from "@/ui/admin/atoms/button/Button";
 import { PageIcon } from "@/ui/admin/atoms/icons/PageIcon";
 import { DatabaseIcon } from "@/ui/admin/atoms/icons/DatabaseIcon";
 import { ThemeIcon } from "@/ui/admin/atoms/icons/ThemeIcon";
@@ -8,12 +12,11 @@ import { UserIcon } from "@/ui/admin/atoms/icons/UserIcon";
 import { LogoutIcon } from "@/ui/admin/atoms/icons/LogoutIcon";
 import "./side_pannel.scss";
 
-import { Link } from "@/ui/admin/atoms/link/Link";
-import { Button } from "@/ui/admin/atoms/button/Button";
+export function SidePannel(props: HTMLAttributes<HTMLElement>) {
+  const sidePannelClasses = classNames("admin__side-pannel", props.className);
 
-export function SidePannel() {
   return (
-    <nav className="admin__side-pannel">
+    <nav className={sidePannelClasses} {...props}>
       <ul className="admin__side-pannel__menu-list">
         <li className="admin__side-pannel__menu-list__item">
           <Link href="#">
