@@ -1,11 +1,11 @@
 "use client";
 
 import { signOut } from "next-auth/react";
-import { PageIcon } from "@/ui/admin/components/atoms/icons/PageIcon";
-import { DatabaseIcon } from "@/ui/admin/components/atoms/icons/DatabaseIcon";
-import { ThemeIcon } from "@/ui/admin/components/atoms/icons/ThemeIcon";
-import { UserIcon } from "@/ui/admin/components/atoms/icons/UserIcon";
-import { LogoutIcon } from "@/ui/admin/components/atoms/icons/LogoutIcon";
+import { PageIcon } from "@/ui/admin/atoms/icons/PageIcon";
+import { DatabaseIcon } from "@/ui/admin/atoms/icons/DatabaseIcon";
+import { ThemeIcon } from "@/ui/admin/atoms/icons/ThemeIcon";
+import { UserIcon } from "@/ui/admin/atoms/icons/UserIcon";
+import { LogoutIcon } from "@/ui/admin/atoms/icons/LogoutIcon";
 import "./side_pannel.scss";
 
 import { Link } from "@/ui/admin/atoms/link/Link";

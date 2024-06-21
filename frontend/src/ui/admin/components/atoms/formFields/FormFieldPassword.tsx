@@ -9,8 +9,8 @@ import {
   Path,
 } from "react-hook-form";
 import classNames from "classnames";
-import { EyeCloseIcon } from "@/ui/admin/components/atoms/icons/EyeCloseIcon";
-import { EyeOpenIcon } from "@/ui/admin/components/atoms/icons/EyeOpenIcon";
+import { EyeCloseIcon } from "@/ui/admin/atoms/icons/EyeCloseIcon";
+import { EyeOpenIcon } from "@/ui/admin/atoms/icons/EyeOpenIcon";
 import "./form_field.scss";
 
 import { Button } from "@/ui/admin/atoms/button/Button";
