@@ -37,7 +37,7 @@ export function SidePannel(props: HTMLAttributes<HTMLElement>) {
           </Link>
         </li>
         <li className="admin__side-pannel__menu-list__item">
-          <Link href="#">
+          <Link href="/dashboard/profile">
             <UserIcon size="small" />
             Profile
           </Link>
