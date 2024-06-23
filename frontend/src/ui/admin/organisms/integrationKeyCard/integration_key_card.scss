@@ -1,95 +1,54 @@
 @import "../../variables.scss";
 
-.admin__integration-key-card {
-  background-color: $white;
-  display: flex;
-  flex-direction: column;
-  padding: 3rem 2rem;
-  width: 100%;
+.admin__integration-key-card__body {
   max-width: 600px;
-  border-radius: 6px;
-  box-sizing: border-box;
 
-  &__header {
+  &--admin {
+    max-width: unset;
+  }
+
+  &__guide {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    padding-bottom: 4.5rem;
+    gap: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid $black;
 
-    &__title {
+    &__step {
       display: flex;
       flex-direction: row;
       align-items: center;
       gap: 1.5rem;
 
-      > h1 {
-        font-size: 3rem;
+      & > div > p {
+        padding: 4px 10px;
+        font-size: 1.6rem;
         font-weight: 600;
+        border-radius: 50%;
+        color: $white;
+        background-color: $black;
+
+        > span {
+          display: none;
+        }
       }
-    }
 
-    &__sub-title {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-
-      p {
+      > p {
         line-height: 2.5rem;
       }
     }
   }
 
-  &__body {
-    &__guide {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-      padding: 4.5rem 0;
-      border-top: 1px solid $black;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-top: 2.5rem;
 
-      &__step {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 1.5rem;
-
-        & > div > p {
-          padding: 4px 10px;
-          font-size: 1.6rem;
-          font-weight: 600;
-          border-radius: 50%;
-          color: $white;
-          background-color: $black;
-
-          > span {
-            display: none;
-          }
-        }
-
-        > p {
-          line-height: 2.5rem;
-        }
-      }
+    &__error {
+      text-align: center;
+      line-height: 2.5rem;
+      color: $error;
     }
-
-    &__form {
-      display: flex;
-      flex-direction: column;
-      gap: 3rem;
-      padding-top: 4.5rem;
-      border-top: 1px solid $black;
-
-      &__error {
-        text-align: center;
-        line-height: 2.5rem;
-        color: $error;
-      }
-    }
-  }
-}
-
-@media screen and (min-width: 450px) {
-  .admin__integration-key-card {
-    padding: 3rem 4rem;
   }
 }

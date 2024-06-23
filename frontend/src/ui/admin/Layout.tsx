@@ -29,18 +29,16 @@ export async function Layout({
           <Section className="dashboard__layout__content__side-pannel">
             <SidePannel />
           </Section>
-          <Section className="dashboard__layout__content__main-pannel">
+          <div className="dashboard__layout__content__main-pannel">
             <main>{children}</main>
-          </Section>
+          </div>
         </div>
       )}
       {session &&
         user &&
         (!user.Settings || !user.Settings.integration_key) && (
           <main className="dashboard__layout__content__welcome-pannel">
-            <Section>
-              <IntegrationKeyCard user={user} />
-            </Section>
+            <IntegrationKeyCard variant="welcome" user={user} />
           </main>
         )}
       {!session ||
