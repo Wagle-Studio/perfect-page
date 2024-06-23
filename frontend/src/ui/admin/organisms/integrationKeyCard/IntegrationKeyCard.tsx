@@ -74,6 +74,7 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
         title: "Integration key",
         message: "Registered with success",
       });
+      router.refresh();
     },
     onError: () => {
       toaster.error({
@@ -90,6 +91,7 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
         title: "Integration key",
         message: "Registered with success",
       });
+      router.refresh();
     },
     onError: () => {
       toaster.error({
@@ -178,17 +180,6 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
                 defaultValues={integrationKeyFormDefaultValues}
                 onSubmit={handleFormSubmit}
               />
-            )}
-            {testIntegrationKeyPost.error && (
-              <p className="admin__integration-key-card__body__form__error">
-                It appears that the provided key is not recognized by Notion
-              </p>
-            )}
-            {createUserSettings.error && (
-              <p className="admin__integration-key-card__body__form__error">
-                We're sorry, an error occurred while registering your
-                integration key
-              </p>
             )}
           </>
         )}
