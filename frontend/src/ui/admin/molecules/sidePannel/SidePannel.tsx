@@ -19,19 +19,19 @@ export function SidePannel(props: HTMLAttributes<HTMLElement>) {
     <nav className={sidePannelClasses} {...props}>
       <ul className="admin__side-pannel__menu-list">
         <li className="admin__side-pannel__menu-list__item">
-          <Link href="#">
+          <Link href="/dashboard/pages">
             <PageIcon size="small" />
             Pages
           </Link>
         </li>
         <li className="admin__side-pannel__menu-list__item">
-          <Link href="#">
+          <Link href="/dashboard/databases">
             <DatabaseIcon size="small" />
             Databases
           </Link>
         </li>
         <li className="admin__side-pannel__menu-list__item">
-          <Link href="#">
+          <Link href="/dashboard/themes">
             <ThemeIcon size="small" />
             Themes
           </Link>

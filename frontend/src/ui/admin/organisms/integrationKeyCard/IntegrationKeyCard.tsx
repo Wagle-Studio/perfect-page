@@ -37,7 +37,7 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
     integrationKey: "",
   };
 
-  const testIntegrationKeyPost = usePost<BotUserObjectResponse | null>({
+  const testIntegrationKey = usePost<BotUserObjectResponse | null>({
     url: "/api/admin/user/integration_key",
     onSuccess: async (res) => {
       toaster.success({
@@ -104,7 +104,7 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
   async function handleFormSubmit(fieldValues: IntegrationKeyFormSchema) {
     integrationKeyHolder = fieldValues.integrationKey;
 
-    await testIntegrationKeyPost.send({
+    await testIntegrationKey.send({
       integrationKey: fieldValues.integrationKey,
     });
   }
@@ -167,7 +167,7 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
         </div>
       )}
       <div className="admin__integration-key-card__body__form">
-        {(!testIntegrationKeyPost.loading || !createUserSettings) && (
+        {(!testIntegrationKey.loading || !createUserSettings) && (
           <>
             {status === "loading" && <Loader />}
             {status === "unauthenticated" && (
@@ -183,7 +183,7 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
             )}
           </>
         )}
-        {(testIntegrationKeyPost.loading || createUserSettings.loading) && (
+        {(testIntegrationKey.loading || createUserSettings.loading) && (
           <Loader />
         )}
       </div>
