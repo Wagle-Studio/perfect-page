@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { Settings, User } from "@prisma/client";
+import { Pages, Settings, User } from "@prisma/client";
 import { BotUserObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import classNames from "classnames";
 import { usePost } from "@/cdn/hooks/usePost";
@@ -14,8 +14,6 @@ import {
 import { Link } from "@/ui/admin/atoms/link/Link";
 import { Card } from "@/ui/admin/atoms/card/Card";
 import { PageIcon } from "@/ui/admin/atoms/icons/PageIcon";
-import { SaveIcon } from "@/ui/admin/atoms/icons/SaveIcon";
-import { TrashIcon } from "@/ui/admin/atoms/icons/TrashIcon";
 
 type PageCardProps = {
   user: User & { Settings: Settings | null };
@@ -28,7 +26,7 @@ export function PageCard(props: PageCardProps) {
     pageId: "",
   };
 
-  // const createPage = usePost<>()
+  const createPage = usePost<Pages>()
 
   async function handleFormSubmit(fieldValues: PageFormSchema) {
     console.log(fieldValues);

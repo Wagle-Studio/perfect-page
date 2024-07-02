@@ -19,6 +19,7 @@ model User {
   Account       Account?
   Authenticator Authenticator[]
   Settings      Settings?
+  Pages         UserPages[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -84,12 +85,30 @@ model Authenticator {
 }
 
 model Settings {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User?    @relation(fields: [userId], references: [id])
+  integration_key String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Pages {
   id        String   @id @default(cuid())
-  userId    String   @unique
-  user      User?    @relation(fields: [userId], references: [id])
-  integration_key   String
+  page_id   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([userId])
+  UserPages UserPages[] // Modification ici
+}
+
+model UserPages {
+  userId String
+  pageId String
+  user   User   @relation(fields: [userId], references: [id])
+  page   Pages  @relation(fields: [pageId], references: [id])
+
+  @@id([userId, pageId])
 }
