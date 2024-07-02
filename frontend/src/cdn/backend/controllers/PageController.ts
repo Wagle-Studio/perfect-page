@@ -1,17 +1,17 @@
 import { ApiController } from "@/cdn/backend/controllers/_ApiController";
-import { SettingsRepository } from "@/cdn/backend/repositories/SettingsRepository";
+import { PageRepository } from "@/cdn/backend/repositories/PageRepository";
 
-export class SettingsController extends ApiController {
-  protected entity = "settings";
+export class PageController extends ApiController {
+  protected entity = "page";
 
   public constructor(request: Request) {
     super(request);
   }
 
-  public async updateSettings() {
+  public async createPage() {
     enum MandatoryFields {
+      "PAGE_ID" = "pageId",
       "USER_ID" = "userId",
-      "INTEGRATION_KEY" = "integrationKey",
     }
 
     try {
@@ -21,17 +21,18 @@ export class SettingsController extends ApiController {
         return this.resBadRequestError();
       }
 
-      const settingsRepository = new SettingsRepository();
-      const settings = await settingsRepository.updateSettings(
-        res.userId,
-        res.integrationKey
-      );
+      const pageRepository = new PageRepository();
+      const page = await pageRepository.createPage(res.pageId, res.userId);
 
-      if (!settings) {
+      if (!page) {
         return this.resNotFoundError();
       }
 
-      return this.resCreatedSuccess(settings);
+      if (!page) {
+        return this.resUnprocessableEntityError();
+      }
+
+      return this.resCreatedSuccess(page);
     } catch (error) {
       console.log(error);
       return this.resInternalServerError();
