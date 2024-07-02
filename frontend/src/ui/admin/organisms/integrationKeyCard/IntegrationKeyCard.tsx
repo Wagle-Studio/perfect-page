@@ -10,7 +10,7 @@ import { usePut } from "@/cdn/hooks/usePut";
 import {
   IntegrationKeyForm,
   IntegrationKeyFormSchema,
-} from "@/ui/admin/molecules/forms/IntegrationKeyForm";
+} from "@/ui/admin/molecules/forms/integrationKey/IntegrationKeyForm";
 import { Loader } from "@/ui/admin/atoms/loader/Loader";
 import { Link } from "@/ui/admin/atoms/link/Link";
 import { KeyIcon } from "@/ui/admin/atoms/icons/KeyIcon";
