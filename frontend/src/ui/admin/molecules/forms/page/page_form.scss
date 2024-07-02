@@ -1,0 +1,13 @@
+.admin__form__page {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  
+    &__actions {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      justify-content: flex-end;
+    }
+  }
+  
