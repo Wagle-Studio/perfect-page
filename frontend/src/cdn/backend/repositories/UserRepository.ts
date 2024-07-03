@@ -6,6 +6,16 @@ export class UserRepository extends Repository {
     super();
   }
 
+  public async getUser(email?: string | null): Promise<User | null> {
+    if (email) {
+      return await this.client.user.findUnique({
+        where: { email },
+      });
+    } else {
+      return null;
+    }
+  }
+
   public async getSettings(
     email?: string | null
   ): Promise<(User & { Settings: Settings | null }) | null> {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Pages, Settings, User } from "@prisma/client";
+import { Pages, User } from "@prisma/client";
 import { usePost } from "@/cdn/hooks/usePost";
 import { usePut } from "@/cdn/hooks/usePut";
 import {
@@ -15,7 +15,7 @@ import { PageIcon } from "@/ui/admin/atoms/icons/PageIcon";
 import { toaster } from "@/ui/admin/atoms/toast/toaster";
 
 type PageCardProps = {
-  user: User & { Settings: Settings | null };
+  user: User;
 };
 
 export function PageCard(props: PageCardProps) {

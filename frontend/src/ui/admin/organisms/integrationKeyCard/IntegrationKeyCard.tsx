@@ -1,7 +1,6 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { Settings, User } from "@prisma/client";
 import { BotUserObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 import classNames from "classnames";
@@ -25,7 +24,6 @@ type IntegrationKeyCardProps = {
 
 export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
   const router = useRouter();
-  const { data: session, status } = useSession();
   let integrationKeyHolder: string | undefined;
 
   const integrationKeyCardClasses = classNames(
@@ -52,7 +50,7 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
         });
       } else {
         await createUserSettings.send({
-          userEmail: session?.user.email,
+          userEmail: props.user.email,
           integrationKey: integrationKeyHolder,
         });
       }
@@ -168,20 +166,10 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
       )}
       <div className="admin__integration-key-card__body__form">
         {(!testIntegrationKey.loading || !createUserSettings) && (
-          <>
-            {status === "loading" && <Loader />}
-            {status === "unauthenticated" && (
-              <p className="admin__integration-key-card__body__form__error">
-                We're sorry, an error occurred while retrieving your data
-              </p>
-            )}
-            {status === "authenticated" && session && (
-              <IntegrationKeyForm
-                defaultValues={integrationKeyFormDefaultValues}
-                onSubmit={handleFormSubmit}
-              />
-            )}
-          </>
+          <IntegrationKeyForm
+            defaultValues={integrationKeyFormDefaultValues}
+            onSubmit={handleFormSubmit}
+          />
         )}
         {(testIntegrationKey.loading || createUserSettings.loading) && (
           <Loader />
