@@ -10,11 +10,16 @@ import "./page_form.scss";
 
 export type PageFormSchema = {
   pageId: string;
+  title: string;
 };
 
 export function PageForm(props: Form<PageFormSchema>) {
   const schema: ObjectSchema<PageFormSchema> = object({
     pageId: string()
+      .min(10, "Minimum 10 characters")
+      .max(50, "Maximum 50 characters")
+      .required("Required field"),
+    title: string()
       .min(10, "Minimum 10 characters")
       .max(50, "Maximum 50 characters")
       .required("Required field"),
@@ -34,6 +39,14 @@ export function PageForm(props: Form<PageFormSchema>) {
         control={form.control}
         placeholder="e8b7a9f47d20485b8c4a1b37e7d1c482"
         error={form.formState.errors.pageId?.message}
+        required
+      />
+      <FormFieldText
+        label="Title :"
+        name="title"
+        control={form.control}
+        placeholder="My awesome page"
+        error={form.formState.errors.title?.message}
         required
       />
       <div className="admin__form__integration-key__actions">

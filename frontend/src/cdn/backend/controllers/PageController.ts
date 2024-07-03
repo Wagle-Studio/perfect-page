@@ -12,6 +12,7 @@ export class PageController extends ApiController {
     enum MandatoryFields {
       "PAGE_ID" = "pageId",
       "USER_ID" = "userId",
+      "TITLE" = "title",
     }
 
     try {
@@ -21,8 +22,15 @@ export class PageController extends ApiController {
         return this.resBadRequestError();
       }
 
+      console.log(res);
+      
+
       const pageRepository = new PageRepository();
-      const page = await pageRepository.createPage(res.pageId, res.userId);
+      const page = await pageRepository.createPage(
+        res.userId,
+        res.pageId,
+        res.title
+      );
 
       if (!page) {
         return this.resNotFoundError();

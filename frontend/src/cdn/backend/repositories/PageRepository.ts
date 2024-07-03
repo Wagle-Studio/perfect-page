@@ -6,17 +6,34 @@ export class PageRepository extends Repository {
     super();
   }
 
+  public async getPages(userId?: string | null): Promise<Pages[] | null> {
+    if (userId) {
+      return await this.client.pages.findMany({
+        where: {
+          UserPages: {
+            some: {
+              userId: userId,
+            },
+          },
+        },
+      });
+    } else {
+      return null;
+    }
+  }
+
   public async createPage(
+    userId?: string | null,
     pageId?: string | null,
-    userId?: string | null
+    title?: string | null
   ): Promise<{ userId: string; pageId: string } | null> {
-    if (pageId && userId) {
+    if (userId && pageId && title) {
       return await this.client.userPages.create({
         data: {
           page: {
             connectOrCreate: {
               where: { id: pageId },
-              create: { page_id: pageId },
+              create: { page_id: pageId, title: title },
             },
           },
           user: {

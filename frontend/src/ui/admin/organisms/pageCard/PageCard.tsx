@@ -23,6 +23,7 @@ export function PageCard(props: PageCardProps) {
 
   const pageFormDefaultValues: PageFormSchema = {
     pageId: "",
+    title: "",
   };
 
   const createPage = usePost<Pages | null>({
@@ -44,8 +45,9 @@ export function PageCard(props: PageCardProps) {
 
   async function handleFormSubmit(fieldValues: PageFormSchema) {
     createPage.send({
-      pageId: fieldValues.pageId,
       userId: props.user.id,
+      pageId: fieldValues.pageId,
+      title: fieldValues.title,
     });
   }
 
