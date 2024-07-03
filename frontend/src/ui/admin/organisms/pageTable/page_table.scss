@@ -1,0 +1,77 @@
+@import "../../variables.scss";
+
+.admin__page-table__body {
+  &__table {
+    table-layout: auto;
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 3rem;
+
+    &__head {
+      &__row {
+        &__item {
+          text-align: left;
+          padding-bottom: 2.5rem;
+
+          p {
+            font-weight: 600;
+          }
+
+          &--date,
+          &--actions {
+            text-align: right;
+          }
+        }
+      }
+    }
+
+    &__body {
+      &__row {
+        border-bottom: 1px solid $gray;
+
+        &__item {
+          padding: 1rem 0;
+
+          &--title {
+            width: 440px;
+            max-width: 440px;
+
+            p {
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+          }
+
+          &--date {
+            text-align: right;
+            width: 200px;
+            max-width: 200px;
+          }
+
+          &--actions {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            width: 100px;
+          }
+        }
+
+        &:first-child {
+          td {
+            padding: 0 0 1rem 0;
+          }
+        }
+
+        &:last-child {
+          border-bottom: none;
+
+          td {
+            padding: 1rem 0 0 0;
+          }
+        }
+      }
+    }
+  }
+}
