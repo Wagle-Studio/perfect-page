@@ -6,6 +6,18 @@ export class PageRepository extends Repository {
     super();
   }
 
+  public async getPage(pageId?: string | null): Promise<Pages | null> {
+    if (pageId) {
+      return await this.client.pages.findUnique({
+        where: {
+          id: pageId,
+        },
+      });
+    } else {
+      return null;
+    }
+  }
+
   public async getPages(userId?: string | null): Promise<Pages[] | null> {
     if (userId) {
       return await this.client.pages.findMany({
@@ -39,6 +51,25 @@ export class PageRepository extends Repository {
           user: {
             connect: { id: userId },
           },
+        },
+      });
+    } else {
+      return null;
+    }
+  }
+
+  public async updatePage(
+    id?: string | null,
+    pageId?: string | null,
+    title?: string | null
+  ): Promise<Pages | null> {
+    if (id && pageId && title) {
+      return await this.client.pages.update({
+        where: {
+          id: id,
+        },
+        data: {
+          title: title,
         },
       });
     } else {

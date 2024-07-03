@@ -22,6 +22,11 @@
   -webkit-appearance: none;
   -moz-appearance: none;
 
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+
   &--primary {
     background-color: $primary;
     color: $primary--reverse;

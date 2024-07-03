@@ -55,8 +55,9 @@ export function PageForm(props: Form<PageFormSchema>) {
         <Button
           severity="secondary"
           onClick={form.handleSubmit(props.onSubmit)}
+          disabled={!form.formState.isDirty}
         >
-          Register page
+          Save page
         </Button>
         <Button severity="primary" onClick={form.handleSubmit(props.onSubmit)}>
           Quit

@@ -22,12 +22,45 @@ export class PageController extends ApiController {
         return this.resBadRequestError();
       }
 
-      console.log(res);
-      
-
       const pageRepository = new PageRepository();
       const page = await pageRepository.createPage(
         res.userId,
+        res.pageId,
+        res.title
+      );
+
+      if (!page) {
+        return this.resNotFoundError();
+      }
+
+      if (!page) {
+        return this.resUnprocessableEntityError();
+      }
+
+      return this.resCreatedSuccess(page);
+    } catch (error) {
+      console.log(error);
+      return this.resInternalServerError();
+    }
+  }
+
+  public async updatePage() {
+    enum MandatoryFields {
+      "ID" = "id",
+      "PAGE_ID" = "pageId",
+      "TITLE" = "title",
+    }
+
+    try {
+      const res = await this.request.json();
+
+      if (!this.hasMandatoryFields(MandatoryFields, res)) {
+        return this.resBadRequestError();
+      }
+
+      const pageRepository = new PageRepository();
+      const page = await pageRepository.updatePage(
+        res.id,
         res.pageId,
         res.title
       );

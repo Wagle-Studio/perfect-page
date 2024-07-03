@@ -62,7 +62,9 @@ export function PageTable(props: PageTableProps) {
                 <p>{formatDate(page.updatedAt)}</p>
               </td>
               <td className="admin__page-table__body__table__body__row__item admin__page-table__body__table__body__row__item--actions">
-                <EditIcon size="small" />
+                <Link href={`/dashboard/pages/edit/${page.id}`}>
+                  <EditIcon size="small" />
+                </Link>
                 <TrashIcon size="small" />
               </td>
             </tr>
