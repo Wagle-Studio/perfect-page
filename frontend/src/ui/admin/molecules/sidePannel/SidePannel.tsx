@@ -21,31 +21,41 @@ export function SidePannel(props: HTMLAttributes<HTMLElement>) {
         <li className="admin__side-pannel__menu-list__item">
           <Link href="/dashboard/pages">
             <PageIcon size="small" />
-            Pages
+            <span className="admin__side-pannel__menu-list__item__content">
+              Pages
+            </span>
           </Link>
         </li>
         <li className="admin__side-pannel__menu-list__item">
           <Link href="/dashboard/databases">
             <DatabaseIcon size="small" />
-            Databases
+            <span className="admin__side-pannel__menu-list__item__content">
+              Databases
+            </span>
           </Link>
         </li>
         <li className="admin__side-pannel__menu-list__item">
           <Link href="/dashboard/themes">
             <ThemeIcon size="small" />
-            Themes
+            <span className="admin__side-pannel__menu-list__item__content">
+              Themes
+            </span>
           </Link>
         </li>
         <li className="admin__side-pannel__menu-list__item">
           <Link href="/dashboard/profile">
             <UserIcon size="small" />
-            Profile
+            <span className="admin__side-pannel__menu-list__item__content">
+              Profile
+            </span>
           </Link>
         </li>
         <li className="admin__side-pannel__menu-list__item">
           <Button severity="invisible" onClick={() => signOut()}>
             <LogoutIcon size="small" />
-            Log out
+            <span className="admin__side-pannel__menu-list__item__content">
+              Log out
+            </span>
           </Button>
         </li>
       </ul>
