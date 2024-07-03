@@ -2,7 +2,7 @@
 
 .admin__page-table__body {
   &__table {
-    table-layout: auto;
+    table-layout: fixed;
     border-collapse: collapse;
     width: 100%;
     margin-top: 3rem;
@@ -11,14 +11,18 @@
       &__row {
         &__item {
           text-align: left;
-          padding-bottom: 2.5rem;
+          padding-bottom: 1.5rem;
 
           p {
-            font-weight: 600;
+            font-weight: 700;
           }
 
-          &--date,
+          &--date {
+            display: none;
+          }
+
           &--actions {
+            width: 100px;
             text-align: right;
           }
         }
@@ -27,15 +31,12 @@
 
     &__body {
       &__row {
-        border-bottom: 1px solid $gray;
+        border-top: 1px solid $gray;
 
         &__item {
           padding: 1rem 0;
 
           &--title {
-            width: 440px;
-            max-width: 440px;
-
             p {
               overflow: hidden;
               white-space: nowrap;
@@ -44,9 +45,7 @@
           }
 
           &--date {
-            text-align: right;
-            width: 200px;
-            max-width: 200px;
+            display: none;
           }
 
           &--actions {
@@ -58,17 +57,39 @@
           }
         }
 
-        &:first-child {
-          td {
-            padding: 0 0 1rem 0;
-          }
-        }
-
         &:last-child {
-          border-bottom: none;
-
           td {
             padding: 1rem 0 0 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $tablet--horizontal) {
+  .admin__page-table__body {
+    &__table {
+      &__head {
+        &__row {
+          &__item {
+            &--date {
+              display: table-cell;
+              text-align: right;
+              width: 200px;
+            }
+          }
+        }
+      }
+
+      &__body {
+        &__row {
+          &__item {
+            &--date {
+              display: table-cell;
+              text-align: right;
+              width: 200px;
+            }
           }
         }
       }

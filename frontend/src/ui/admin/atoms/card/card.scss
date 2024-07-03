@@ -65,7 +65,7 @@
   }
 }
 
-@media screen and (min-width: 450px) {
+@media screen and (min-width: $tablet--vertical) {
   .admin__card {
     padding: 3rem 4rem;
   }
