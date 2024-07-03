@@ -37,6 +37,7 @@ export function IntegrationKeyForm(props: Form<IntegrationKeyFormSchema>) {
           error={form.formState.errors.integrationKey?.message}
           required
           showButton
+          className="admin__form__integration-key__key-field"
         />
       </div>
       <div className="admin__form__integration-key__actions">

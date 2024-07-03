@@ -3,6 +3,10 @@
   flex-direction: column;
   gap: 2.5rem;
 
+  &__key-field {
+    max-width: 500px;
+  }
+
   &__actions {
     display: flex;
     flex-direction: row;

@@ -33,23 +33,25 @@ export function PageForm(props: Form<PageFormSchema>) {
 
   return (
     <form className="admin__form__page">
-      <FormFieldText
-        label="The ID of the page you want to magnify :"
-        name="pageId"
-        control={form.control}
-        placeholder="e8b7a9f47d20485b8c4a1b37e7d1c482"
-        error={form.formState.errors.pageId?.message}
-        required
-      />
-      <FormFieldText
-        label="Title :"
-        name="title"
-        control={form.control}
-        placeholder="My awesome page"
-        error={form.formState.errors.title?.message}
-        required
-      />
-      <div className="admin__form__integration-key__actions">
+      <div className="admin__form__page__fields-wrapper">
+        <FormFieldText
+          label="ID of the Notion page :"
+          name="pageId"
+          control={form.control}
+          placeholder="e8b7a9f47d20485b8c4a1b37e7d1c482"
+          error={form.formState.errors.pageId?.message}
+          required
+        />
+        <FormFieldText
+          label="Title :"
+          name="title"
+          control={form.control}
+          placeholder="My awesome page"
+          error={form.formState.errors.title?.message}
+          required
+        />
+      </div>
+      <div className="admin__form__page__actions">
         <Button
           severity="secondary"
           onClick={form.handleSubmit(props.onSubmit)}
