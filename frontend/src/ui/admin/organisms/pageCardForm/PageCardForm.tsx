@@ -12,17 +12,18 @@ import { Loader } from "@/ui/admin/atoms/loader/Loader";
 import { Card } from "@/ui/admin/atoms/card/Card";
 import { PageIcon } from "@/ui/admin/atoms/icons/PageIcon";
 import { toaster } from "@/ui/admin/atoms/toast/toaster";
+import "./page_card_form.scss";
 
-type PageCardProps = {
-  user: User;
+type PageCardFormProps = {
+  user?: User;
   page?: Pages;
 };
 
-export function PageCard(props: PageCardProps) {
+export function PageCardForm(props: PageCardFormProps) {
   const router = useRouter();
 
   const pageFormDefaultValues: PageFormSchema = {
-    pageId: props.page ? props.page.page_id : "",
+    pageId: props.page ? props.page.notionPageId : "",
     title: props.page ? props.page.title : "",
   };
 
@@ -68,11 +69,18 @@ export function PageCard(props: PageCardProps) {
         title: fieldValues.title,
       });
     } else {
-      createPage.send({
-        userId: props.user.id,
-        pageId: fieldValues.pageId,
-        title: fieldValues.title,
-      });
+      if (props.user) {
+        createPage.send({
+          userId: props.user.id,
+          pageId: fieldValues.pageId,
+          title: fieldValues.title,
+        });
+      } else {
+        toaster.error({
+          title: "Page",
+          message: "Registration failed",
+        });
+      }
     }
   }
 
@@ -83,13 +91,18 @@ export function PageCard(props: PageCardProps) {
       className="admin__page-card__body"
     >
       <div className="admin__page-card__body__form">
-        {!createPage.loading && (
+        {createPage.error && (
+          <p className="admin__integration-key-card__body__form__error">
+            We're sorry, an error occurred while registering your page
+          </p>
+        )}
+        {!createPage.loading && !updatePage.loading && (
           <PageForm
             defaultValues={pageFormDefaultValues}
             onSubmit={handleFormSubmit}
           />
         )}
-        {createPage.loading && <Loader />}
+        {(createPage.loading || updatePage.loading) && <Loader />}
       </div>
     </Card>
   );

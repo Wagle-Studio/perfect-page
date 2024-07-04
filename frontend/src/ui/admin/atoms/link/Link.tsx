@@ -7,6 +7,7 @@ type LinkProps = {
   href: string;
   variant?: "inline" | "button";
   severity?: "primary" | "secondary";
+  targetBlank?: boolean;
 } & HTMLAttributes<HTMLElement>;
 
 function LinkComponent({
@@ -14,6 +15,7 @@ function LinkComponent({
   variant,
   severity,
   className,
+  targetBlank = false,
   ...props
 }: LinkProps) {
   const linkClasses = classNames(
@@ -27,7 +29,12 @@ function LinkComponent({
   );
 
   return (
-    <Link href={href} className={linkClasses} {...props}>
+    <Link
+      href={href}
+      className={linkClasses}
+      target={targetBlank ? "_blank" : "_self"}
+      {...props}
+    >
       {props.children}
     </Link>
   );

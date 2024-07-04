@@ -8,7 +8,7 @@ import "./form_field.scss";
 type FormFieldText<T extends FieldValues> = FormField<T>;
 
 export function FormFieldText<T extends FieldValues>(props: FormFieldText<T>) {
-  const inputWrapperClasses = classNames("admin__form-field", props.className);
+  const inputWrapperClasses = classNames("admin__form-field admin__form-field--vertical", props.className);
   const inputClasses = classNames("admin__form-field__wrapper__input", {
     [`admin__form-field__wrapper__input--error`]: props.error,
   });

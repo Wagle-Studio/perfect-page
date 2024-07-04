@@ -44,6 +44,7 @@ export function IntegrationKeyForm(props: Form<IntegrationKeyFormSchema>) {
         <Button
           severity="secondary"
           onClick={form.handleSubmit(props.onSubmit)}
+          disabled={!form.formState.isDirty}
         >
           Register key
         </Button>

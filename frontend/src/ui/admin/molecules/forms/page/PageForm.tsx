@@ -59,9 +59,6 @@ export function PageForm(props: Form<PageFormSchema>) {
         >
           Save page
         </Button>
-        <Button severity="primary" onClick={form.handleSubmit(props.onSubmit)}>
-          Quit
-        </Button>
       </div>
     </form>
   );

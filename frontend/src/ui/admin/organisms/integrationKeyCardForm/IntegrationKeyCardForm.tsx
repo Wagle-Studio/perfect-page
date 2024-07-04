@@ -15,14 +15,15 @@ import { Link } from "@/ui/admin/atoms/link/Link";
 import { KeyIcon } from "@/ui/admin/atoms/icons/KeyIcon";
 import { Card } from "@/ui/admin/atoms/card/Card";
 import { toaster } from "@/ui/admin/atoms/toast/toaster";
-import "./integration_key_card.scss";
+import "./integration_key_card_form.scss";
 
-type IntegrationKeyCardProps = {
+type IntegrationKeyCardFormProps = {
   variant: "welcome" | "admin";
-  user: User & { Settings: Settings | null };
+  user: User;
+  settings: Settings | null;
 };
 
-export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
+export function IntegrationKeyCardForm(props: IntegrationKeyCardFormProps) {
   const router = useRouter();
   let integrationKeyHolder: string | undefined;
 
@@ -36,21 +37,21 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
   };
 
   const testIntegrationKey = usePost<BotUserObjectResponse | null>({
-    url: "/api/admin/user/integration_key",
+    url: "/api/admin/integration_key",
     onSuccess: async (res) => {
       toaster.success({
         title: "Integration key",
         message: "Test succeeded",
       });
 
-      if (props.user.Settings && props.user.Settings.userId) {
+      if (props.settings) {
         await updateUserSettings.send({
-          userId: props.user.Settings?.userId,
+          userId: props.user.id,
           integrationKey: integrationKeyHolder,
         });
       } else {
         await createUserSettings.send({
-          userEmail: props.user.email,
+          userId: props.user.id,
           integrationKey: integrationKeyHolder,
         });
       }
@@ -63,10 +64,8 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
     },
   });
 
-  const createUserSettings = usePost<
-    (User & { Settings: Settings | null }) | null
-  >({
-    url: "/api/admin/user/settings",
+  const createUserSettings = usePost<Settings | null>({
+    url: "/api/admin/settings",
     onSuccess: (res) => {
       toaster.success({
         title: "Integration key",
@@ -83,7 +82,7 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
   });
 
   const updateUserSettings = usePut<Settings | null>({
-    url: "/api/admin/user/settings",
+    url: "/api/admin/settings",
     onSuccess: (res) => {
       toaster.success({
         title: "Integration key",
@@ -107,6 +106,16 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
     });
   }
 
+  const CardTitle = (
+    <>
+      {props.variant === "welcome" ? (
+        <h1>Notion integration</h1>
+      ) : (
+        <h2>Notion integration</h2>
+      )}
+    </>
+  );
+
   const CardSubtitles = (
     <>
       <p>
@@ -124,13 +133,7 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
 
   return (
     <Card
-      title={
-        props.variant === "welcome" ? (
-          <h1>Notion integration</h1>
-        ) : (
-          <h2>Notion integration</h2>
-        )
-      }
+      title={CardTitle}
       icon={<KeyIcon size="large" />}
       subtitles={props.variant === "welcome" ? CardSubtitles : undefined}
       className={integrationKeyCardClasses}
@@ -165,15 +168,32 @@ export function IntegrationKeyCard(props: IntegrationKeyCardProps) {
         </div>
       )}
       <div className="admin__integration-key-card__body__form">
-        {(!testIntegrationKey.loading || !createUserSettings) && (
-          <IntegrationKeyForm
-            defaultValues={integrationKeyFormDefaultValues}
-            onSubmit={handleFormSubmit}
-          />
+        {testIntegrationKey.error && (
+          <p
+            className={`admin__integration-key-card__body__form__error admin__integration-key-card__body__form__error--${props.variant}`}
+          >
+            It's appears that the provided key is not recognized by Notion
+          </p>
         )}
-        {(testIntegrationKey.loading || createUserSettings.loading) && (
-          <Loader />
+        {(createUserSettings.error || updateUserSettings.error) && (
+          <p
+            className={`admin__integration-key-card__body__form__error admin__integration-key-card__body__form__error--${props.variant}`}
+          >
+            We're sorry, an error occurred while registering your integration
+            key
+          </p>
         )}
+        {!testIntegrationKey.loading &&
+          !createUserSettings.loading &&
+          !updateUserSettings.loading && (
+            <IntegrationKeyForm
+              defaultValues={integrationKeyFormDefaultValues}
+              onSubmit={handleFormSubmit}
+            />
+          )}
+        {(testIntegrationKey.loading ||
+          createUserSettings.loading ||
+          updateUserSettings.loading) && <Loader />}
       </div>
     </Card>
   );

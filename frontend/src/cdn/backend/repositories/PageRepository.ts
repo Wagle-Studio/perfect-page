@@ -18,14 +18,12 @@ export class PageRepository extends Repository {
     }
   }
 
-  public async getPages(userId?: string | null): Promise<Pages[] | null> {
-    if (userId) {
+  public async getPages(userEmail?: string | null): Promise<Pages[] | null> {
+    if (userEmail) {
       return await this.client.pages.findMany({
         where: {
-          UserPages: {
-            some: {
-              userId: userId,
-            },
+          user: {
+            email: userEmail,
           },
         },
       });
@@ -38,19 +36,13 @@ export class PageRepository extends Repository {
     userId?: string | null,
     pageId?: string | null,
     title?: string | null
-  ): Promise<{ userId: string; pageId: string } | null> {
+  ): Promise<Pages | null> {
     if (userId && pageId && title) {
-      return await this.client.userPages.create({
+      return await this.client.pages.create({
         data: {
-          page: {
-            connectOrCreate: {
-              where: { id: pageId },
-              create: { page_id: pageId, title: title },
-            },
-          },
-          user: {
-            connect: { id: userId },
-          },
+          notionPageId: pageId,
+          title: title,
+          userId: userId,
         },
       });
     } else {

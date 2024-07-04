@@ -46,9 +46,12 @@
     padding-top: 2.5rem;
 
     &__error {
-      text-align: center;
       line-height: 2.5rem;
       color: $error;
+
+      &--welcome {
+        text-align: center;
+      }
     }
   }
 }

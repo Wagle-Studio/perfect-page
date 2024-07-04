@@ -1,0 +1,15 @@
+@import "../../variables.scss";
+
+.admin__page-card__body {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-top: 2.5rem;
+
+    &__error {
+      line-height: 2.5rem;
+      color: $error;
+    }
+  }
+}

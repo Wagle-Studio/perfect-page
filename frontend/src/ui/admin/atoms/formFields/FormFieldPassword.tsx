@@ -17,7 +17,7 @@ export function FormFieldPassword<T extends FieldValues>(
 ) {
   const [showKey, setShowKey] = useState<boolean>(false);
 
-  const inputWrapperClasses = classNames("admin__form-field", props.className);
+  const inputWrapperClasses = classNames("admin__form-field admin__form-field--vertical", props.className);
   const inputClasses = classNames("admin__form-field__wrapper__input", {
     [`admin__form-field__wrapper__input--error`]: props.error,
   });
