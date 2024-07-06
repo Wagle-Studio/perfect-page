@@ -17,9 +17,14 @@ export function FormFieldPassword<T extends FieldValues>(
 ) {
   const [showKey, setShowKey] = useState<boolean>(false);
 
-  const inputWrapperClasses = classNames("admin__form-field admin__form-field--vertical", props.className);
+  const inputWrapperClasses = classNames(
+    "admin__form-field admin__form-field--vertical",
+    props.className
+  );
+
   const inputClasses = classNames("admin__form-field__wrapper__input", {
     [`admin__form-field__wrapper__input--error`]: props.error,
+    [`admin__form-field__wrapper__input--read-only`]: props.readOnly,
   });
 
   const handleShowKeyClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,6 +49,8 @@ export function FormFieldPassword<T extends FieldValues>(
               placeholder={
                 showKey ? props.placeholder ?? "" : "****************"
               }
+              readOnly={props.readOnly ?? false}
+              aria-readonly={props.readOnly ?? false}
               aria-required={props.required}
               aria-invalid={!!props.error}
               aria-describedby={

@@ -18,6 +18,18 @@ export class PageRepository extends Repository {
     }
   }
 
+  public async getPageBySlug(slug?: string | null): Promise<Pages | null> {
+    if (slug) {
+      return await this.client.pages.findFirst({
+        where: {
+          slug: slug,
+        },
+      });
+    } else {
+      return null;
+    }
+  }
+
   public async getPages(userEmail?: string | null): Promise<Pages[] | null> {
     if (userEmail) {
       return await this.client.pages.findMany({
@@ -35,14 +47,16 @@ export class PageRepository extends Repository {
   public async createPage(
     userId?: string | null,
     pageId?: string | null,
-    title?: string | null
+    title?: string | null,
+    slug?: string | null
   ): Promise<Pages | null> {
-    if (userId && pageId && title) {
+    if (userId && pageId && title && slug) {
       return await this.client.pages.create({
         data: {
           notionPageId: pageId,
           title: title,
           userId: userId,
+          slug: slug,
         },
       });
     } else {
@@ -53,15 +67,17 @@ export class PageRepository extends Repository {
   public async updatePage(
     id?: string | null,
     pageId?: string | null,
-    title?: string | null
+    title?: string | null,
+    slug?: string | null
   ): Promise<Pages | null> {
-    if (id && pageId && title) {
+    if (id && pageId && title && slug) {
       return await this.client.pages.update({
         where: {
           id: id,
         },
         data: {
           title: title,
+          slug: slug,
         },
       });
     } else {

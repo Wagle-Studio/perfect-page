@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Pages, User } from "@prisma/client";
 import { usePost } from "@/cdn/hooks/usePost";
 import { usePut } from "@/cdn/hooks/usePut";
+import { slugify, slugifyWithId } from "@/cdn/libs/slugify";
 import {
   PageForm,
   PageFormSchema,
@@ -25,6 +26,7 @@ export function PageCardForm(props: PageCardFormProps) {
   const pageFormDefaultValues: PageFormSchema = {
     pageId: props.page ? props.page.notionPageId : "",
     title: props.page ? props.page.title : "",
+    slug: props.page ? slugify(props.page.title) : "",
   };
 
   const createPage = usePost<Pages | null>({
@@ -67,6 +69,7 @@ export function PageCardForm(props: PageCardFormProps) {
         id: props.page.id,
         pageId: fieldValues.pageId,
         title: fieldValues.title,
+        slug: slugifyWithId(fieldValues.title),
       });
     } else {
       if (props.user) {
@@ -74,6 +77,7 @@ export function PageCardForm(props: PageCardFormProps) {
           userId: props.user.id,
           pageId: fieldValues.pageId,
           title: fieldValues.title,
+          slug: slugifyWithId(fieldValues.title),
         });
       } else {
         toaster.error({

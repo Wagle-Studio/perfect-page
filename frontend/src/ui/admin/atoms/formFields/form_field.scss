@@ -30,6 +30,20 @@
       background-color: $gray--light;
       border: 2px solid $gray;
       border-radius: 3px;
+
+      &--error {
+        border: 2px solid $error;
+      }
+
+      &--read-only {
+        cursor: default;
+      }
+
+      &--read-only:focus,
+      &--read-only:focus-visible,
+      &--read-only:active {
+        outline: none;
+      }
     }
   }
 

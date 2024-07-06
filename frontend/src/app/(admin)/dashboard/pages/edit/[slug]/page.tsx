@@ -6,7 +6,7 @@ export default async function DashboardPagesEdit(
   props: GetServerSidePropsContext
 ) {
   const pageRepository = new PageRepository();
-  const page = await pageRepository.getPage(props.params?.id as string);
+  const page = await pageRepository.getPageBySlug(props.params?.slug as string);
 
   // TODO: handle case when there is no page to edit.
   return <>{page && <PageCardForm page={page} />}</>;

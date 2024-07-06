@@ -48,7 +48,7 @@ export async function Layout({
           />
         </main>
       )}
-      {(!session) && (
+      {(!session || !user) && (
         <main className="dashboard__layout__content__error-pannel">
           <Section>
             <h1>ERROR</h1>

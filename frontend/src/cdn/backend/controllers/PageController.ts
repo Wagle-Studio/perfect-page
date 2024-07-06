@@ -13,6 +13,7 @@ export class PageController extends ApiController {
       "PAGE_ID" = "pageId",
       "USER_ID" = "userId",
       "TITLE" = "title",
+      "SLUG" = "slug",
     }
 
     try {
@@ -26,7 +27,8 @@ export class PageController extends ApiController {
       const page = await pageRepository.createPage(
         res.userId,
         res.pageId,
-        res.title
+        res.title,
+        res.slug
       );
 
       if (!page) {
@@ -49,6 +51,7 @@ export class PageController extends ApiController {
       "ID" = "id",
       "PAGE_ID" = "pageId",
       "TITLE" = "title",
+      "SLUG" = "slug",
     }
 
     try {
@@ -62,7 +65,8 @@ export class PageController extends ApiController {
       const page = await pageRepository.updatePage(
         res.id,
         res.pageId,
-        res.title
+        res.title,
+        res.slug
       );
 
       if (!page) {

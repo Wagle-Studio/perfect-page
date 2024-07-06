@@ -30,7 +30,7 @@ export function IntegrationKeyForm(props: Form<IntegrationKeyFormSchema>) {
     <form className="admin__form__integration-key">
       <div>
         <FormFieldPassword
-          label="Your integration secret key :"
+          label="Your integration secret key"
           name="integrationKey"
           control={form.control}
           placeholder="Your Notion integration key here"

@@ -14,6 +14,7 @@ type PageCardTableProps = {
 };
 
 export function PageCardTable(props: PageCardTableProps) {
+  // TODO: create Date-fns custom service.
   function formatDate(date: Date) {
     return format(new Date(date).toLocaleString(), "MM/dd/yyyy - hh:mm aaa");
   }
@@ -70,7 +71,7 @@ export function PageCardTable(props: PageCardTableProps) {
                   <Link href={`/dashboard/pages/preview`}>
                     <LinkIcon size="small" />
                   </Link>
-                  <Link href={`/dashboard/pages/edit/${page.id}`}>
+                  <Link href={`/dashboard/pages/edit/${page.slug}`}>
                     <EditIcon size="small" />
                   </Link>
                   <TrashIcon size="small" />

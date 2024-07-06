@@ -6,6 +6,7 @@ export type FormField<T extends FieldValues> = {
   name: Path<T>;
   control: Control<T>;
   required: boolean;
+  readOnly?: boolean;
   placeholder?: string;
   error?: string;
   help?: string;
