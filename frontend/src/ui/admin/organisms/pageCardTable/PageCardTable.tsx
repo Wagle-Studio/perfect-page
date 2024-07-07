@@ -8,6 +8,7 @@ import { EditIcon } from "@/ui/admin/atoms/icons/EditIcon";
 import { TrashIcon } from "@/ui/admin/atoms/icons/TrashIcon";
 import { LinkIcon } from "@/ui/admin/atoms/icons/LinkIcon";
 import "./page_card_table.scss";
+import { Button } from "../../atoms/button/Button";
 
 type PageCardTableProps = {
   pages: Pages[] | null;
@@ -68,13 +69,15 @@ export function PageCardTable(props: PageCardTableProps) {
                   <p>{formatDate(page.updatedAt)}</p>
                 </td>
                 <td className="admin__page-table__body__table__body__row__item admin__page-table__body__table__body__row__item--actions">
-                  <Link href={`/dashboard/pages/preview`}>
+                  <Link href="#">
                     <LinkIcon size="small" />
                   </Link>
                   <Link href={`/dashboard/pages/edit/${page.slug}`}>
                     <EditIcon size="small" />
                   </Link>
-                  <TrashIcon size="small" />
+                  <Button severity="invisible">
+                    <TrashIcon size="small" />
+                  </Button>
                 </td>
               </tr>
             ))}

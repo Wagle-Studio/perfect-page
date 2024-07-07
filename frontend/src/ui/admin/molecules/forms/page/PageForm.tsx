@@ -7,6 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { slugify } from "@/cdn/libs/slugify";
 import { Form } from "@/ui/admin/molecules/forms/Form";
 import { Button } from "@/ui/admin/atoms/button/Button";
+import { Link } from "@/ui/admin/atoms/link/Link";
 import { FormFieldText } from "@/ui/admin/atoms/formFields/FormFieldText";
 import "./page_form.scss";
 
@@ -41,10 +42,12 @@ export function PageForm(props: Form<PageFormSchema>) {
   const titleWatcher = form.watch("title");
 
   useEffect(() => {
-    if (titleWatcher && titleWatcher.length > 0) {
-      form.setValue("slug", slugify(titleWatcher));
-    }
+    form.setValue("slug", titleWatcher ? slugify(titleWatcher) : "");
   }, [titleWatcher]);
+
+  console.log(
+    form.getFieldState("pageId").invalid && form.getValues("pageId").length < 9
+  );
 
   return (
     <form className="admin__form__page">
@@ -78,6 +81,18 @@ export function PageForm(props: Form<PageFormSchema>) {
         />
       </div>
       <div className="admin__form__page__actions">
+        <Link
+          href={`/preview?pageId=${form.getValues("pageId")}`}
+          variant="button"
+          severity="primary"
+          targetBlank
+          disabled={
+            form.getFieldState("pageId").invalid ||
+            form.getValues("pageId").length < 9
+          }
+        >
+          Preview
+        </Link>
         <Button
           severity="secondary"
           onClick={form.handleSubmit(props.onSubmit)}

@@ -8,6 +8,7 @@ type LinkProps = {
   variant?: "inline" | "button";
   severity?: "primary" | "secondary";
   targetBlank?: boolean;
+  disabled?: boolean;
 } & HTMLAttributes<HTMLElement>;
 
 function LinkComponent({
@@ -16,6 +17,7 @@ function LinkComponent({
   severity,
   className,
   targetBlank = false,
+  disabled = false,
   ...props
 }: LinkProps) {
   const linkClasses = classNames(
@@ -24,6 +26,7 @@ function LinkComponent({
       [`admin__link--inline`]: variant === "inline",
       [`admin__link--button admin__link--button--${severity}`]:
         variant === "button" && severity,
+      "admin__link--button--disabled": disabled,
     },
     className
   );

@@ -63,7 +63,7 @@ export function PageCardForm(props: PageCardFormProps) {
     },
   });
 
-  async function handleFormSubmit(fieldValues: PageFormSchema) {
+  function handleFormSubmit(fieldValues: PageFormSchema) {
     if (props.page) {
       updatePage.send({
         id: props.page.id,
